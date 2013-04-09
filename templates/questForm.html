@@ -1,0 +1,138 @@
+$def with (var)
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript" src="static/questFormControl.js"></script>
+</head>
+
+<body>
+
+<form name="main" method="post">
+<h2>$var</h2>
+
+<fieldset>
+    <ol class="formset">
+        <li>
+            <label for="id">id</label>
+            <input type="number" id="id" name="id" />
+        </li>
+        <li>
+            <label for="command">command</label>
+            <input type="text" id="command" name="command" />
+        </li>
+        <li>
+            <label for="description">description</label>
+            <input type="text" id="description" name="description" />
+        </li>
+        <li>
+            <label for="latitude">latitude</label>
+            <input type="text" id="latitude" name="latitude" />
+        </li>
+        <li>
+            <label for="longitude">longitude</label>
+            <input type="text" id="longitude" name="longitude" />
+        </li>
+        <li>
+            <label for="image">image</label>
+            <input type="text" id="image" name="image" />
+        </li>
+        <li>
+            <label for="icon">icon</label>
+            <input type="text" id="icon" name="icon" />
+        </li>
+        <li>
+            <label for="task_location">task location?</label>
+            <input type="radio" name="task_location" value="Yes" class="is_task_location" />Yes
+            <input type="radio" name="task_location" value="No" class="is_task_location" />No</li>
+        <ol id="task_location_parent" class="formset">
+            <li><strong>Task location:</strong>
+
+            </li>
+            <li>
+                <label for="task_latitude">latitude</label>
+                <input type="text" id="task_latitude" name="task_latitude" />
+            </li>
+            <li>
+                <label for="task_longitude">longitude</label>
+                <input type="text" id="task_longitude" name="task_longitude" />
+            </li>
+            <li>
+                <label for="task_radius">radius</label>
+                <input type="text" id="task_radius" name="task_radius" />
+            </li>
+        </ol>
+        <li>
+            <label for="task_text">task text?</label>
+            <input type="radio" name="task_text" value="Yes" class="is_task_text" />Yes
+            <input type="radio" name="task_text" value="No" class="is_task_text" />No</li>
+        <ol id="task_text_parent" class="formset">
+            <li><strong>Task text:</strong>
+
+            </li>
+            <li>
+                <label for="task_question">question</label>
+                <input type="text" id="task_question" name="task_question" />
+            </li>
+            <li>
+                <label for="task_answer">answer</label>
+                <input type="text" id="task_answer" name="task_answer" />
+            </li>
+        </ol>
+        <li>
+            <label for="task_choice">task choice?</label>
+            <input type="radio" name="task_choice" value="Yes" class="is_task_choice" />Yes
+            <input type="radio" name="task_choice" value="No" class="is_task_choice" />No</li>
+        <ol id="task_choice_parent" class="formset">
+            <li><strong>Task choice:</strong>
+
+            </li>
+            <li>
+                <label for="task_question">question</label>
+                <input type="text" id="task_question" name="task_question" />
+            </li>
+            <li>
+                <label for="task_answer1">answer1/s_code_1</label>
+                <input type="text" id="task_answer1" name="task_answer1" />
+                <input type="number" id="succsess_code_1" name="succsess_code_1" size="2" />
+            </li>
+            <li>
+                <label for="task_answer2">answer2/s_code_2</label>
+                <input type="text" id="task_answer2" name="task_answer2" />
+                <input type="number" id="succsess_code_2" name="succsess_code_2" size="2" />
+            </li>
+            <li>
+                <label for="task_answer3">answer3/s_code_3</label>
+                <input type="text" id="task_answer3" name="task_answer3" />
+                <input type="number" id="succsess_code_3" name="succsess_code_3" size="2" />
+            </li>
+        </ol>
+        <li>
+            <label for="task_hint">task hint?</label>
+            <input type="radio" name="task_hint" value="Yes" class="is_task_hint" />Yes
+            <input type="radio" name="task_hint" value="No" class="is_task_hint" />No</li>
+        <ol id="task_hint_parent" class="formset">
+            <li><strong>Task hint:</strong>
+
+            </li>
+            <li>
+                <label for="task_hint_text">hint text / cost</label>
+                <input type="text" id="task_hint_text" name="task_hint_text" />
+                <input type="number" id="task_hint_text_cost" name="task_hint_text_cost" size="2" />
+            </li>
+            <li>
+                <label for="task_hint_image">hint text / cost</label>
+                <input type="text" id="task_hint_image" name="task_hint_image" />
+                <input type="number" id="task_hint_image_cost" name="task_hint_image_cost" size="2" />
+            </li>
+            <li>
+                <label for="task_hint_sound">hint sound / cost</label>
+                <input type="text" id="task_hint_sound" name="task_hint_sound" />
+                <input type="number" id="ttask_hint_sound_cost" name="task_hint_sound_cost" size="2" />
+            </li>
+        </ol>
+    </ol>
+    
+    	<input type="submit" />
+</fieldset>
+</form>
+
+</body>
