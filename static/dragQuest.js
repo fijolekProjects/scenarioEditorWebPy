@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	
 	$('#questIconId').draggable({
 				revert : true
 			});
@@ -8,8 +9,7 @@ $(document).ready(function() {
 			var latlng = overlay.getProjection()
 					.fromContainerPixelToLatLng(point);
 			placeQuestMarker(latlng);
-		
-			
+			$('#tabs').tabs('enable', 1).tabs('select', 1); 
 		}
 	});
 });

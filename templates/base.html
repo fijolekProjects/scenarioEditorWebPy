@@ -122,13 +122,15 @@ $def with (page)
       </script>
 </head>
 <body>
-	<div id="googleMap" style="height: 100%; width: 50%; float: left">
+	<div>
+        <div id="googleMap" style="height: 100%; width:50%; float:left">
+           
+        </div>
+        <div style="width:50%;float:right">
+            $:page
+        </div>
+</div>
 
-		<p>
-			You are visiting page <b>page.name</b>.
-		</p>
 
-	</div>
-	<div style="float: left; margin-left: 120px">$:page</div>
 </body>
 </html>

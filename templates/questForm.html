@@ -1,44 +1,34 @@
 $def with (var)
 <head>
-<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js'></script>
+<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
 <script type="text/javascript" src="static/questFormControl.js"></script>
-<script type="text/javascript" src="static/organictabs.jquery.js"></script>
-<script type="text/javascript" src="static/organic.js"></script>
+<script type="text/javascript" src="static/tabsControl.js"></script>
 <script type="text/javascript" src="static/dragQuest.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 
-
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/start/jquery-ui.css"/>
 </head>
 
 <body>
 
 
-<div id="page-wrap">
-
-		<p>Są taby! Choose Component - drag&drop questa! Kliknij prawym by utworzyc task location. Bug z rozwijaniem formularza</p>
-		
-        <div id="example-one">
-        			
-        	<ul class="nav">
-        	      <li class="nav-one"><a href="#chooseComponentTab" class="current">Choose Component</a></li>
-                <li class="nav-two"><a href="#formTab" id="#formTabId">Form</a></li>
-                <li class="nav-three"><a href="#jquerytuts">jQuery</a></li>
-                <li class="nav-four last"><a href="#classics">Classics</a></li>
-            </ul>
-        	
-        	<div class="list-wrap">
-        	<ul id="chooseComponentTab" class="1">
-                    <img src="/static/questIcon.gif" id="questIconId">
-        		 </ul>
-        		<ul id="formTab" class="hide">
-        			<form name="main" method="post">
-<h2>$var</h2>
-
-<fieldset>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Choose Component</a></li>
+    <li><a href="#tabs-2">Form</a></li>
+    <li><a href="#tabs-3">Tab</a></li>
+  </ul>
+  <div id="tabs-1">
+  <img src="static/questIcon.gif" id="questIconId">
+  </div>
+  <div id="tabs-2">
+  <form name="main" method="post">
+  	<h2>$var</h2>
+    <fieldset>
     <ol class="formset">
         <li>
             <label for="id">id</label>
-            <input type="number" id="id" name="id" style="width: 50px;"/>
+            <input type="number" id="id" name="id" style="width: 50px;" />
         </li>
         <li>
             <label for="command">command</label>
@@ -158,39 +148,12 @@ $def with (var)
     
     	<input type="submit" />
 </fieldset>
-        		</ul>
-        		 
-        		 
-        		 
-        		 <ul id="jquerytuts" class="hide">
-        		    <li><a href="http://css-tricks.com/anythingslider-jquery-plugin/">Anything Slider jQuery Plugin</a></li>
-        		    <li><a href="http://css-tricks.com/moving-boxes/">Moving Boxes</a></li>
-        			<li><a href="http://css-tricks.com/simple-jquery-dropdowns/">Simple jQuery Dropdowns</a></li>
-        			<li><a href="http://css-tricks.com/creating-a-slick-auto-playing-featured-content-slider/">Featured Content Slider</a></li>
-        			<li><a href="http://css-tricks.com/startstop-slider/">Start/Stop Slider</a></li>
-        			<li><a href="http://css-tricks.com/banner-code-displayer-thing/">Banner Code Displayer Thing</a></li>
-        			<li><a href="http://css-tricks.com/highlight-certain-number-of-characters/">Highlight Certain Number of Characters</a></li>
-        			<li><a href="http://css-tricks.com/auto-moving-parallax-background/">Auto-Moving Parallax Background</a></li>
-        		 </ul>
-        		 
-        		 <ul id="classics" class="hide">
-                    <li><a href="http://css-tricks.com/css-wishlist/">Top Designers CSS Wishlist</a></li>
-                    <li><a href="http://css-tricks.com/what-beautiful-html-code-looks-like/">What Beautiful HTML Code Looks Like</a></li>
-                    <li><a href="http://css-tricks.com/easily-password-protect-a-website-or-subdirectory/">Easily Password Protect a Website or Subdirectory</a></li>
-                    <li><a href="http://css-tricks.com/how-to-create-an-ie-only-stylesheet/">IE-Only Stylesheets</a></li>
-                    <li><a href="http://css-tricks.com/ecommerce-considerations/">eCommerce Considerations</a></li>
-                    <li><a href="http://css-tricks.com/php-for-beginners-building-your-first-simple-cms/">PHP: Build Your First CMS</a></li>
-        		 </ul>
-        		 
-        	 </div> <!-- END List Wrap -->
-         
-         </div> <!-- END Organic Tabs (Example One) -->
-		 
-		 
-	
-		 
-	
-	</div>
+  </div>
+  <div id="tabs-3">
+    <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+    <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+  </div>
+</div>
 
 
 </body>
