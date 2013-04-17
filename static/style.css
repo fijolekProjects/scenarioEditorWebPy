@@ -125,3 +125,9 @@ h1 { font: bold 40px Sans-Serif; margin: 0 0 20px 0; }
 #example-one ul li.nav-two a.current, #example-one ul.core li a:hover { background-color: #d30000; color: white; }
 #example-one ul li.nav-three a.current, #example-one ul.jquerytuts li a:hover { background-color: #8d01b0; color: white; }
 #example-one ul li.nav-four a.current, #example-one ul.classics li a:hover { background-color: #FE4902; color: white; }
+
+
+
+.over {
+    background-color: #cedae3;
+}

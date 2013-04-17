@@ -3,14 +3,15 @@ $def with (page)
 <head>
 <title>page.title</title>
 
-      <link rel="stylesheet" href="static/style.css"/>
-      <script
-         src="https://maps.googleapis.com/maps/api/js?3.12&sensor=false&language=pl"></script>
-      <script>
+<link rel="stylesheet" href="static/style.css" />
+<script
+	src="https://maps.googleapis.com/maps/api/js?3.12&sensor=false&language=pl"></script>
+<script>
          var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
          
          <!-- initialize -->
          var map;
+         var overlay;
          function initialize()
          {
            var mapProp = {
@@ -19,6 +20,9 @@ $def with (page)
              mapTypeId: google.maps.MapTypeId.ROADMAP
            };
            map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+           overlay = new google.maps.OverlayView();
+           overlay.draw = function() {};
+           overlay.setMap(map);
          
          var marker = new google.maps.Marker({
          position:myCenter,
@@ -42,60 +46,89 @@ $def with (page)
          
          google.maps.event.addListener(marker, 'click', function(){
          var infoWindow = new google.maps.InfoWindow();
-         infoWindow.setContent("<p>WEITI<br />" + "Lat = " + myCenter.lat() + "<br />" + "Lng = " + myCenter.lng() + "<br />" + "Radius = " + weiti.radius + "<br/>" + "Kliknij na mape by dodac nowy marker " + "<br />" + "Nastepnie kliknij na marker PP myszy" + "<br />" + "Usuwanie markera double click" + "</p>");
+         infoWindow.setContent("<p>WEITI<br />" + "Lat = " + myCenter.lat() + "<br />" + "Lng = " + myCenter.lng() + "<br />" + "Radius = " + weiti.radius + "<br/>" + "Kliknij na mape by dodac nowy taskMarker " + "<br />" + "Nastepnie kliknij na taskMarker PP myszy" + "<br />" + "Usuwanie markera double click" + "</p>");
          infoWindow.open(map,marker);
          });
          
-         google.maps.event.addListener(map, 'click', function(event) {
-         placeMarker(event.latLng);
-         document.getElementById("latitude").value = event.latLng.lat();
-         document.getElementById("longitude").value = event.latLng.lng();
-         });
          
+         google.maps.event.addListener(map, 'rightclick', function(event) {
+         placeTaskMarker(event.latLng);
+         document.getElementById("task_latitude").value = event.latLng.lat();
+         document.getElementById("task_longitude").value = event.latLng.lng();
+         });
          
          }
          <!-- initialize -->
          
-         <!-- placeMarker -->
-         function placeMarker(location){
-         var marker = new google.maps.Marker({
-         position:location,
+         <!-- placeQuestMarker -->
+         function placeQuestMarker(location){
+         var questImage = 'static/questIcon.gif';
+         var questMarker = new google.maps.Marker({
+         position: location,
          map: map,
-         draggable:true,
-         
+         draggable: true,
+         icon: questImage,
          });
-         
-         
-         
-         google.maps.event.addListener(marker, 'rightclick', function(event) {
+         document.getElementById("latitude").value = questMarker.position.lat();
+         document.getElementById("longitude").value = questMarker.position.lng();
+                  
+         google.maps.event.addListener(questMarker, 'rightclick', function(event) {
          var lat = event.latLng.lat();
          var lng = event.latLng.lng();
          
          var infoWindow = new google.maps.InfoWindow();
          infoWindow.setContent("<p>Lat = " + lat + "<br />" + "Lng = " + lng + "</p>")
-         infoWindow.open(map,marker)
+         infoWindow.open(map,questMarker)
          
          });
-         google.maps.event.addListener(marker, 'dblclick', function() {marker.setMap(null)});
-         google.maps.event.addListener(marker, 'drag', function(event) {
+         google.maps.event.addListener(questMarker, 'dblclick', function() {
+        	 questMarker.setMap(null);
+        	 document.getElementById("latitude").value = null;
+             document.getElementById("longitude").value = null;; 
+         });
+         google.maps.event.addListener(questMarker, 'drag', function(event) {
              document.getElementById("latitude").value = event.latLng.lat();
              document.getElementById("longitude").value = event.latLng.lng(); 
          });
          }
          
-         <!-- placeMarker -->
+         <!-- placeQuestMarker -->
+         
+         <!-- placeTaskMarker -->
+         function placeTaskMarker(location){
+             var taskImage = 'static/taskIcon.png';
+             var taskMarker = new google.maps.Marker({
+             position:location,
+             map: map,
+             draggable:true,
+             icon: taskImage,
+             
+             });
+             
+             
+             google.maps.event.addListener(taskMarker, 'dblclick', function() {
+            	 taskMarker.setMap(null)
+            	 document.getElementById("task_latitude").value = null;
+            	 document.getElementById("task_longitude").value = null; 
+             });
+             google.maps.event.addListener(taskMarker, 'drag', function(event) {
+                 document.getElementById("task_latitude").value = event.latLng.lat();
+                 document.getElementById("task_longitude").value = event.latLng.lng(); 
+             });
+             }
+         <!-- placeTaskMarker -->
          
          google.maps.event.addDomListener(window, 'load', initialize);
       </script>
 </head>
 <body>
-<div id="googleMap" style="height:100%; width: 50%; float:left">
-      
-<p>You are visiting page <b>page.name</b>.</p>
+	<div id="googleMap" style="height: 100%; width: 50%; float: left">
 
-</div>
-<div style="float:left; margin-left:120px">
-$:page
-</div>
+		<p>
+			You are visiting page <b>page.name</b>.
+		</p>
+
+	</div>
+	<div style="float: left; margin-left: 120px">$:page</div>
 </body>
 </html>

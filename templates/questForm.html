@@ -4,29 +4,33 @@ $def with (var)
 <script type="text/javascript" src="static/questFormControl.js"></script>
 <script type="text/javascript" src="static/organictabs.jquery.js"></script>
 <script type="text/javascript" src="static/organic.js"></script>
+<script type="text/javascript" src="static/dragQuest.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
 
 </head>
 
 <body>
 
+
 <div id="page-wrap">
 
-		<h1>Taby</h1>
-		
-		<p>Są taby!</p>
+		<p>Są taby! Choose Component - drag&drop questa! Kliknij prawym by utworzyc task location. Bug z rozwijaniem formularza</p>
 		
         <div id="example-one">
         			
         	<ul class="nav">
-                <li class="nav-one"><a href="#formTab" class="current">Form</a></li>
-                <li class="nav-two"><a href="#chooseComponentTab">Choose Component</a></li>
+        	      <li class="nav-one"><a href="#chooseComponentTab" class="current">Choose Component</a></li>
+                <li class="nav-two"><a href="#formTab" id="#formTabId">Form</a></li>
                 <li class="nav-three"><a href="#jquerytuts">jQuery</a></li>
                 <li class="nav-four last"><a href="#classics">Classics</a></li>
             </ul>
         	
         	<div class="list-wrap">
-        	
-        		<ul id="formTab">
+        	<ul id="chooseComponentTab" class="1">
+                    <img src="/static/questIcon.gif" id="questIconId">
+        		 </ul>
+        		<ul id="formTab" class="hide">
         			<form name="main" method="post">
 <h2>$var</h2>
 
@@ -156,9 +160,7 @@ $def with (var)
 </fieldset>
         		</ul>
         		 
-        		 <ul id="chooseComponentTab" class="hide">
-                    
-        		 </ul>
+        		 
         		 
         		 <ul id="jquerytuts" class="hide">
         		    <li><a href="http://css-tricks.com/anythingslider-jquery-plugin/">Anything Slider jQuery Plugin</a></li>
