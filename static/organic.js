@@ -1,5 +1,0 @@
-$(function() {
-
-			$("#example-one").organicTabs();
-
-		});
