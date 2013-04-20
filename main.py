@@ -19,7 +19,11 @@ class Index:
         return render.questForm("Quest Form")
     def POST(self):
         inputFromForm = web.input()
-        return  inputFromForm
+        return inputFromForm
+        
+    
+    
+        
 
 if __name__ == '__main__':
     app.run()

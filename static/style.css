@@ -105,3 +105,21 @@ body {
     width:728px;
     height:90px;
 }
+html				{height:100%}
+body				{height:100%; overflow-x:hidden}
+
+#page-wrap			{ width:100%; height:100%; padding:1px;}
+#right-panel {width:50%;float:right; }
+#google-map				{ width: 50%; height: 100%; float:left; }
+ .labels {
+     color: blue;
+     background-color: white;
+     font-family: "Lucida Grande", "Arial", sans-serif;
+     font-size: 12px;
+     font-weight: bold;
+     text-align: center;
+     width: 25px;
+     border: 1px solid black;
+     white-space: nowrap;
+   }
+

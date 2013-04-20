@@ -28,7 +28,7 @@ $def with (var)
     <ol class="formset">
         <li>
             <label for="id">id</label>
-            <input type="number" id="id" name="id" style="width: 50px;" />
+            <input type="number" id="id" name="id" value=20 style="width: 50px;" />
         </li>
         <li>
             <label for="command">command</label>
@@ -61,6 +61,9 @@ $def with (var)
         <ol id="task_location_parent" class="formset">
             <li><strong>Task location:</strong>
 
+            </li>
+            <li>
+            		<img src="static/taskIcon.png" id="taskIconId">
             </li>
             <li>
                 <label for="task_latitude">latitude</label>
@@ -141,7 +144,7 @@ $def with (var)
             <li>
                 <label for="task_hint_sound">hint sound / cost</label>
                 <input type="file" id="task_hint_sound" name="task_hint_sound" style="width: 178px;"/>
-                <input type="number" id="ttask_hint_sound_cost" name="task_hint_sound_cost" style="width: 50px;" />
+                <input type="number" id="task_hint_sound_cost" name="task_hint_sound_cost" style="width: 50px;" />
             </li>
         </ol>
     </ol>
