@@ -4,6 +4,7 @@ $def with (var)
 <script type="text/javascript" src="static/questFormControl.js"></script>
 <script type="text/javascript" src="static/tabsControl.js"></script>
 <script type="text/javascript" src="static/dragQuest.js"></script>
+<script type="text/javascript" src="static/ajaxFormHandle.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/start/jquery-ui.css"/>
@@ -22,7 +23,7 @@ $def with (var)
   <img src="static/questIcon.gif" id="questIconId">
   </div>
   <div id="tabs-2">
-  <form name="main" method="post">
+  <form class="form" method="post">
   	<h2>$var</h2>
     <fieldset>
     <ol class="formset">
@@ -149,8 +150,9 @@ $def with (var)
         </ol>
     </ol>
     
-    	<input type="submit" />
+    	<input class="button" type="submit" value="send"/>    
 </fieldset>
+</form>
   </div>
   <div id="tabs-3">
     <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>

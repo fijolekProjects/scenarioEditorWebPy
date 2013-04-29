@@ -1,5 +1,6 @@
 $(document).ready(function() {
 			$("#task_location_parent").css("display", "none");
+			
 			$(".is_task_location").click(function() {
 						if ($('input[name=task_location]:checked').val() == "Yes") {
 							$("#task_location_parent").slideDown("fast"); // Slide
