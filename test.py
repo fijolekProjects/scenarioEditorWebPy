@@ -12,21 +12,21 @@ def fillXml(xmlData):
     pattern = "\((.*?)\)"
     regex = re.compile(pattern)
     
-    for matches in regex.finditer(input):
+    for record in regex.finditer(input):
        
        attributeFlag = 1
        
-       data = str(matches.group(1))
+       data = str(record.group(1))
        inPattern = "\'(.*?)\'"
        inRegex = re.compile(inPattern)
        
-       for match in inRegex.finditer(data):
+       for parameters in inRegex.finditer(data):
             if attributeFlag == 1:
-                    name = str(match.group(1))
+                    name = str(parameters.group(1))
                     attribute = etree.Element(name)
                     attributeFlag = 0
             else:
-                    attribute.text = match.group(1)
+                    attribute.text = parameters.group(1)
                     root.append(attribute)
     
     

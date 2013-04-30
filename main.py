@@ -5,6 +5,7 @@ Created on Apr 9, 2013
 '''
 import web
 from urlparse import parse_qsl
+from test import fillXml
 
 urls = (
     '/', 'Index')
@@ -23,9 +24,10 @@ class Index:
     
     def POST(self):
         form = web.data()
-        formList = parse_qsl(form)
-        
+        formList = parse_qsl(form)       
+        fillXml(formList)
+    
         return formList
-
+   
 if __name__ == '__main__':
     app.run()
