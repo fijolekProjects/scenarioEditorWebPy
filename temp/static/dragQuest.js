@@ -1,16 +1,10 @@
 $(document).ready(function() {
+	
 	$('#questIconId').draggable({
 				revert : true
-				
 			});
-	$('#infoIconId').draggable({
-		revert : true
-		
-	});
 	$('#taskIconId').draggable({
-				revert : true,
-				appendTo: 'body' ,
-				helper: "clone",
+				revert : true
 			});		
 			
 	$('#google-map').droppable({
@@ -20,14 +14,8 @@ $(document).ready(function() {
 			var latlng = overlay.getProjection()
 					.fromContainerPixelToLatLng(point);
 			if (draggableId === "questIconId") {
-				placeQuestMarker(latlng);
-				$('#tabs').tabs('select', 1);
-				$("#accordion").accordion("activate", 0);
-			}
-			else if(draggableId === "infoIconId") {
-				placeInfoMarker(latlng)
-				$('#tabs').tabs('select', 1);
-				$("#accordion").accordion("activate", 1);
+			placeQuestMarker(latlng);
+			$('#tabs').tabs('enable', 1).tabs('select', 1); 
 			}
 			else if (draggableId === "taskIconId") {
 				placeTaskMarker(latlng);

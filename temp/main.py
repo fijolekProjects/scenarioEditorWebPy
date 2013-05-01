@@ -20,7 +20,7 @@ app = web.application(urls, globals())
                    
 class Index:
     def GET(self):
-        return render.appMenu()
+        return render.questForm("Quest Form")
     
     def POST(self):
         form = web.data()

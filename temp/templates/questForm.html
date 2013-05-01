@@ -1,0 +1,165 @@
+$def with (var)
+<head>
+<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+<script type="text/javascript" src="static/questFormControl.js"></script>
+<script type="text/javascript" src="static/tabsControl.js"></script>
+<script type="text/javascript" src="static/dragQuest.js"></script>
+<script type="text/javascript" src="static/ajaxFormHandle.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script> 
+
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/start/jquery-ui.css"/>
+</head>
+
+<body>
+
+
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Choose Component</a></li>
+    <li><a href="#tabs-2">Form</a></li>
+    <li><a href="#tabs-3">Tab</a></li>
+  </ul>
+  <div id="tabs-1">
+  <img src="static/questIcon.gif" id="questIconId">
+  </div>
+  <div id="tabs-2">
+  <form class="quest-form" method="post">
+  	<h2>$var</h2>
+    <fieldset>
+    <ol class="formset">
+        <li>
+            <label for="id">id</label>
+            <input type="number" id="id" name="id" style="width: 50px;" />
+        </li>
+        <li>
+            <label for="command">command</label>
+            <input type="text" id="command" name="command" />
+        </li>
+        <li>
+            <label for="description">description</label>
+            <input type="text" id="description" name="description" />
+        </li>
+        <li>
+            <label for="latitude">latitude</label>
+            <input type="text" id="latitude" name="latitude" />
+        </li>
+        <li>
+            <label for="longitude">longitude</label>
+            <input type="text" id="longitude" name="longitude" />
+        </li>
+        <li>
+            <label for="image">image</label>
+            <input type="file" id="image" name="image" style="width: 178px;"/>
+        </li>
+        <li>
+            <label for="icon">icon</label>
+            <input type="file" id="icon" name="icon" style="width: 178px;"/>
+        </li>
+        <li>
+            <label for="tasks_location">tasks location?</label>
+            <input type="radio" name="tasks_location" value="Yes" class="is_tasks_location" />Yes
+            <input type="radio" name="tasks_location" value="No" class="is_tasks_location" />No</li>
+        <ol id="tasks_location_parent" class="formset">
+            <li><strong>Task location:</strong>
+
+            </li>
+            <li>
+            		<img src="static/taskIcon.png" id="taskIconId">
+            </li>
+            <li>
+                <label for="tasks_latitude">latitude</label>
+                <input type="text" id="tasks_latitude" name="tasks_latitude" />
+            </li>
+            <li>
+                <label for="tasks_longitude">longitude</label>
+                <input type="text" id="tasks_longitude" name="tasks_longitude" />
+            </li>
+            <li>
+                <label for="tasks_radius">radius</label>
+                <input type="text" id="tasks_radius" name="tasks_radius" />
+            </li>
+        </ol>
+        <li>
+            <label for="tasks_text">tasks text?</label>
+            <input type="radio" name="tasks_text" value="Yes" class="is_tasks_text" />Yes
+            <input type="radio" name="tasks_text" value="No" class="is_tasks_text" />No</li>
+        <ol id="tasks_text_parent" class="formset">
+            <li><strong>Task text:</strong>
+
+            </li>
+            <li>
+                <label for="tasks_question">question</label>
+                <input type="text" id="tasks_question" name="tasks_question" />
+            </li>
+            <li>
+                <label for="tasks_answer">answer</label>
+                <input type="text" id="tasks_answer" name="tasks_answer" />
+            </li>
+        </ol>
+        <li>
+            <label for="tasks_choice">tasks choice?</label>
+            <input type="radio" name="tasks_choice" value="Yes" class="is_tasks_choice" />Yes
+            <input type="radio" name="tasks_choice" value="No" class="is_tasks_choice" />No</li>
+        <ol id="tasks_choice_parent" class="formset">
+            <li><strong>Task choice:</strong>
+
+            </li>
+            <li>
+                <label for="tasks_question">question</label>
+                <input type="text" id="tasks_question" name="tasks_question" />
+            </li>
+            <li>
+                <label for="tasks_answer1">answer1/s_code_1</label>
+                <input type="text" id="tasks_answer1" name="tasks_answer1" />
+                <input type="number" id="succsess_code_1" name="succsess_code_1" style="width: 50px;">
+            </li>
+            <li>
+                <label for="tasks_answer2">answer2/s_code_2</label>
+                <input type="text" id="tasks_answer2" name="tasks_answer2" />
+                <input type="number" id="succsess_code_2" name="succsess_code_2" style="width: 50px;" />
+            </li>
+            <li>
+                <label for="tasks_answer3">answer3/s_code_3</label>
+                <input type="text" id="tasks_answer3" name="tasks_answer3" />
+                <input type="number" id="succsess_code_3" name="succsess_code_3" style="width: 50px;" />
+            </li>
+        </ol>
+        <li>
+            <label for="hints">tasks hints?</label>
+            <input type="radio" name="hints" value="Yes" class="is_hints" />Yes
+            <input type="radio" name="hints" value="No" class="is_hints" />No</li>
+        <ol id="hints_parent" class="formset">
+            <li><strong>Task hints:</strong>
+
+            </li>
+            <li>
+                <label for="hints_text">hints text / cost</label>
+                <input type="text" id="hints_text" name="hints_text" />
+                <input type="number" id="hints_text_cost" name="hints_text_cost" style="width: 50px;" />
+            </li>
+            <li>
+                <label for="hints_image">hints image / cost</label>
+                <input type="file" id="hints_image" name="hints_image" style="width: 178px;"/>
+                <input type="number" id="hints_image_cost" name="hints_image_cost" style="width: 50px;" />
+            </li>
+            <li>
+                <label for="hints_sound">hints sound / cost</label>
+                <input type="file" id="hints_sound" name="hints_sound" style="width: 178px;"/>
+                <input type="number" id="hints_sound_cost" name="hints_sound_cost" style="width: 50px;" />
+            </li>
+        </ol>
+    </ol>
+    
+    	<input class="button" type="submit" value="send"/>    
+</fieldset>
+</form>
+  </div>
+  <div id="tabs-3">
+    <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+    <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+  </div>
+</div>
+
+
+</body>
