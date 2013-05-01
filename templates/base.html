@@ -1,9 +1,9 @@
 $def with (page)
 <html>
 <head>
-<title>page.title</title>
+<title>Scenario Editor</title>
 
-<link rel="stylesheet" href="static/style.css" />
+<link rel="stylesheet" href="static/style/style.css" />
 <script
 	src="https://maps.googleapis.com/maps/api/js?3.12&sensor=false"></script>
 <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.5/src/markerwithlabel_packed.js"></script>
@@ -59,7 +59,7 @@ $def with (page)
          var componentCounter = -1;
          function placeQuestMarker(location){
         
-         var questImage = 'static/questIcon.png';
+         var questImage = 'static/icons/questIcon.png';
          componentCounter++;
          document.getElementById("id").value = componentCounter;
          var questMarker = new MarkerWithLabel({
@@ -103,7 +103,7 @@ $def with (page)
          
          <!-- placeTaskMarker -->
          function placeTaskMarker(location){
-             var taskImage = 'static/taskIcon.png';
+             var taskImage = 'static/icons/taskIcon.png';
              var taskMarker = new MarkerWithLabel({
              position:location,
              map: map,
@@ -155,7 +155,7 @@ $def with (page)
          <!-- placeInfoMarker -->
          
          function placeInfoMarker(location){
-        	 var infoImage = 'static/infoIcon.png';
+        	 var infoImage = 'static/icons/infoIcon.png';
         	 componentCounter++;
              var infoMarker = new MarkerWithLabel({
        
