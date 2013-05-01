@@ -24,8 +24,8 @@ class Index:
     
     def POST(self):
         form = web.data()
-        formList = parse_qsl(form)       
-#         fillXml(formList)
+        formList = parse_qsl(form)
+        fillXml(formList)
     
         return formList
    
