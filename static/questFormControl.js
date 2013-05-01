@@ -1,48 +1,48 @@
 $(document).ready(function() {
-			$("#task_location_parent").css("display", "none");
+			$("#tasks_location_parent").css("display", "none");
 			
-			$(".is_task_location").click(function() {
-						if ($('input[name=task_location]:checked').val() == "Yes") {
-							$("#task_location_parent").slideDown("fast"); // Slide
+			$(".is_tasks_location").click(function() {
+						if ($('input[name=tasks_location]:checked').val() == "Yes") {
+							$("#tasks_location_parent").slideDown("fast"); // Slide
 																			// Down
 																			// Effect
 						} else {
-							$("#task_location_parent").slideUp("fast"); // Slide
+							$("#tasks_location_parent").slideUp("fast"); // Slide
 																		// Up
 																		// Effect
 						}
 					});
-			$("#task_text_parent").css("display", "none");
-			$(".is_task_text").click(function() {
-						if ($('input[name=task_text]:checked').val() == "Yes") {
-							$("#task_text_parent").slideDown("fast"); // Slide
+			$("#tasks_text_parent").css("display", "none");
+			$(".is_tasks_text").click(function() {
+						if ($('input[name=tasks_text]:checked').val() == "Yes") {
+							$("#tasks_text_parent").slideDown("fast"); // Slide
 																		// Down
 																		// Effect
 						} else {
-							$("#task_text_parent").slideUp("fast"); // Slide Up
+							$("#tasks_text_parent").slideUp("fast"); // Slide Up
 																	// Effect
 						}
 					});
-			$("#task_choice_parent").css("display", "none");
-			$(".is_task_choice").click(function() {
-						if ($('input[name=task_choice]:checked').val() == "Yes") {
-							$("#task_choice_parent").slideDown("fast"); // Slide
+			$("#tasks_choice_parent").css("display", "none");
+			$(".is_tasks_choice").click(function() {
+						if ($('input[name=tasks_choice]:checked').val() == "Yes") {
+							$("#tasks_choice_parent").slideDown("fast"); // Slide
 																		// Down
 																		// Effect
 						} else {
-							$("#task_choice_parent").slideUp("fast"); // Slide
+							$("#tasks_choice_parent").slideUp("fast"); // Slide
 																		// Up
 																		// Effect
 						}
 					});
-			$("#task_hint_parent").css("display", "none");
-			$(".is_task_hint").click(function() {
-						if ($('input[name=task_hint]:checked').val() == "Yes") {
-							$("#task_hint_parent").slideDown("fast"); // Slide
+			$("#hints_parent").css("display", "none");
+			$(".is_hints").click(function() {
+						if ($('input[name=hints]:checked').val() == "Yes") {
+							$("#hints_parent").slideDown("fast"); // Slide
 																		// Down
 																		// Effect
 						} else {
-							$("#task_hint_parent").slideUp("fast"); // Slide Up
+							$("#hints_parent").slideUp("fast"); // Slide Up
 							// Effect
 						}
 					});

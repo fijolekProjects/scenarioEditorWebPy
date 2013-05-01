@@ -3,7 +3,6 @@ import re
 from lxml import etree
 
 def fillXml(xmlData):
-    
     input = str(xmlData)
       
        
