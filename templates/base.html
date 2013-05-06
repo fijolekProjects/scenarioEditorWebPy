@@ -131,22 +131,22 @@ $def with (page)
              taskCircle.bindTo('center', taskMarker, 'position');
              
              google.maps.event.addDomListener(
-            		   document.getElementById('tasks_radius'), 'change', function() {
-            			   taskCircle.setRadius(parseInt(document.getElementById('tasks_radius').value))
+            		   document.getElementById('location_radius'), 'change', function() {
+            			   taskCircle.setRadius(parseInt(document.getElementById('location_radius').value))
             		   });
                  
-             document.getElementById("tasks_latitude").value = taskMarker.position.lat();
-             document.getElementById("tasks_longitude").value = taskMarker.position.lng();
+             document.getElementById("location_latitude").value = taskMarker.position.lat();
+             document.getElementById("location_longitude").value = taskMarker.position.lng();
              
              google.maps.event.addListener(taskMarker, 'dblclick', function() {
             	 taskMarker.setMap(null)
             	 taskCircle.setMap(null)
-            	 document.getElementById("tasks_latitude").value = null;
-            	 document.getElementById("tasks_longitude").value = null; 
+            	 document.getElementById("location_latitude").value = null;
+            	 document.getElementById("location_longitude").value = null; 
              });
              google.maps.event.addListener(taskMarker, 'drag', function(event) {
-                 document.getElementById("tasks_latitude").value = event.latLng.lat();
-                 document.getElementById("tasks_longitude").value = event.latLng.lng(); 
+                 document.getElementById("location_latitude").value = event.latLng.lat();
+                 document.getElementById("location_longitude").value = event.latLng.lng(); 
                 
              });
              }

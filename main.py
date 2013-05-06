@@ -4,8 +4,9 @@ Created on Apr 9, 2013
 @author: mihas
 '''
 import web
+
 from urlparse import parse_qsl
-from test import ScenarioGenerator
+from generate import ScenarioGenerator
 
 urls = (
     '/', 'Index', '/generateScenario', 'generateScenario')
@@ -32,8 +33,11 @@ class Index:
 
 class generateScenario:
     def GET(self):
-        gen = ScenarioGenerator()
+        gen = ScenarioGenerator()        
+        gen.xmlFinish()
         gen.FILE.close()
+      
+       
         return render.appMenu()
 
 if __name__ == '__main__':
