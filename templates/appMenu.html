@@ -7,7 +7,7 @@ $def with ()
 <script type="text/javascript" src="static/cleanForms.js"></script>
 <script type="text/javascript" src="static/ajaxFormHandle.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-<script src="http://malsup.github.com/jquery.form.js"></script> 
+<script type="text/javascript" src="https://raw.github.com/kflorence/jquery-deserialize/master/src/jquery.deserialize.js"></script>
 
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/start/jquery-ui.css"/>
 </head>
@@ -27,7 +27,7 @@ $def with ()
             <div id ="accordion">
                 <h3>Quest Form</h3>
                 <div>
-                    <form class="questForm" method="post">
+                    <form method="post" id="questForm">
                         <fieldset>
                             <ol class="formset">
                                 <li>

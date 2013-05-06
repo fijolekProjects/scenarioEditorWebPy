@@ -13,22 +13,17 @@ def singleton(cls):
     return getinstance
 
 
-
-
-
 @singleton
 class ScenarioGenerator(object):
    
     filledFormCounter = 0
     filename = "scenario.xml"
     FILE = open(filename, "w")
-   
-
     
-   ################### Filling xml with quests ##############################
+    
+    ################### Filling xml with quests ##############################
   
     def fillXml(self, xmlData):
-                     
         quest = etree.Element('quest', id = xmlData[0][1])  
         taskList = ['location_.*','text_,*','choice_.*']
         
@@ -39,19 +34,13 @@ class ScenarioGenerator(object):
             attribute= etree.Element(item[0])           
             attribute.text = item[1] 
              
-            attribute = self.addMultiChild('tasks_.*', attribute, i, item,taskList)              
-            
+            attribute = self.addMultiChild('tasks.*', attribute, i, item,taskList)              
             
             quest.append(attribute)
-  
-        
         root.append(quest)
 
         return 0
-
     #########################################################################
-        
-        
     
     ################### Adds finished quests to root ##########################
         
@@ -66,12 +55,12 @@ class ScenarioGenerator(object):
 
 
 
-   #################### Adding single child ###################################
+    #################### Adding single child ###################################
    
-    def addChild(self,prefix,attr,iter,item,section):
+    def addChild(self, prefix, attr, iter,item,section):
         if re.match(section,item[0]):
             item = iter.next()
-        
+        print("obecny string to %s",item[0])
         localRoot = etree.Element(prefix[0:len(prefix)-3])
         topicTest = 0
         
@@ -85,9 +74,9 @@ class ScenarioGenerator(object):
                     task = etree.Element(temp)
                     task.text = item[1]
                     localRoot.append(task)    
-                         
+                    print(item[0])       
                     try:                          
-                       item = iter.next()
+                        item = iter.next()
                     except StopIteration:
                         break
         
@@ -96,7 +85,7 @@ class ScenarioGenerator(object):
             
         return item
     
-   ##########################################################################
+    ##########################################################################
 
 
 
@@ -106,7 +95,7 @@ class ScenarioGenerator(object):
     def addMultiChild(self,prefix,attribute,i,item,childList):
         if re.match(prefix,item[0]):
                 
-                attribute =etree.Element(prefix[0:len(prefix)-2])
+                attribute = etree.Element(prefix[0:len(prefix)-2])
                 attribute.text = ''    
                
                 item = i.next()

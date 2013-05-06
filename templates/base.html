@@ -2,11 +2,13 @@ $def with (page)
 <html>
 <head>
 <title>Scenario Editor</title>
-
+<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
 <link rel="stylesheet" href="static/style/style.css" />
 <script
 	src="https://maps.googleapis.com/maps/api/js?3.12&sensor=false"></script>
+	
 <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.5/src/markerwithlabel_packed.js"></script>
+<script type="text/javascript" src="https://raw.github.com/kflorence/jquery-deserialize/master/src/jquery.deserialize.js"></script>
 <script>
          var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
          
@@ -20,7 +22,7 @@ $def with (page)
              zoom:16,
              mapTypeId: google.maps.MapTypeId.ROADMAP
            };
-           map = new google.maps.Map(document.getElementById("google-map"),mapProp);
+           map = new google.maps.Map(document.getElementById("google-map"), mapProp);
            overlay = new google.maps.OverlayView();
            overlay.draw = function() {};
            overlay.setMap(map);
@@ -87,14 +89,22 @@ $def with (page)
          google.maps.event.addListener(questMarker, 'dblclick', function() {
         	 componentCounter--;
         	 questMarker.setMap(null);
-        	 document.getElementById("latitude").value = null;
-             document.getElementById("longitude").value = null;; 
+        	 cleanForms();
          });
          google.maps.event.addListener(questMarker, 'drag', function(event) {
              document.getElementById("latitude").value = event.latLng.lat();
              document.getElementById("longitude").value = event.latLng.lng(); 
          });
-         
+         google.maps.event.addListener(questMarker, 'click', function(event) {
+        	 var $$form = $$("#questForm")
+        	 cleanForms();
+        	 var data = "id=0&command=to+jest&description=wczytane+z+query+string'a&latitude=52.221976541586386&longitude=21.0128116607666&location_latitude=&location_longitude=&location_radius=&text_question=&text_answer=&choice_question=&choice_answer1=&choice_succsess_code_1=&choice_answer2=&choice_succsess_code_2=&choice_answer3=&choice_succsess_code_3=&hints_text=&hints_text_cost=&hints_image_cost=&hints_sound_cost=";
+        	 $$form.deserialize(data)
+				   function clear() {
+					    $$form.get(0).reset();
+				   }
+					
+         });
          
          
          }

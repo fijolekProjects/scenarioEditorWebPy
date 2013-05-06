@@ -29,15 +29,14 @@ class Index:
         gen = ScenarioGenerator()
         gen.fillXml(formList)
         
-        return formList
+        return form
 
 class generateScenario:
     def GET(self):
         gen = ScenarioGenerator()        
         gen.xmlFinish()
         gen.FILE.close()
-      
-       
+        
         return render.appMenu()
 
 if __name__ == '__main__':

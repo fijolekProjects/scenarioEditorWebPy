@@ -1,9 +1,11 @@
 $(document).ready(function () {
+	var questFormData = null;
     $(".button").click(function () {
+    	questFormData = $("form").serialize()
         $.ajax({
             type: "POST",
             async: false,
-            data: $("form").serialize(),
+            data: questFormData,
             success: function (data) {
                 $('#result').html(data).hide().fadeIn(1500);
                 cleanForms();
