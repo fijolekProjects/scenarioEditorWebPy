@@ -28,8 +28,7 @@ class ScenarioGenerator(object):
    ################### Filling xml with quests ##############################
   
     def fillXml(self, xmlData):
-        
-               
+                     
         quest = etree.Element('quest', id = xmlData[0][1])  
         taskList = ['location_.*','text_,*','choice_.*']
         
@@ -72,7 +71,7 @@ class ScenarioGenerator(object):
     def addChild(self,prefix,attr,iter,item,section):
         if re.match(section,item[0]):
             item = iter.next()
-        print("obecny string to %s",item[0])
+        
         localRoot = etree.Element(prefix[0:len(prefix)-3])
         topicTest = 0
         
@@ -86,7 +85,7 @@ class ScenarioGenerator(object):
                     task = etree.Element(temp)
                     task.text = item[1]
                     localRoot.append(task)    
-                    print(item[0])       
+                         
                     try:                          
                        item = iter.next()
                     except StopIteration:
