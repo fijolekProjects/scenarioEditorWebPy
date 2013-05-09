@@ -1,7 +1,10 @@
+var questFormData = 1;
 $(document).ready(function () {
-	var questFormData = null;
+	
     $(".button").click(function () {
-    	questFormData = $("form").serialize()
+    	questFormData = $("form").serialize();
+    	var currentId = $('#id').val();
+    	markersArray[currentId]["queryString"] = questFormData;
         $.ajax({
             type: "POST",
             async: false,

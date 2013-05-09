@@ -1,7 +1,6 @@
 function cleanForms() {
     hideFormFields();
-    $("form").find("input[type = text], input[type = number]").val('');
-    $("input:radio").removeAttr("checked");
+    $("form").get(0).reset();
 
 }
 
