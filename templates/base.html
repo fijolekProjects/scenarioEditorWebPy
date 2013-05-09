@@ -12,6 +12,12 @@ $def with (page)
 <script> 
 var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
 
+function putBaseDataToForm(marker) {
+	  document.getElementById("id").value = componentCounter;
+    document.getElementById("latitude").value = marker.position.lat();
+    document.getElementById("longitude").value = marker.position.lng();
+}
+
 <!-- initialize -->
 var map;
 var overlay;
@@ -65,7 +71,8 @@ function placeQuestMarker(location) {
 
     var questImage = 'static/icons/questIcon.png';
     componentCounter++;
-    document.getElementById("id").value = componentCounter;
+    
+    
     var questMarker = new MarkerWithLabel({
 
         position: location,
@@ -77,8 +84,8 @@ function placeQuestMarker(location) {
         labelAnchor: new google.maps.Point(14, -5),
         queryString: 0,
     });
-    document.getElementById("latitude").value = questMarker.position.lat();
-    document.getElementById("longitude").value = questMarker.position.lng();
+    
+    putBaseDataToForm(questMarker);
 
     markersArray.push(questMarker);
 
@@ -106,11 +113,14 @@ function placeQuestMarker(location) {
         if (questMarker["queryString"] !== 0) {
             var $$form = $$("#questForm")
             var formSerializedData = questMarker["queryString"];
-            $$form.deserialize(formSerializedData)
-
-            function clear() {
-                $$form.get(0).reset();
-            }
+            cleanForms();
+            $$form.deserialize(formSerializedData);
+						goToFormTab();
+           
+        } else {
+        	cleanForms();
+        	putBaseDataToForm(questMarker);
+        	goToQuestFormTab();
         }
 
 

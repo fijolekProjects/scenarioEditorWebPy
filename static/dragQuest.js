@@ -21,12 +21,10 @@ $(document).ready(function () {
                 .fromContainerPixelToLatLng(point);
             if (draggableId === "questIconId") {
                 placeQuestMarker(latlng);
-                $('#tabs').tabs('select', 1);
-                $("#accordion").accordion("activate", 0);
+                goToQuestFormTab();
             } else if (draggableId === "infoIconId") {
                 placeInfoMarker(latlng)
-                $('#tabs').tabs('select', 1);
-                $("#accordion").accordion("activate", 1);
+                goToInfoFormTab();
             } else if (draggableId === "taskIconId") {
                 placeTaskMarker(latlng);
             }

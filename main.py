@@ -28,16 +28,9 @@ class Index:
         formList = parse_qsl(form)       
         gen = ScenarioGenerator()
         gen.fillXml(formList)
-        
-        return form
-
-class generateScenario:
-    def GET(self):
-        gen = ScenarioGenerator()        
-        gen.xmlFinish()
         gen.FILE.close()
         
-        return render.appMenu()
+        return form
 
 if __name__ == '__main__':
     app.run()

@@ -4,7 +4,7 @@ $def with ()
 <script type="text/javascript" src="static/questFormControl.js"></script>
 <script type="text/javascript" src="static/menuControl.js"></script>
 <script type="text/javascript" src="static/dragQuest.js"></script>
-<script type="text/javascript" src="static/cleanForms.js"></script>
+<script type="text/javascript" src="static/formFunctions.js"></script>
 <script type="text/javascript" src="static/ajaxFormHandle.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://raw.github.com/kflorence/jquery-deserialize/master/src/jquery.deserialize.js"></script>
@@ -151,7 +151,7 @@ $def with ()
                                     </ol>
                                 </li>
                             </ol>
-                            <input class="button" type="submit" value="Add component"/>
+                            <input class="formButton" type="submit" value="Add component"/>
                         </fieldset>
                     </form>
                 </div>
@@ -160,7 +160,7 @@ $def with ()
             </div>
         </div>
         <div id="tabs-3">
-        	<form action="/generateScenario">
+        	<form method="post">
     				<input class="scenarioButton" type="submit" value="Generate XML!">
 				</form>
         </div>
