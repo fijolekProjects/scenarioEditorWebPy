@@ -6,7 +6,7 @@ $(document).ready(function () {
     $(".formButton").click(function () {
     	var serializedForm = $("form").serialize();
     	var currentId = $('#id').val();
-    	markersArray[currentId]["queryString"] = serializedForm;
+    	componentArray[currentId]["queryString"] = serializedForm;
     	queryStringsArr.push(serializedForm);
     	cleanForms();
     	goToChooseComponentTab();

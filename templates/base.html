@@ -21,7 +21,8 @@ function putBaseDataToForm(marker) {
 <!-- initialize -->
 var map;
 var overlay;
-var markersArray = [];
+var componentArray = [];
+var taskCircleArray = [];
 
 function initialize() {
     var mapProp = {
@@ -87,7 +88,7 @@ function placeQuestMarker(location) {
     
     putBaseDataToForm(questMarker);
 
-    markersArray.push(questMarker);
+    componentArray.push(questMarker);
 
     google.maps.event.addListener(questMarker, 'rightclick', function (event) {
         var lat = event.latLng.lat();
@@ -147,24 +148,29 @@ function placeTaskMarker(location) {
     });
     var taskPosition = taskMarker.position;
 
+    var taskCircle = new google.maps.Circle({
+        center: taskPosition,
+        radius: 0,
+        circleId: componentCounter,
+        strokeColor: "#0000FF",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#0000FF",
+        fillOpacity: 0.4,
+        map: map,
+    });
 
-
-
+    taskCircleArray.push(taskCircle);
+    
     google.maps.event.addDomListener(
         document.getElementById('location_radius'), 'change', function () {
-        var taskCircle = new google.maps.Circle({
-            center: taskPosition,
-            radius: 0,
-            strokeColor: "#0000FF",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "#0000FF",
-            fillOpacity: 0.4,
-            map: map,
-        });
-        taskCircle.bindTo('center', taskMarker, 'position');
-
-        taskCircle.setRadius(parseInt(document.getElementById('location_radius').value))
+        var currentTaskId = parseInt(document.getElementById("id").value);
+        for (var i = 0; i < taskCircleArray.length; i++) {
+        	if (currentTaskId === (taskCircleArray[i]["circleId"])) {
+            	taskCircleArray[i].bindTo('center', taskMarker, 'position');
+            	taskCircleArray[i].setRadius(parseInt(document.getElementById('location_radius').value))
+            }
+        }
     });
 
 

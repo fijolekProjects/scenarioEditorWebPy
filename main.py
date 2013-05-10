@@ -30,7 +30,7 @@ class Index:
         gen.fillXml(formList)
         gen.FILE.close()
         
-        return form
+        return formList
 
 if __name__ == '__main__':
     app.run()
