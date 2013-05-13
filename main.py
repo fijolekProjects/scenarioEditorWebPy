@@ -17,7 +17,6 @@ render = web.template.render('templates/', base='base')
 
 app = web.application(urls, globals())
 
-
                    
 class Index:
     def GET(self):

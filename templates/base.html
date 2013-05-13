@@ -116,7 +116,7 @@ function placeQuestMarker(location) {
             var formSerializedData = questMarker["queryString"];
             cleanForms();
             $$form.deserialize(formSerializedData);
-						goToFormTab();
+            goToQuestFormTab();
            
         } else {
         	cleanForms();
@@ -213,6 +213,9 @@ function placeInfoMarker(location) {
         componentCounter--;
         infoMarker.setMap(null);
 
+    });
+    google.maps.event.addListener(infoMarker, 'click', function (event) {
+    	goToInfoFormTab();
     });
 }
 

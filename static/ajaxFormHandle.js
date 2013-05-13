@@ -10,6 +10,7 @@ $(document).ready(function () {
     	queryStringsArr.push(serializedForm);
     	cleanForms();
     	goToChooseComponentTab();
+    	$("#remove_answer_button").click();
         $.ajax({
             async: false,
         });
