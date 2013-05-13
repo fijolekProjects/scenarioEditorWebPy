@@ -21,7 +21,24 @@ class ScenarioGenerator(object):
     FILE = open(filename, "w")
     
     
-    ################### Filling xml with quests ##############################
+    def cutFormList(self,inputList):
+       
+        questList = []    
+        tempQuestMark = 0;
+                
+        for index,item in enumerate(inputList):
+            if item[0] == 'EOS':
+                
+                questList.append(inputList[tempQuestMark:index])
+                tempQuestMark = index+1
+              
+             
+        for item in questList:
+            self.fillXml(item)
+            
+
+        
+    
   
     def fillXml(self, xmlData):
         quest = etree.Element('quest', id = xmlData[0][1])  
@@ -40,9 +57,8 @@ class ScenarioGenerator(object):
         root.append(quest)
 
         return 0
-    #########################################################################
-    
-    ################### Adds finished quests to root ##########################
+  
+
         
     def xmlFinish(self):
         
@@ -51,16 +67,13 @@ class ScenarioGenerator(object):
         
         return 0
 
-    ###########################################################################
-
-
-
-    #################### Adding single child ###################################
+   
+   
    
     def addChild(self, prefix, attr, iter,item,section):
         if re.match(section,item[0]):
             item = iter.next()
-        print("obecny string to %s",item[0])
+        
         localRoot = etree.Element(prefix[0:len(prefix)-3])
         topicTest = 0
         
@@ -74,7 +87,7 @@ class ScenarioGenerator(object):
                     task = etree.Element(temp)
                     task.text = item[1]
                     localRoot.append(task)    
-                    print(item[0])       
+                          
                     try:                          
                         item = iter.next()
                     except StopIteration:
@@ -85,11 +98,8 @@ class ScenarioGenerator(object):
             
         return item
     
-    ##########################################################################
-
-
-
-    ######################## Adding complex child ################################
+   
+   
     
     
     def addMultiChild(self,prefix,attribute,i,item,childList):
@@ -108,4 +118,4 @@ class ScenarioGenerator(object):
     
       
       
-####################################################################################  
+

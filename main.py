@@ -25,9 +25,10 @@ class Index:
     
     def POST(self):
         form = web.data()
-        formList = parse_qsl(form)       
+        formList = parse_qsl(form)      
         gen = ScenarioGenerator()
-        gen.fillXml(formList)
+        gen.cutFormList(formList)
+        gen.xmlFinish()
         gen.FILE.close()
         
         return formList

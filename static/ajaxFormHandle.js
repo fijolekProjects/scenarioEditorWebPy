@@ -19,7 +19,8 @@ $(document).ready(function () {
     $(".scenarioButton").click(function () {
     	var wholeQueryString = "";
     	for (var i = 0; i < queryStringsArr.length; i++) {
-    		wholeQueryString += queryStringsArr[i] + "EOS";
+		
+    		wholeQueryString += queryStringsArr[i] + "&EOS= " + i + "&";
     	}
     	alert(wholeQueryString);
         $.ajax({
