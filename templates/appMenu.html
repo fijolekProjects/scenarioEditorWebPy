@@ -52,11 +52,13 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="image">image</label>
-                                    <input type="file" id="image" name="image"/>
+                                    <input type="file" id="imageFile" name="imageFile" class="fileInput"/>
+                                    <input type="hidden" id="image" name="image"/>
                                 </li>
                                 <li>
                                     <label for="icon">icon</label>
-                                    <input type="file" id="icon" name="icon"/>
+                                    <input type="file" id="iconFile" name="icon" class="fileInput"/>
+                                    <input type="hidden" id="icon" name="icon"/>
                                 </li>
                                 <li>
                                     <label for="tasks_location">tasks location?</label>
@@ -130,12 +132,14 @@ $def with ()
                                         </li>
                                         <li>
                                             <label for="hints_image">hints image / cost</label>
-                                            <input type="file" id="hints_image" name="hints_image"/>
+                                            <input type="file" id="hints_imageFile" name="hints_imageFile" class="fileInput"/>
+                                            <input type="hidden" id="hints_image" name="hints_image" />
                                             <input type="number" id="hints_image_cost" name="hints_image_cost"/>
                                         </li>
                                         <li>
                                             <label for="hints_sound">hints sound / cost</label>
-                                            <input type="file" id="hints_sound" name="hints_sound"/>
+                                            <input type="file" id="hints_soundFile" name="hints_soundFile" class="fileInput"/>
+                                            <input type="hidden" id="hints_sound" name="hints_sound" />
                                             <input type="number" id="hints_sound_cost" name="hints_sound_cost"/>
                                         </li>
                                     </ol>

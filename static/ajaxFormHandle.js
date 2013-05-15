@@ -4,9 +4,15 @@ $(document).ready(function () {
 	
 	
     $(".formButton").click(function () {
+    	 $(".fileInput").each(function () {
+    		 var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
+    		 $(":input:eq(" + ($(":input").index($(this)) + 1) + ")").val(fileName);
+    	 });
+    	
     	var serializedForm = $("form").serialize();
     	var currentId = $('#id').val();
     	componentArray[currentId]["queryString"] = serializedForm;
+    	
     	queryStringsArr.push(serializedForm);
     	cleanForms();
     	goToChooseComponentTab();
