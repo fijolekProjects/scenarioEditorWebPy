@@ -136,6 +136,7 @@ function placeQuestMarker(location) {
 <!-- placeTaskMarker -->
 
 function placeTaskMarker(location) {
+	
     var taskImage = 'static/icons/taskIcon.png';
     var taskMarker = new MarkerWithLabel({
         position: location,
@@ -188,7 +189,6 @@ function placeTaskMarker(location) {
     google.maps.event.addListener(taskMarker, 'drag', function (event) {
         document.getElementById("location_latitude").value = event.latLng.lat();
         document.getElementById("location_longitude").value = event.latLng.lng();
-
     });
 }
 <!-- placeTaskMarker -->
@@ -207,7 +207,14 @@ function placeInfoMarker(location) {
         labelContent: componentCounter.toString(),
         labelClass: "labels",
         labelAnchor: new google.maps.Point(14, -5),
+        queryString: 0,
     });
+    
+    document.getElementById("info_id").value = componentCounter;
+    document.getElementById("info_latitude").value = infoMarker.position.lat();
+    document.getElementById("info_longitude").value = infoMarker.position.lng();
+
+    componentArray.push(infoMarker);
 
     google.maps.event.addListener(infoMarker, 'dblclick', function () {
         componentCounter--;
@@ -215,7 +222,24 @@ function placeInfoMarker(location) {
 
     });
     google.maps.event.addListener(infoMarker, 'click', function (event) {
-    	goToInfoFormTab();
+    	if (infoMarker["queryString"] !== 0) {
+            var $$form = $$("#infoForm")
+            var formSerializedData = infoMarker["queryString"];
+            cleanForms();
+            $$form.deserialize(formSerializedData);
+            goToInfoFormTab();
+           
+        } else {
+        	cleanForms();
+        	document.getElementById("info_id").value = componentCounter;
+          document.getElementById("info_latitude").value = infoMarker.position.lat();
+          document.getElementById("info_longitude").value = infoMarker.position.lng();
+        	goToInfoFormTab();
+        }
+    });
+    google.maps.event.addListener(infoMarker, 'drag', function (event) {
+        document.getElementById("info_latitude").value = event.latLng.lat();
+        document.getElementById("info_longitude").value = event.latLng.lng();
     });
 }
 

@@ -31,12 +31,13 @@ $def with ()
                         <fieldset>
                             <ol class="formset">
                                 <li>
+                                		<input type="hidden" name="FORM_TYPE" value="quest" />
                                     <label for="id">id</label>
                                     <input type="number" id="id" name="id" readonly/>
                                 </li>
                                 <li>
                                     <label for="command">command</label>
-                                    <input type="text" id="command" name="command" />
+                                    <input type="text" id="quest_command" name="command" />
                                 </li>
                                 <li>
                                     <label for="description">description</label>
@@ -52,12 +53,12 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="image">image</label>
-                                    <input type="file" id="imageFile" name="imageFile" class="fileInput"/>
+                                    <input type="file" id="imageFile" name="imageFile" class="questFileInput"/>
                                     <input type="hidden" id="image" name="image"/>
                                 </li>
                                 <li>
                                     <label for="icon">icon</label>
-                                    <input type="file" id="iconFile" name="icon" class="fileInput"/>
+                                    <input type="file" id="iconFile" name="icon" class="questFileInput"/>
                                     <input type="hidden" id="icon" name="icon"/>
                                 </li>
                                 <li>
@@ -132,25 +133,64 @@ $def with ()
                                         </li>
                                         <li>
                                             <label for="hints_image">hints image / cost</label>
-                                            <input type="file" id="hints_imageFile" name="hints_imageFile" class="fileInput"/>
+                                            <input type="file" id="hints_imageFile" name="hints_imageFile" class="questFileInput"/>
                                             <input type="hidden" id="hints_image" name="hints_image" />
                                             <input type="number" id="hints_image_cost" name="hints_image_cost"/>
                                         </li>
                                         <li>
                                             <label for="hints_sound">hints sound / cost</label>
-                                            <input type="file" id="hints_soundFile" name="hints_soundFile" class="fileInput"/>
+                                            <input type="file" id="hints_soundFile" name="hints_soundFile" class="questFileInput"/>
                                             <input type="hidden" id="hints_sound" name="hints_sound" />
                                             <input type="number" id="hints_sound_cost" name="hints_sound_cost"/>
                                         </li>
                                     </ol>
                                 </li>
                             </ol>
-                            <input class="formButton" type="submit" value="Add component"/>
+                            <input id="questButton" class="formButton" type="submit" value="Add component"/>
                         </fieldset>
                     </form>
                 </div>
                 <h3>Information Form</h3>
-                <div></div>
+                <div>
+                <form method="post" id="infoForm">
+                        <fieldset>
+                            <ol class="formset">
+                                <li>
+                                		<input type="hidden" name="FORM_TYPE" value="info" />
+                                    <label for="id">id</label>
+                                    <input type="number" id="info_id" name="id" readonly/>
+                                </li>
+                                <li>
+                                    <label for="description">description</label>
+                                    <input type="text" id="info_description" name="description" />
+                                </li>
+                                <li>
+                                    <label for="latitude">latitude</label>
+                                    <input type="text" id="info_latitude" name="latitude" />
+                                </li>
+                                <li>
+                                    <label for="longitude">longitude</label>
+                                    <input type="text" id="info_longitude" name="longitude" />
+                                </li>
+                                <li>
+                                    <label for="finaldescription">final description</label>
+                                    <input type="text" id="info_finaldescription" name="finaldescription" />
+                                </li>
+                                <li>
+                                    <label for="image">image</label>
+                                    <input type="file" id="imageFile" name="imageFile" class="infoFileInput"/>
+                                    <input type="hidden" id="info_image" name="image"/>
+                                </li>
+                                <li>
+                                    <label for="icon">icon</label>
+                                    <input type="file" id="iconFile" name="icon" class="infoFileInput"/>
+                                    <input type="hidden" id="info_icon" name="icon"/>
+                                </li>
+                            </ol>
+                            <input id="infoButton" class="formButton" type="submit" value="Add component"/>
+                        </fieldset>
+                    </form>
+                </div>
             </div>
         </div>
         <div id="tabs-3">

@@ -1,6 +1,7 @@
 function cleanForms() {
     hideFormFields();
-    $("form").get(0).reset();
+    $("#questForm").get(0).reset();
+    $("#infoForm").get(0).reset();
 
 }
 

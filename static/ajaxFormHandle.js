@@ -3,16 +3,16 @@ $(document).ready(function () {
 	var queryStringsArr = [];
 	
 	
-    $(".formButton").click(function () {
-    	 $(".fileInput").each(function () {
+    $("#questButton").click(function () {
+    	 $(".questFileInput").each(function () {
     		 var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
     		 $(":input:eq(" + ($(":input").index($(this)) + 1) + ")").val(fileName);
     	 });
     	
-    	var serializedForm = $("form").serialize();
+    	var serializedForm = $("#questForm").serialize();
     	var currentId = $('#id').val();
     	componentArray[currentId]["queryString"] = serializedForm;
-    	
+    	  
     	queryStringsArr.push(serializedForm);
     	cleanForms();
     	goToChooseComponentTab();
@@ -22,6 +22,26 @@ $(document).ready(function () {
         });
         return false;
     });
+    
+    $("#infoButton").click(function () {
+   	 $(".infoFileInput").each(function () {
+   		 var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
+   		 $(":input:eq(" + ($(":input").index($(this)) + 1) + ")").val(fileName);
+   	 });
+   	
+   	var serializedForm = $("#infoForm").serialize();
+   	var currentId = $('#info_id').val();
+   	componentArray[currentId]["queryString"] = serializedForm;
+   	  
+   	queryStringsArr.push(serializedForm);
+   	cleanForms();
+   	goToChooseComponentTab();
+   	$("#remove_answer_button").click();
+       $.ajax({
+           async: false,
+       });
+       return false;
+   });
     
     $(".scenarioButton").click(function () {
     	var wholeQueryString = "";
