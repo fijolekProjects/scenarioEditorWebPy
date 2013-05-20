@@ -64,14 +64,16 @@ function initialize() {
 <!-- placeQuestMarker -->
 var componentCounter = -1;
 var componentArray = [];
-function placeQuestMarker(location) {
 
-  
-	componentCounter++;
     
-    
-    function componentMarkerClass(markerProp) {
-    	var that = new MarkerWithLabel(
+    function componentMarkerClass(location, markerProp) {
+    	componentCounter++;
+    	function putBaseDataToForm() {
+  		  document.getElementById(markerObj.idString).value = componentCounter;
+  	    document.getElementById(markerObj.latString).value = markerObj.position.lat();
+  	    document.getElementById(markerObj.lngString).value = markerObj.position.lng();
+  	}
+    	var markerObj = new MarkerWithLabel(
         		{
             position: location,
             map: map,
@@ -85,70 +87,65 @@ function placeQuestMarker(location) {
             latString: markerProp[1],
             lngString: markerProp[2],
             formString: markerProp[3],
+            formID: 0,
         });
     	
-    	function putBaseDataToForm() {
-    		  document.getElementById(that.idString).value = componentCounter;
-    	    document.getElementById(that.latString).value = that.position.lat();
-    	    document.getElementById(that.lngString).value = that.position.lng();
-    	}
     	
     	
-    	google.maps.event.addListener(that, 'rightclick', function (event) {
-            var lat = event.latLng.lat();
-            var lng = event.latLng.lng();
-
-            var infoWindow = new google.maps.InfoWindow();
-            infoWindow.setContent("<p>Lat = " + lat + "<br />" + "Lng = " + lng + "</p>")
-            infoWindow.open(map, that)
-
-        });
-    	google.maps.event.addListener(that, 'dblclick', function () {
+    	
+    	google.maps.event.addListener(markerObj, 'dblclick', function () {
             componentCounter--;
-            that.setMap(null);
+            markerObj.setMap(null);
             cleanForms();
             goToChooseComponentTab();
         });
-    	google.maps.event.addListener(that, 'drag', function (event) {
-            document.getElementById(that.latString).value = event.latLng.lat();
-            document.getElementById(that.lngString).value = event.latLng.lng();
+    	google.maps.event.addListener(markerObj, 'drag', function (event) {
+            document.getElementById(markerObj.latString).value = event.latLng.lat();
+            document.getElementById(markerObj.lngString).value = event.latLng.lng();
         });
     	
-    	google.maps.event.addListener(that, 'click', function (event) {
-            if (questMarker.queryString !== 0) {
-                var $$form = $$("#".concat(that.formString))
-                var formSerializedData = that.queryString;
+    	google.maps.event.addListener(markerObj, 'click', function (event) {
+            if (markerObj.queryString !== 0) {
+                var $$form = $$("#".concat(markerObj.formString))
+                var formSerializedData = markerObj.queryString;
                 cleanForms();
                 $$form.deserialize(formSerializedData);
-                goToQuestFormTab();
-               
+                goToSpecificTab(markerObj.formID);
             } else {
             	cleanForms();
             	putBaseDataToForm();
-            	goToQuestFormTab();
+            	goToSpecificTab(markerObj.formID);
             }
         });
     	
     	putBaseDataToForm();
-    	componentArray.push(that);
+    	componentArray.push(markerObj);
     	
-    	return that;
+    	return markerObj;
     }
     
     
     
-    function questMarkerClass() {
+    function questMarkerClass(location) {
     	var questImage = 'static/icons/questIcon.png';
     	var markerStrings = ["id", "latitude", "longitude", "questForm"];
-    	var that = componentMarkerClass(markerStrings);
-    	that.icon = questImage;
-    	return that;
+    	var questMarkerObj = componentMarkerClass(location, markerStrings);
+    	questMarkerObj.icon = questImage;
+    	questMarkerObj.formID = 0;
+    	return questMarkerObj;
     }
     
-    var questMarker = questMarkerClass();
     
+    function infoMarkerClass(location) {
+    	var infoImage = 'static/icons/infoIcon.png';
+    	var markerStrings = ["info_id", "info_latitude", "info_longitude", "infoForm"];
+    	var infoMarkerObj = componentMarkerClass(location, markerStrings);
+    	infoMarkerObj.icon = infoImage;
+    	infoMarkerObj.formID = 1;
+    	return infoMarkerObj;
+    }
 
-}
+
 
 <!-- placeQuestMarker -->
 

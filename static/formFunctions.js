@@ -24,3 +24,8 @@ function goToInfoFormTab() {
 function goToChooseComponentTab() {
 	$('#tabs').tabs('enable', 0).tabs('select', 0);
 }
+
+function goToSpecificTab(formID) {
+	goToFormTab();
+	$("#accordion").accordion("activate", formID);
+}
