@@ -1,276 +1,265 @@
 $def with (page)
 <html>
-<head>
-<title>Scenario Editor</title>
-<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
-<link rel="stylesheet" href="static/style/style.css" />
-<script
-	src="https://maps.googleapis.com/maps/api/js?3.12&sensor=false"></script>
-	
-<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.5/src/markerwithlabel_packed.js"></script>
-<script type="text/javascript" src="https://raw.github.com/kflorence/jquery-deserialize/master/src/jquery.deserialize.js"></script>
-<script> 
-var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
-
-
-
-<!-- initialize -->
-var map;
-var overlay;
-
-var taskCircleArray = [];
-
-function initialize() {
-    var mapProp = {
-        center: myCenter,
-        zoom: 16,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById("google-map"), mapProp);
-    overlay = new google.maps.OverlayView();
-    overlay.draw = function () {};
-    overlay.setMap(map);
-
-    var marker = new google.maps.Marker({
-        position: myCenter,
-        animation: google.maps.Animation.BOUNCE
-    });
-    marker.setMap(map);
-
-    var weiti = new google.maps.Circle({
-        center: myCenter,
-        radius: 100,
-        strokeColor: "#0000FF",
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: "#0000FF",
-        fillOpacity: 0.4,
-        map: map,
-    });
-
-
-
-
-    google.maps.event.addListener(marker, 'click', function () {
-        var infoWindow = new google.maps.InfoWindow();
-        infoWindow.setContent("<p>WEITI<br />" + "Lat = " + myCenter.lat() + "<br />" + "Lng = " + myCenter.lng() + "<br />" + "Radius = " + weiti.radius + "<br/>" + "Kliknij na mape by dodac nowy taskMarker " + "<br />" + "Nastepnie kliknij na taskMarker PP myszy" + "<br />" + "Usuwanie markera double click" + "</p>");
-        infoWindow.open(map, marker);
-    });
-
-
-}
-<!-- initialize -->
-
-<!-- placeQuestMarker -->
-var componentCounter = -1;
-var componentArray = [];
-
     
-    function componentMarkerClass(location, markerProp) {
-    	componentCounter++;
-    	function putBaseDataToForm() {
-  		  document.getElementById(markerObj.idString).value = componentCounter;
-  	    document.getElementById(markerObj.latString).value = markerObj.position.lat();
-  	    document.getElementById(markerObj.lngString).value = markerObj.position.lng();
-  	}
-    	var markerObj = new MarkerWithLabel(
-        		{
-            position: location,
-            map: map,
-            draggable: true,
-            icon: '',
-            labelContent: componentCounter.toString(),
-            labelClass: "labels",
-            labelAnchor: new google.maps.Point(14, -5),
-            queryString: 0,
-            idString: markerProp[0],
-            latString: markerProp[1],
-            lngString: markerProp[2],
-            formString: markerProp[3],
-            formID: 0,
-        });
-    	
-    	
-    	
-    	
-    	google.maps.event.addListener(markerObj, 'dblclick', function () {
-            componentCounter--;
-            markerObj.setMap(null);
-            cleanForms();
-            goToChooseComponentTab();
-        });
-    	google.maps.event.addListener(markerObj, 'drag', function (event) {
-            document.getElementById(markerObj.latString).value = event.latLng.lat();
-            document.getElementById(markerObj.lngString).value = event.latLng.lng();
-        });
-    	
-    	google.maps.event.addListener(markerObj, 'click', function (event) {
-            if (markerObj.queryString !== 0) {
-                var $$form = $$("#".concat(markerObj.formString))
-                var formSerializedData = markerObj.queryString;
-                cleanForms();
-                $$form.deserialize(formSerializedData);
-                goToSpecificTab(markerObj.formID);
-            } else {
-            	cleanForms();
-            	putBaseDataToForm();
-            	goToSpecificTab(markerObj.formID);
+    <head>
+        <title>Scenario Editor</title>
+        <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+        <link rel="stylesheet" href="static/style/style.css" />
+        <script src="https://maps.googleapis.com/maps/api/js?3.12&sensor=false"></script>
+        <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.5/src/markerwithlabel_packed.js"></script>
+        <script type="text/javascript" src="https://raw.github.com/kflorence/jquery-deserialize/master/src/jquery.deserialize.js"></script>
+        <script>
+            var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
+
+
+
+            <!-- initialize -->
+            var map;
+            var overlay;
+
+            var taskCircleArray = [];
+
+            function initialize() {
+                var mapProp = {
+                    center: myCenter,
+                    zoom: 16,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById("google-map"), mapProp);
+                overlay = new google.maps.OverlayView();
+                overlay.draw = function() {};
+                overlay.setMap(map);
+
+                var marker = new google.maps.Marker({
+                    position: myCenter,
+                    animation: google.maps.Animation.BOUNCE
+                });
+                marker.setMap(map);
+
+                var weiti = new google.maps.Circle({
+                    center: myCenter,
+                    radius: 100,
+                    strokeColor: "#0000FF",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: "#0000FF",
+                    fillOpacity: 0.4,
+                    map: map,
+                });
+
+
+
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    var infoWindow = new google.maps.InfoWindow();
+                    infoWindow.setContent("<p>WEITI<br />" + "Lat = " + myCenter.lat() + "<br />" + "Lng = " + myCenter.lng() + "<br />" + "Radius = " + weiti.radius + "<br/>" + "Kliknij na mape by dodac nowy taskMarker " + "<br />" + "Nastepnie kliknij na taskMarker PP myszy" + "<br />" + "Usuwanie markera double click" + "</p>");
+                    infoWindow.open(map, marker);
+                });
+
+
             }
-        });
-    	
-    	putBaseDataToForm();
-    	componentArray.push(markerObj);
-    	
-    	return markerObj;
-    }
-    
-    
-    
-    function questMarkerClass(location) {
-    	var questImage = 'static/icons/questIcon.png';
-    	var markerStrings = ["id", "latitude", "longitude", "questForm"];
-    	var questMarkerObj = componentMarkerClass(location, markerStrings);
-    	questMarkerObj.icon = questImage;
-    	questMarkerObj.formID = 0;
-    	return questMarkerObj;
-    }
-    
-    
-    function infoMarkerClass(location) {
-    	var infoImage = 'static/icons/infoIcon.png';
-    	var markerStrings = ["info_id", "info_latitude", "info_longitude", "infoForm"];
-    	var infoMarkerObj = componentMarkerClass(location, markerStrings);
-    	infoMarkerObj.icon = infoImage;
-    	infoMarkerObj.formID = 1;
-    	return infoMarkerObj;
-    }
+            <!-- initialize -->
 
-
-
-<!-- placeQuestMarker -->
-
-<!-- placeTaskMarker -->
-
-function placeTaskMarker(location) {
-	
-    var taskImage = 'static/icons/taskIcon.png';
-    var taskMarker = new MarkerWithLabel({
-        position: location,
-        map: map,
-        draggable: true,
-        icon: taskImage,
-        labelContent: componentCounter.toString(),
-        labelClass: "labels",
-        labelAnchor: new google.maps.Point(14, -5),
-    });
-    var taskPosition = taskMarker.position;
-
-    var taskCircle = new google.maps.Circle({
-        center: taskPosition,
-        radius: 0,
-        circleId: componentCounter,
-        strokeColor: "#0000FF",
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: "#0000FF",
-        fillOpacity: 0.4,
-        map: map,
-    });
-
-    taskCircleArray.push(taskCircle);
-    
-    google.maps.event.addDomListener(
-        document.getElementById('location_radius'), 'change', function () {
-        var currentTaskId = parseInt(document.getElementById("id").value);
-        for (var i = 0; i < taskCircleArray.length; i++) {
-        	if (currentTaskId === (taskCircleArray[i]["circleId"])) {
-            	taskCircleArray[i].bindTo('center', taskMarker, 'position');
-            	taskCircleArray[i].setRadius(parseInt(document.getElementById('location_radius').value))
+            <!-- placeQuestMarker -->
+            var componentCounter = -1;
+            var componentArray = [];
+            
+            function abstractMarkerClass(location, markerProp) {
+            	var abstractMarkerObj = new MarkerWithLabel({
+                    position: location,
+                    map: map,
+                    draggable: true,
+                    icon: '',
+                    labelContent: componentCounter.toString(),
+                    labelClass: "labels",
+                    labelAnchor: new google.maps.Point(14, -5),
+                    latString: markerProp[0],
+            				lngString: markerProp[1],
+                });
+            	
+            	google.maps.event.addListener(abstractMarkerObj, 'dblclick', function() {
+                    abstractMarkerObj.setMap(null);
+                });
+            	
+            	google.maps.event.addListener(abstractMarkerObj, 'drag', function(event) {
+                    document.getElementById(abstractMarkerObj.latString).value = event.latLng.lat();
+                    document.getElementById(abstractMarkerObj.lngString).value = event.latLng.lng();
+                });
+            	
+            	function putLatLngToForm() {
+                    document.getElementById(abstractMarkerObj.latString).value = abstractMarkerObj.position.lat();
+                    document.getElementById(abstractMarkerObj.lngString).value = abstractMarkerObj.position.lng();
+                }
+            	
+            	putLatLngToForm();
+            	
+            	return abstractMarkerObj;
             }
-        }
-    });
+
+
+            function componentMarkerClass(location, markerProp) {
+                componentCounter++;
+
+                function putComponentIdToForm() {
+                    document.getElementById(markerObj.idString).value = componentCounter;
+                }
+                
+                var createMarkerObj = function() {
+                var concreteMarkerObj = abstractMarkerClass(location, markerProp);
+                concreteMarkerObj.queryString = 0;
+                concreteMarkerObj.idString = markerProp[2];
+                concreteMarkerObj.formString = markerProp[3];
+                concreteMarkerObj.formId = 0;
+                return concreteMarkerObj;
+                }
+                
+                var markerObj = createMarkerObj();
+
+                google.maps.event.addListener(markerObj, 'dblclick', function() {
+                    componentCounter--;
+                    goToChooseComponentTab();
+                    cleanForms();
+                });
+                
+                
+
+                google.maps.event.addListener(markerObj, 'click', function(event) {
+                    if (markerObj.queryString !== 0) {
+                        var $$form = $$("#".concat(markerObj.formString))
+                        var formSerializedData = markerObj.queryString;
+                        cleanForms();
+                        $$form.deserialize(formSerializedData);
+                        goToSpecificTab(markerObj.formID);
+                    } else {
+                        cleanForms();
+                        putBaseDataToForm();
+                        goToSpecificTab(markerObj.formID);
+                    }
+                });
+
+                putComponentIdToForm();
+                componentArray.push(markerObj);
+								
+                return markerObj;
+            }
 
 
 
+            function createQuestMarker(location) {
+                var questImage = 'static/icons/questIcon.png';
+                var markerStrings = ["latitude", "longitude", "id", "questForm"];
+                var questMarkerObj = componentMarkerClass(location, markerStrings);
+                questMarkerObj.icon = questImage;
+                questMarkerObj.formID = 0;
+                return questMarkerObj;
+            }
 
-    document.getElementById("location_latitude").value = taskMarker.position.lat();
-    document.getElementById("location_longitude").value = taskMarker.position.lng();
 
-    google.maps.event.addListener(taskMarker, 'dblclick', function () {
-        taskMarker.setMap(null)
-        taskCircle.setMap(null)
-        document.getElementById("location_latitude").value = null;
-        document.getElementById("location_longitude").value = null;
-    });
-    google.maps.event.addListener(taskMarker, 'drag', function (event) {
-        document.getElementById("location_latitude").value = event.latLng.lat();
-        document.getElementById("location_longitude").value = event.latLng.lng();
-    });
-}
-<!-- placeTaskMarker -->
+            function createInfoMarker(location) {
+                var infoImage = 'static/icons/infoIcon.png';
+                var markerStrings = ["info_latitude", "info_longitude", "info_id", "infoForm"];
+                var infoMarkerObj = componentMarkerClass(location, markerStrings);
+                infoMarkerObj.icon = infoImage;
+                infoMarkerObj.formID = 1;
+                return infoMarkerObj;
+            }
 
-<!-- placeInfoMarker -->
+						
 
-function placeInfoMarker(location) {
-    var infoImage = 'static/icons/infoIcon.png';
-    componentCounter++;
-    var infoMarker = new MarkerWithLabel({
+            <!-- placeQuestMarker -->
 
-        position: location,
-        map: map,
-        draggable: true,
-        icon: infoImage,
-        labelContent: componentCounter.toString(),
-        labelClass: "labels",
-        labelAnchor: new google.maps.Point(14, -5),
-        queryString: 0,
-    });
-    
-    document.getElementById("info_id").value = componentCounter;
-    document.getElementById("info_latitude").value = infoMarker.position.lat();
-    document.getElementById("info_longitude").value = infoMarker.position.lng();
+            <!-- placeTaskMarker -->
 
-    componentArray.push(infoMarker);
-
-    google.maps.event.addListener(infoMarker, 'dblclick', function () {
-        componentCounter--;
-        infoMarker.setMap(null);
-
-    });
-    google.maps.event.addListener(infoMarker, 'click', function (event) {
-    	if (infoMarker["queryString"] !== 0) {
-            var $$form = $$("#infoForm")
-            var formSerializedData = infoMarker["queryString"];
-            cleanForms();
-            $$form.deserialize(formSerializedData);
-            goToInfoFormTab();
            
-        } else {
-        	cleanForms();
-        	document.getElementById("info_id").value = componentCounter;
-          document.getElementById("info_latitude").value = infoMarker.position.lat();
-          document.getElementById("info_longitude").value = infoMarker.position.lng();
-        	goToInfoFormTab();
-        }
-    });
-    google.maps.event.addListener(infoMarker, 'drag', function (event) {
-        document.getElementById("info_latitude").value = event.latLng.lat();
-        document.getElementById("info_longitude").value = event.latLng.lng();
-    });
-}
+            	function circleClass (taskPosition) {
+            		var circleObj = new google.maps.Circle({
+                        center: taskPosition,
+                        radius: 0,
+                        circleId: componentCounter,
+                        strokeColor: "#0000FF",
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: "#0000FF",
+                        fillOpacity: 0.4,
+                        map: map,
+                    });
+            		return circleObj;
+            	}
+            	
+                
+                function taskMarkerClass(location) {
+                	var taskImage = 'static/icons/taskIcon.png';
+                	var taskMarkerStrings = ["location_latitude", "location_longitude"];
+                	var taskMarkerObj = abstractMarkerClass(location, taskMarkerStrings);
+                  taskMarkerObj.icon = taskImage;
+                  
+                  google.maps.event.addListener(taskMarkerObj, 'dblclick', function() {
+                	  document.getElementById(taskMarkerObj.latString).value = null;
+                    document.getElementById(taskMarkerObj.lngString).value = null;
+                  });
+                  
+                  return taskMarkerObj;
+                }
+                
+
+                function taskCircleClass(taskPosition) {
+                	var taskCircle = circleClass(taskPosition);
+                	taskCircleArray.push(taskCircle);
+                
+                	
+                	return taskCircle;
+                }
+                
+               
+
+                function markerWithCircle(location, idString, radiusString) {
+                	var taskMarker = taskMarkerClass(location);
+                  var taskPosition = taskMarker.position;
+                  var taskCircle = taskCircleClass(taskPosition);
+                  
+                  google.maps.event.addDomListener(
+                          document.getElementById(radiusString), 'change', function() {
+                              var currentTaskId = parseInt(document.getElementById(idString).value);
+                              for (var i = 0; i < taskCircleArray.length; i++) {
+                                  if (currentTaskId === (taskCircleArray[i]["circleId"])) {
+                                      taskCircleArray[i].bindTo('center', taskMarker, 'position');
+                                      taskCircleArray[i].setRadius(parseInt(document.getElementById(radiusString).value))
+                                  }
+                              }
+                          });
 
 
 
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-</head>
-<body>
-	<div id="page-wrap">
-        <div id="google-map"></div>
-        <div id="right-panel">$:page</div>
-        <span id="result">OUT</span>
-</div>
+                  google.maps.event.addListener(taskMarker, 'dblclick', function() {
+                      taskCircle.setMap(null);
+                      document.getElementById(radiusString).value = null;
+                  });
+                  
+                }
+                
+                function createTaskMarkerWithCircle(location) {
+                	markerWithCircle(location, "id", "location_radius");
+                }
+								
+                
+            
+            <!-- placeTaskMarker -->
+
+            <!-- placeInfoMarker -->
 
 
-</body>
+
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+    </head>
+    
+    <body>
+        <div id="page-wrap">
+            <div id="google-map"></div>
+            <div id="right-panel">$:page</div> <span id="result">OUT</span>
+
+        </div>
+    </body>
+
 </html>

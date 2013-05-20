@@ -20,15 +20,15 @@ $(document).ready(function () {
             var latlng = overlay.getProjection()
                 .fromContainerPixelToLatLng(point);
             if (draggableId === "questIconId") {
-            	var questMarker = questMarkerClass(latlng);
+            	createQuestMarker(latlng);
                 //placeQuestMarker(latlng);
                 goToQuestFormTab();
             } else if (draggableId === "infoIconId") {
                 //placeInfoMarker(latlng)
-            	var infoMarker = infoMarkerClass(latlng);
+            	createInfoMarker(latlng);
                 goToInfoFormTab();
             } else if (draggableId === "taskIconId") {
-                placeTaskMarker(latlng);
+            	createTaskMarkerWithCircle(latlng);
             }
 
 
