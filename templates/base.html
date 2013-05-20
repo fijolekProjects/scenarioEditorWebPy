@@ -12,16 +12,12 @@ $def with (page)
 <script> 
 var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
 
-function putBaseDataToForm(marker) {
-	  document.getElementById("id").value = componentCounter;
-    document.getElementById("latitude").value = marker.position.lat();
-    document.getElementById("longitude").value = marker.position.lng();
-}
+
 
 <!-- initialize -->
 var map;
 var overlay;
-var componentArray = [];
+
 var taskCircleArray = [];
 
 function initialize() {
@@ -67,67 +63,90 @@ function initialize() {
 
 <!-- placeQuestMarker -->
 var componentCounter = -1;
-
+var componentArray = [];
 function placeQuestMarker(location) {
 
-    var questImage = 'static/icons/questIcon.png';
-    componentCounter++;
+  
+	componentCounter++;
     
     
-    var questMarker = new MarkerWithLabel({
+    function componentMarkerClass(markerProp) {
+    	var that = new MarkerWithLabel(
+        		{
+            position: location,
+            map: map,
+            draggable: true,
+            icon: '',
+            labelContent: componentCounter.toString(),
+            labelClass: "labels",
+            labelAnchor: new google.maps.Point(14, -5),
+            queryString: 0,
+            idString: markerProp[0],
+            latString: markerProp[1],
+            lngString: markerProp[2],
+            formString: markerProp[3],
+        });
+    	
+    	function putBaseDataToForm() {
+    		  document.getElementById(that.idString).value = componentCounter;
+    	    document.getElementById(that.latString).value = that.position.lat();
+    	    document.getElementById(that.lngString).value = that.position.lng();
+    	}
+    	
+    	
+    	google.maps.event.addListener(that, 'rightclick', function (event) {
+            var lat = event.latLng.lat();
+            var lng = event.latLng.lng();
 
-        position: location,
-        map: map,
-        draggable: true,
-        icon: questImage,
-        labelContent: componentCounter.toString(),
-        labelClass: "labels",
-        labelAnchor: new google.maps.Point(14, -5),
-        queryString: 0,
-    });
-    
-    putBaseDataToForm(questMarker);
+            var infoWindow = new google.maps.InfoWindow();
+            infoWindow.setContent("<p>Lat = " + lat + "<br />" + "Lng = " + lng + "</p>")
+            infoWindow.open(map, that)
 
-    componentArray.push(questMarker);
-
-    google.maps.event.addListener(questMarker, 'rightclick', function (event) {
-        var lat = event.latLng.lat();
-        var lng = event.latLng.lng();
-
-        var infoWindow = new google.maps.InfoWindow();
-        infoWindow.setContent("<p>Lat = " + lat + "<br />" + "Lng = " + lng + "</p>")
-        infoWindow.open(map, questMarker)
-
-    });
-    google.maps.event.addListener(questMarker, 'dblclick', function () {
-        componentCounter--;
-        questMarker.setMap(null);
-        cleanForms();
-    });
-    google.maps.event.addListener(questMarker, 'drag', function (event) {
-        document.getElementById("latitude").value = event.latLng.lat();
-        document.getElementById("longitude").value = event.latLng.lng();
-    });
-
-
-    google.maps.event.addListener(questMarker, 'click', function (event) {
-        if (questMarker["queryString"] !== 0) {
-            var $$form = $$("#questForm")
-            var formSerializedData = questMarker["queryString"];
+        });
+    	google.maps.event.addListener(that, 'dblclick', function () {
+            componentCounter--;
+            that.setMap(null);
             cleanForms();
-            $$form.deserialize(formSerializedData);
-            goToQuestFormTab();
-           
-        } else {
-        	cleanForms();
-        	putBaseDataToForm(questMarker);
-        	goToQuestFormTab();
-        }
-
-
-    });
-
-
+            goToChooseComponentTab();
+        });
+    	google.maps.event.addListener(that, 'drag', function (event) {
+            document.getElementById(that.latString).value = event.latLng.lat();
+            document.getElementById(that.lngString).value = event.latLng.lng();
+        });
+    	
+    	google.maps.event.addListener(that, 'click', function (event) {
+            if (questMarker.queryString !== 0) {
+                var $$form = $$("#".concat(that.formString))
+                var formSerializedData = that.queryString;
+                cleanForms();
+                $$form.deserialize(formSerializedData);
+                goToQuestFormTab();
+               
+            } else {
+            	cleanForms();
+            	putBaseDataToForm();
+            	goToQuestFormTab();
+            }
+        });
+    	
+    	putBaseDataToForm();
+    	componentArray.push(that);
+    	
+    	return that;
+    }
+    
+    
+    
+    function questMarkerClass() {
+    	var questImage = 'static/icons/questIcon.png';
+    	var markerStrings = ["id", "latitude", "longitude", "questForm"];
+    	var that = componentMarkerClass(markerStrings);
+    	that.icon = questImage;
+    	return that;
+    }
+    
+    var questMarker = questMarkerClass();
+    
 
 }
 
