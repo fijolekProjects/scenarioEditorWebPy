@@ -1,6 +1,6 @@
 
 $(document).ready(function () {
-	var queryStringsArr = [];
+	
 	
 	
     $("#questButton").click(function () {
