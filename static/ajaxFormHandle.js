@@ -2,7 +2,6 @@
 $(document).ready(function () {
 	
 	
-	
     $("#questButton").click(function () {
     	 $(".questFileInput").each(function () {
     		 var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
