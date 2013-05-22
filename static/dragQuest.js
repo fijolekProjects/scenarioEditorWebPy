@@ -21,10 +21,8 @@ $(document).ready(function () {
                 .fromContainerPixelToLatLng(point);
             if (draggableId === "questIconId") {
             	createQuestMarker(latlng);
-                //placeQuestMarker(latlng);
                 goToQuestFormTab();
             } else if (draggableId === "infoIconId") {
-                //placeInfoMarker(latlng)
             	createInfoMarker(latlng);
                 goToInfoFormTab();
             } else if (draggableId === "taskIconId") {

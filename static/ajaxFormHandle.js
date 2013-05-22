@@ -11,7 +11,7 @@ $(document).ready(function () {
     	var serializedForm = $("#questForm").serialize();
     	var currentId = $('#id').val();
     	componentArray[currentId]["queryString"] = serializedForm;
-    	  
+    	alert(serializedForm);
     	queryStringsArr.push(serializedForm);
     	cleanForms();
     	goToChooseComponentTab();
