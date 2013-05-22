@@ -1,6 +1,4 @@
-var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
 
-<!-- initialize -->
 var map;
 var overlay;
 
@@ -10,6 +8,7 @@ var componentArray = [];
 var queryStringsArr = [];
 
 function initialize() {
+	var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
     var mapProp = {
         center: myCenter,
         zoom: 16,
@@ -120,7 +119,6 @@ function componentMarkerClass(location, markerProp) {
             		elem.slideDown('fast');
             	}
             });
-            
         } else {
             putComponentIdToForm();
             goToSpecificTab(markerObj.formID);
