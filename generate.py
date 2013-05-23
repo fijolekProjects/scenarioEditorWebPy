@@ -3,6 +3,7 @@ import re
 from lxml import etree
 
 root = etree.Element('Scenario')
+taskList = ['location_.*','text_,*','choice_.*']
 
 def singleton(cls):
     instances = {}
@@ -21,10 +22,10 @@ class ScenarioGenerator(object):
     FILE = open(filename, "w")
     
     
-    def cutFormList(self,inputList):
+    def cutFormList(self, inputList):
        
         questList = []    
-        tempQuestMark = 0;
+        tempQuestMark = 0
                 
         for index,item in enumerate(inputList):
             if item[0] == 'EOS':
@@ -41,17 +42,21 @@ class ScenarioGenerator(object):
     
   
     def fillXml(self, xmlData):
-        quest = etree.Element('quest', id = xmlData[0][1])  
-        taskList = ['location_.*','text_,*','choice_.*']
+       
+        eventType = xmlData[0][1]
+               
+        quest = etree.Element(eventType, id = xmlData[1][1])  
+       
         
-        i = iter(xmlData)    
-        i.next()  
+        i = iter(xmlData)   
+        i.next() 
+        i.next() 
         for item in i:         
   
             attribute= etree.Element(item[0])           
             attribute.text = item[1] 
              
-            attribute = self.addMultiChild('tasks.*', attribute, i, item,taskList)              
+            attribute = self.addMultiChild('tasks.*', attribute, i, item, taskList)              
             
             quest.append(attribute)
         root.append(quest)
@@ -70,14 +75,14 @@ class ScenarioGenerator(object):
    
    
    
-    def addChild(self, prefix, attr, iter,item,section):
+    def addChild(self, prefix, attr, iter, item ,section):
         if re.match(section,item[0]):
             item = iter.next()
         
         localRoot = etree.Element(prefix[0:len(prefix)-3])
         topicTest = 0
         
-        while re.match(prefix,item[0]):
+        while re.match(prefix, item[0]):
                             
                     topicTest = 1
                     
@@ -102,8 +107,8 @@ class ScenarioGenerator(object):
    
     
     
-    def addMultiChild(self,prefix,attribute,i,item,childList):
-        if re.match(prefix,item[0]):
+    def addMultiChild(self, prefix, attribute, i, item, childList):
+        if re.match(prefix, item[0]):
                 
                 attribute = etree.Element(prefix[0:len(prefix)-2])
                 attribute.text = ''    
@@ -111,7 +116,7 @@ class ScenarioGenerator(object):
                 item = i.next()
                 
                 for k in range (0,len(childList)):
-                    item = (self.addChild(childList[k],attribute,i,item,prefix))
+                    item = (self.addChild(childList[k], attribute, i, item, prefix))
       
                
         return attribute
