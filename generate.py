@@ -145,7 +145,7 @@ class ScenarioGenerator(object):
 
  
     def addChild(self, prefix, attribute, i, item):
-         print(prefix,item)
+         
          while re.match(prefix,item[0]):
                            
             task = self.createSingleTask(prefix, attribute, i, item)  
