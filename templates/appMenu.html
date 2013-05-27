@@ -131,16 +131,16 @@ $def with ()
                                             <input type="number" id="hints_text_cost" name="cost"/>
                                         </li>
                                         <li>
-                                            <label for="hints_image">hints image / cost</label>
+                                            <label for="hints_image_param">hints image / cost</label>
                                             <input type="file" id="hints_imageFile" name="hints_imageFile" class="questFileInput"/>
-                                            <input type="hidden" id="hints_image" name="hints_image" />
-                                            <input type="number" id="hints_image_cost" name="hints_image_cost"/>
+                                            <input type="hidden" id="hints_image" name="hints_image_param" />
+                                            <input type="number" id="hints_image_cost" name="cost"/>
                                         </li>
                                         <li>
                                             <label for="hints_sound">hints sound / cost</label>
                                             <input type="file" id="hints_soundFile" name="hints_soundFile" class="questFileInput"/>
-                                            <input type="hidden" id="hints_sound" name="hints_sound" />
-                                            <input type="number" id="hints_sound_cost" name="hints_sound_cost"/>
+                                            <input type="hidden" id="hints_sound" name="hints_sound_param" />
+                                            <input type="number" id="hints_sound_cost" name="cost"/>
                                         </li>
                                     </ol>
                                 </li>
@@ -155,7 +155,7 @@ $def with ()
                         <fieldset>
                             <ol class="formset">
                                 <li>
-                                		<input type="hidden" name="FORM_TYPE" value="info" />
+                                		<input type="hidden" name="FORM_TYPE" value="information" />
                                     <label for="id">id</label>
                                     <input type="number" id="info_id" name="id" readonly/>
                                 </li>

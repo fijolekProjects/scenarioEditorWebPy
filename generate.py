@@ -51,10 +51,14 @@ class ScenarioGenerator(object):
   
     def fillXml(self, xmlData):
         
-        quest = etree.Element('quest', id = xmlData[0][1])  
+        eventType = xmlData[0][1]
+        quest = etree.Element(eventType, id = xmlData[1][1])
+        
+       
         
         i = iter(xmlData)    
-        i.next()  
+        item = i.next()  
+        item = i.next()
         
         for item in i:         
   
@@ -136,7 +140,8 @@ class ScenarioGenerator(object):
         
         for k in range(0,len(self.indentationList)):
         
-            if re.match(self.indentationList[k][0],item[0]):              
+            if re.match(self.indentationList[k][0],item[0]):    
+                          
                  tempAttribute = None
                  tempAttribute = self.addComplexChild(self.indentationList[k][0], attribute, i, item,self.indentationList[k][1])  
                  break
@@ -145,6 +150,7 @@ class ScenarioGenerator(object):
 
  
     def addChild(self, prefix, attribute, i, item):
+         
          
          while re.match(prefix,item[0]):
                            
@@ -173,7 +179,9 @@ class ScenarioGenerator(object):
             task.text = item[1]
             item = i.next()              
             task.set(item[0],item[1])
+            
         else:
+            
             task = etree.Element(temp)
             task.text = item[1]
         
