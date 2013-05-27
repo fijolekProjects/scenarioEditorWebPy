@@ -118,7 +118,7 @@ function componentMarkerClass(location, markerProp) {
            else {
 //            cleanForms();
 //            putLatLngToForm();
-/            putComponentIdToForm();
+             putComponentIdToForm();
              goToSpecificTab(markerObj.formID);
         }
     });
