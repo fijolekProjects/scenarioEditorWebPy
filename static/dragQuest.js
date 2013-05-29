@@ -1,13 +1,13 @@
 $(document).ready(function () {
-    $('#questIconId').draggable({
+    $('#quest_icon_id').draggable({
         revert: true
 
     });
-    $('#infoIconId').draggable({
+    $('#info_icon_id').draggable({
         revert: true
 
     });
-    $('#taskIconId').draggable({
+    $('#task_icon_id').draggable({
         revert: true,
         appendTo: 'body',
         helper: "clone",
@@ -30,9 +30,9 @@ $(document).ready(function () {
     }
 
     var droppedElementHandlers = {
-        "questIconId": handleQuestDropped,
-        "infoIconId": handleInfoDropped,
-        "taskIconId": handleTaskDropped,
+        "quest_icon_id": handleQuestDropped,
+        "info_icon_id": handleInfoDropped,
+        "task_icon_id": handleTaskDropped,
     }
 
 

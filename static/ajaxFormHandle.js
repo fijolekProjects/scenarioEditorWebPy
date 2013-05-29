@@ -9,7 +9,7 @@ $(document).ready(function () {
 	    	var serializedForm = $(formId).serialize();
 	    	var currentId = $(componentID).val();
 	    	componentArray[currentId]["queryString"] = serializedForm;
-	    	queryStringsArr.push(serializedForm);
+	    	queryStringsArr.splice(currentId, 1, serializedForm);
 	    	cleanForms();
 	    	goToChooseComponentTab();
 	    	$("#remove_answer_button").click();
@@ -20,7 +20,7 @@ $(document).ready(function () {
 	    });
 	}
     
-    $(".scenarioButton").click(function () {
+    $(".scenario_button").click(function () {
     	var wholeQueryString = "";
     	for (var i = 0; i < queryStringsArr.length; i++) {
     		wholeQueryString += queryStringsArr[i] + "&EOS= " + i + "&";
@@ -37,7 +37,7 @@ $(document).ready(function () {
         return false;
     });
     
-    handleClickComponentButtonEvent("#questButton", ".questFileInput", "#questForm", '#id');
-	handleClickComponentButtonEvent("#infoButton", ".infoFileInput", "#infoForm", '#info_id');
+    handleClickComponentButtonEvent("#quest_button", ".quest_file_input", "#quest_form", '#id');
+	handleClickComponentButtonEvent("#info_button", ".info_file_input", "#info_form", '#info_id');
 });
 

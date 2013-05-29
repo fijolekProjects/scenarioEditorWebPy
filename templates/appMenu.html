@@ -19,14 +19,14 @@ $def with ()
             <li><a href="#tabs-3">Scenario Generation</a></li>
         </ul>
         <div id="tabs-1">
-            <img src="static/icons/questIcon.png" id="questIconId">
-            <img src="static/icons/infoIcon.png" id="infoIconId">
+            <img src="static/icons/questIcon.png" id="quest_icon_id">
+            <img src="static/icons/infoIcon.png" id="info_icon_id">
         </div>
         <div id="tabs-2">
             <div id ="accordion">
                 <h3>Quest Form  </h3>
                 <div>
-                    <form method="post" id="questForm">
+                    <form method="post" id="quest_form">
                         <fieldset>
                             <ol class="formset">
                                 <li>
@@ -52,22 +52,22 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="image">image</label>
-                                    <input type="file" id="imageFile" name="imageFile" class="questFileInput"/>
+                                    <input type="file" id="image_file" name="image_file" class="quest_file_input"/>
                                     <input type="hidden" id="image" name="image"/>
                                 </li>
                                 <li>
                                     <label for="icon">icon</label>
-                                    <input type="file" id="iconFile" name="icon" class="questFileInput"/>
+                                    <input type="file" id="icon_file" name="icon_file" class="quest_file_input"/>
                                     <input type="hidden" id="icon" name="icon"/>
                                 </li>
                                 <li>
                                     <label for="tasks_location">tasks location?</label>
-                                    <input type="radio" name="tasks_location" value="Yes" class="radioCheckedTrue"/>Yes
+                                    <input type="radio" name="tasks_location" value="Yes" class="radio_checked_true"/>Yes
                                     <input type="radio" name="tasks_location" value="No"/>No
                                     <ol id="tasks_location_parent" class="formset">
                                         <li><strong>Task location:</strong></li>
                                         <li>
-                                            <img src="static/icons/taskIcon.png" id="taskIconId">
+                                            <img src="static/icons/taskIcon.png" id="task_icon_id">
                                         </li>
                                         <li>
                                             <label for="location_latitude">latitude</label>
@@ -85,7 +85,7 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="tasks_text">tasks text?</label>
-                                    <input type="radio" name="tasks_text" value="Yes" class="radioCheckedTrue"/>Yes
+                                    <input type="radio" name="tasks_text" value="Yes" class="radio_checked_true"/>Yes
                                     <input type="radio" name="tasks_text" value="No" />No
                                     <ol id="tasks_text_parent" class="formset">
                                         <li><strong>Task text:</strong>
@@ -102,7 +102,7 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="tasks_choice">tasks choice?</label>
-                                    <input type="radio" name="tasks_choice" value="Yes" class="radioCheckedTrue"/>Yes
+                                    <input type="radio" name="tasks_choice" value="Yes" class="radio_checked_true"/>Yes
                                     <input type="radio" name="tasks_choice" value="No"/>No
                                     <ol id="tasks_choice_parent" class="formset">
                                         <li><strong>Task choice:</strong>
@@ -120,7 +120,7 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="hints">tasks hints?</label>
-                                    <input type="radio" name="hints_description" value="Yes" class="radioCheckedTrue"/>Yes
+                                    <input type="radio" name="hints_description" value="Yes" class="radio_checked_true"/>Yes
                                     <input type="radio" name="hints_description" value="No"/>No
                                     <ol id="hints_parent" class="formset">
                                         <li><strong>Task hints:</strong>
@@ -132,26 +132,26 @@ $def with ()
                                         </li>
                                         <li>
                                             <label for="hints_image_param">hints image / cost</label>
-                                            <input type="file" id="hints_imageFile" name="hints_imageFile" class="questFileInput"/>
+                                            <input type="file" id="hints_image_file" name="hints_image_file" class="quest_file_input"/>
                                             <input type="hidden" id="hints_image" name="hints_image_param" />
                                             <input type="number" id="hints_image_cost" name="cost"/>
                                         </li>
                                         <li>
                                             <label for="hints_sound">hints sound / cost</label>
-                                            <input type="file" id="hints_soundFile" name="hints_soundFile" class="questFileInput"/>
+                                            <input type="file" id="hints_sound_file" name="hints_sound_file" class="quest_file_input"/>
                                             <input type="hidden" id="hints_sound" name="hints_sound_param" />
                                             <input type="number" id="hints_sound_cost" name="cost"/>
                                         </li>
                                     </ol>
                                 </li>
                             </ol>
-                            <input id="questButton" class="formButton" type="submit" value="Add component"/>
+                            <input id="quest_button" class="form_button" type="submit" value="Add component"/>
                         </fieldset>
                     </form>
                 </div>
                 <h3>Information Form</h3>
                 <div>
-                <form method="post" id="infoForm">
+                <form method="post" id="info_form">
                         <fieldset>
                             <ol class="formset">
                                 <li>
@@ -177,16 +177,16 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="image">image</label>
-                                    <input type="file" id="imageFile" name="imageFile" class="infoFileInput"/>
+                                    <input type="file" id="image_file" name="image_file" class="info_file_input"/>
                                     <input type="hidden" id="info_image" name="image"/>
                                 </li>
                                 <li>
                                     <label for="icon">icon</label>
-                                    <input type="file" id="iconFile" name="icon" class="infoFileInput"/>
+                                    <input type="file" id="icon_file" name="icon_file" class="info_file_input"/>
                                     <input type="hidden" id="info_icon" name="icon"/>
                                 </li>
                             </ol>
-                            <input id="infoButton" class="formButton" type="submit" value="Add component"/>
+                            <input id="info_button" class="form_button" type="submit" value="Add component"/>
                         </fieldset>
                     </form>
                 </div>
@@ -194,7 +194,7 @@ $def with ()
         </div>
         <div id="tabs-3">
         	<form method="post">
-    				<input class="scenarioButton" type="submit" value="Generate XML!">
+    				<input class="scenario_button" type="submit" value="Generate XML!">
 				</form>
         </div>
     </div>
