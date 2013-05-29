@@ -36,7 +36,7 @@ $(document).ready(function () {
     }
 
 
-    $('#google-map').droppable({
+    $('#google_map').droppable({
         drop: function (event, ui) {
             var draggableId = ui.draggable.attr("id");
             var point = new google.maps.Point(event.pageX, event.pageY);

@@ -115,9 +115,9 @@ legend {
 html				{height:100%}
 body				{height:100%; overflow-x:hidden}
 
-#page-wrap			{ width:100%; height:100%; padding:1px;}
-#right-panel {width:50%;float:right; }
-#google-map				{ width: 50%; height: 100%; float:left; }
+#page_wrap			{ width:100%; height:100%; padding:1px;}
+#right_panel {width:50%;float:right; }
+#google_map				{ width: 50%; height: 100%; float:left; }
  .labels {
      color: blue;
      background-color: white;

@@ -6,26 +6,25 @@ function cleanForms() {
 }
 
 function hideFormFields() {
-    $("#tasks_location_parent, #tasks_text_parent, #tasks_choice_parent, #hints_parent").css("display", "none");
+    $("#quest_task_location_parent, #quest_task_text_parent, #quest_task_choice_parent, #quest_task_hints_parent").css("display", "none");
 }
 function goToFormTab() {
 	$('#tabs').tabs('enable', 1).tabs('select', 1);
 }
 
 function goToQuestFormTab() {
-	goToFormTab();
-	$("#accordion").accordion("activate", 0);
+	goToSpecificFormTab(0);
 }
 
 function goToInfoFormTab() {
-	goToFormTab();
-	$("#accordion").accordion("activate", 1);
+	goToSpecificFormTab(1);
 }
+
 function goToChooseComponentTab() {
 	$('#tabs').tabs('enable', 0).tabs('select', 0);
 }
 
-function goToSpecificTab(formID) {
+function goToSpecificFormTab(formID) {
 	goToFormTab();
 	$("#accordion").accordion("activate", formID);
 }

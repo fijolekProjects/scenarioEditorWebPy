@@ -32,7 +32,7 @@ $def with ()
                                 <li>
                                 		<input type="hidden" name="FORM_TYPE" value="quest" />
                                     <label for="id">id</label>
-                                    <input type="number" id="id" name="id" readonly/>
+                                    <input type="number" id="quest_id" name="id" readonly/>
                                 </li>
                                 <li>
                                     <label for="command">command</label>
@@ -40,46 +40,46 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="description">description</label>
-                                    <input type="text" id="description" name="description" />
+                                    <input type="text" id="quest_description" name="description" />
                                 </li>
                                 <li>
                                     <label for="latitude">latitude</label>
-                                    <input type="text" id="latitude" name="latitude" />
+                                    <input type="text" id="quest_latitude" name="latitude" />
                                 </li>
                                 <li>
                                     <label for="longitude">longitude</label>
-                                    <input type="text" id="longitude" name="longitude" />
+                                    <input type="text" id="quest_longitude" name="longitude" />
                                 </li>
                                 <li>
                                     <label for="image">image</label>
-                                    <input type="file" id="image_file" name="image_file" class="quest_file_input"/>
+                                    <input type="file" id="quest_image_file" name="image_file" class="quest_file_input"/>
                                     <input type="hidden" id="image" name="image"/>
                                 </li>
                                 <li>
                                     <label for="icon">icon</label>
-                                    <input type="file" id="icon_file" name="icon_file" class="quest_file_input"/>
+                                    <input type="file" id="quest_icon_file" name="icon_file" class="quest_file_input"/>
                                     <input type="hidden" id="icon" name="icon"/>
                                 </li>
                                 <li>
                                     <label for="tasks_location">tasks location?</label>
                                     <input type="radio" name="tasks_location" value="Yes" class="radio_checked_true"/>Yes
                                     <input type="radio" name="tasks_location" value="No"/>No
-                                    <ol id="tasks_location_parent" class="formset">
+                                    <ol id="quest_task_location_parent" class="formset">
                                         <li><strong>Task location:</strong></li>
                                         <li>
                                             <img src="static/icons/taskIcon.png" id="task_icon_id">
                                         </li>
                                         <li>
                                             <label for="location_latitude">latitude</label>
-                                            <input type="text" id="location_latitude" name="location_latitude" />
+                                            <input type="text" id="quest_task_location_latitude" name="location_latitude" />
                                         </li>
                                         <li>
                                             <label for="location_longitude">longitude</label>
-                                            <input type="text" id="location_longitude" name="location_longitude" />
+                                            <input type="text" id="quest_task_location_longitude" name="location_longitude" />
                                         </li>
                                         <li>
-                                            <label for="location_radius">radius</label>
-                                            <input type="text" id="location_radius" name="location_radius" />
+                                            <label for="location_radius">radius [m]</label>
+                                            <input type="text" id="quest_task_location_radius" name="location_radius" />
                                         </li>
                                     </ol>
                                 </li>
@@ -87,16 +87,16 @@ $def with ()
                                     <label for="tasks_text">tasks text?</label>
                                     <input type="radio" name="tasks_text" value="Yes" class="radio_checked_true"/>Yes
                                     <input type="radio" name="tasks_text" value="No" />No
-                                    <ol id="tasks_text_parent" class="formset">
+                                    <ol id="quest_task_text_parent" class="formset">
                                         <li><strong>Task text:</strong>
                                         </li>
                                         <li>
                                             <label for="text_question">question</label>
-                                            <input type="text" id="text_question" name="text_question" />
+                                            <input type="text" id="quest_task_text_question" name="text_question" />
                                         </li>
                                         <li>
                                             <label for="text_answer">answer</label>
-                                            <input type="text" id="text_answer" name="text_answer" />
+                                            <input type="text" id="quest_task_text_answer" name="text_answer" />
                                         </li>
                                     </ol>
                                 </li>
@@ -104,7 +104,7 @@ $def with ()
                                     <label for="tasks_choice">tasks choice?</label>
                                     <input type="radio" name="tasks_choice" value="Yes" class="radio_checked_true"/>Yes
                                     <input type="radio" name="tasks_choice" value="No"/>No
-                                    <ol id="tasks_choice_parent" class="formset">
+                                    <ol id="quest_task_choice_parent" class="formset">
                                         <li><strong>Task choice:</strong>
                                         </li>
                                         <li>
@@ -114,7 +114,7 @@ $def with ()
                                         </li>
                                         <li>
                                             <label for="choice_question">question</label>
-                                            <input type="text" id="choice_question" name="choice_question" />
+                                            <input type="text" id="quest_task_choice_question" name="choice_question" />
                                         </li>
                                     </ol>
                                 </li>
@@ -122,25 +122,25 @@ $def with ()
                                     <label for="hints">tasks hints?</label>
                                     <input type="radio" name="hints_description" value="Yes" class="radio_checked_true"/>Yes
                                     <input type="radio" name="hints_description" value="No"/>No
-                                    <ol id="hints_parent" class="formset">
+                                    <ol id="quest_task_hints_parent" class="formset">
                                         <li><strong>Task hints:</strong>
                                         </li>
                                         <li>
                                             <label for="hints_text">hints text / cost</label>
-                                            <input type="text" id="hints_text" name="hints_text_param" />
-                                            <input type="number" id="hints_text_cost" name="cost"/>
+                                            <input type="text" id="quest_task_hints_text" name="hints_text_param" />
+                                            <input type="number" id="quest_task_hints_text_cost" name="cost"/>
                                         </li>
                                         <li>
                                             <label for="hints_image_param">hints image / cost</label>
-                                            <input type="file" id="hints_image_file" name="hints_image_file" class="quest_file_input"/>
-                                            <input type="hidden" id="hints_image" name="hints_image_param" />
-                                            <input type="number" id="hints_image_cost" name="cost"/>
+                                            <input type="file" id="quest_task_hints_image_file" name="hints_image_file" class="quest_file_input"/>
+                                            <input type="hidden" id="quest_task_hints_image" name="hints_image_param" />
+                                            <input type="number" id="quest_task_hints_image_cost" name="cost"/>
                                         </li>
                                         <li>
                                             <label for="hints_sound">hints sound / cost</label>
-                                            <input type="file" id="hints_sound_file" name="hints_sound_file" class="quest_file_input"/>
-                                            <input type="hidden" id="hints_sound" name="hints_sound_param" />
-                                            <input type="number" id="hints_sound_cost" name="cost"/>
+                                            <input type="file" id="quest_task_hints_sound_file" name="hints_sound_file" class="quest_file_input"/>
+                                            <input type="hidden" id="quest_task_hints_sound" name="hints_sound_param" />
+                                            <input type="number" id="quest_task_hints_sound_cost" name="cost"/>
                                         </li>
                                     </ol>
                                 </li>
@@ -177,13 +177,13 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="image">image</label>
-                                    <input type="file" id="image_file" name="image_file" class="info_file_input"/>
-                                    <input type="hidden" id="info_image" name="image"/>
+                                    <input type="file" id="info_image_file" name="image_file" class="info_file_input"/>
+                                    <input type="hidden" id="info_info_image" name="image"/>
                                 </li>
                                 <li>
                                     <label for="icon">icon</label>
-                                    <input type="file" id="icon_file" name="icon_file" class="info_file_input"/>
-                                    <input type="hidden" id="info_icon" name="icon"/>
+                                    <input type="file" id="info_icon_file" name="icon_file" class="info_file_input"/>
+                                    <input type="hidden" id="info_info_icon" name="icon"/>
                                 </li>
                             </ol>
                             <input id="info_button" class="form_button" type="submit" value="Add component"/>

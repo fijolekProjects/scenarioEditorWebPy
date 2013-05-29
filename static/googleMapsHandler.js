@@ -17,7 +17,7 @@ function initialize() {
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    map = new google.maps.Map(document.getElementById("google-map"), mapProp);
+    map = new google.maps.Map(document.getElementById("google_map"), mapProp);
     overlay = new google.maps.OverlayView();
     overlay.draw = function () {};
     overlay.setMap(map);
@@ -29,7 +29,7 @@ function initialize() {
  * - 'rightclick' deletes the marker <br>
  * - 'drag' changes latitude/longitude at Marker specific fields in form
  * @namespace MarkerClass
- * @param location usually event coordinates in google map, Marker is created at that specific place1
+ * @param location usually event coordinates in google map, Marker is created at that specific place
  * @param markerProp marker properties <br>
  * markerProp[0] = latitude name in form <br>
  * markerProp[1] = longitude name in form <br>
@@ -115,7 +115,7 @@ function ComponentMarkerClass(location, markerProp) {
             var formSerializedData = markerObj.queryString;
             cleanForms();
             $form.deserialize(formSerializedData);
-            goToSpecificTab(markerObj.formID);
+            goToSpecificFormTab(markerObj.formID);
             $(".radio_checked_true").each(function () {
             	if ($(this).is(':checked')) {
             		var elem = $("ol.formset", $(this).parent());
@@ -125,7 +125,7 @@ function ComponentMarkerClass(location, markerProp) {
             
         } else {
             putComponentIdToForm();
-            goToSpecificTab(markerObj.formID);
+            goToSpecificFormTab(markerObj.formID);
         }
     });
 
@@ -138,7 +138,7 @@ function ComponentMarkerClass(location, markerProp) {
 
 function createQuestMarker(location) {
     var questImage = 'static/icons/questIcon.png';
-    var markerStrings = ["latitude", "longitude", "id", "quest_form"];
+    var markerStrings = ["quest_latitude", "quest_longitude", "quest_id", "quest_form"];
     var questMarkerObj = ComponentMarkerClass(location, markerStrings);
     questMarkerObj.icon = questImage;
     questMarkerObj.formID = 0;
@@ -173,7 +173,7 @@ function CircleClass(taskPosition) {
 
 function TaskMarkerClass(location) {
     var taskImage = 'static/icons/taskIcon.png';
-    var taskMarkerStrings = ["location_latitude", "location_longitude"];
+    var taskMarkerStrings = ["quest_task_location_latitude", "quest_task_location_longitude"];
     var taskMarkerObj = AbstractMarkerClass(location, taskMarkerStrings);
     taskMarkerObj.icon = taskImage;
 
@@ -216,7 +216,7 @@ function markerWithCircle(location, idString, radiusString) {
 }
 
 function createTaskMarkerWithCircle(location) {
-    markerWithCircle(location, "id", "location_radius");
+    markerWithCircle(location, "quest_id", "quest_task_location_radius");
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);

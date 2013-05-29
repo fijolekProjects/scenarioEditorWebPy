@@ -23,7 +23,7 @@ $(document).ready(function () {
     $(".scenario_button").click(function () {
     	var wholeQueryString = "";
     	for (var i = 0; i < queryStringsArr.length; i++) {
-    		wholeQueryString += queryStringsArr[i] + "&EOS= " + i + "&";
+    		wholeQueryString += queryStringsArr[i] + "&EOS=" + i + "&";
     	}
     	alert(wholeQueryString);
         $.ajax({
@@ -37,7 +37,7 @@ $(document).ready(function () {
         return false;
     });
     
-    handleClickComponentButtonEvent("#quest_button", ".quest_file_input", "#quest_form", '#id');
-	handleClickComponentButtonEvent("#info_button", ".info_file_input", "#info_form", '#info_id');
+    handleClickComponentButtonEvent("#quest_button", ".quest_file_input", "#quest_form", '#quest_id');
+    handleClickComponentButtonEvent("#info_button", ".info_file_input", "#info_form", '#info_id');
 });
 
