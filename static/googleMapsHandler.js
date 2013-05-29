@@ -22,28 +22,6 @@ function initialize() {
     overlay.draw = function () {};
     overlay.setMap(map);
 
-    var marker = new google.maps.Marker({
-        position: myCenter,
-        animation: google.maps.Animation.BOUNCE
-    });
-    marker.setMap(map);
-
-    var weiti = new google.maps.Circle({
-        center: myCenter,
-        radius: 100,
-        strokeColor: "#0000FF",
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: "#0000FF",
-        fillOpacity: 0.4,
-        map: map,
-    });
-    
-    google.maps.event.addListener(marker, 'click', function () {
-        var infoWindow = new google.maps.InfoWindow();
-        infoWindow.setContent("<p>WEITI<br />" + "Lat = " + myCenter.lat() + "<br />" + "Lng = " + myCenter.lng() + "<br />" + "Radius = " + weiti.radius + "<br/>" + "Kliknij na mape by dodac nowy taskMarker " + "<br />" + "Nastepnie kliknij na taskMarker PP myszy" + "<br />" + "Usuwanie markera double click" + "</p>");
-        infoWindow.open(map, marker);
-    });
 }
 
 /**
@@ -138,7 +116,7 @@ function ComponentMarkerClass(location, markerProp) {
             cleanForms();
             $form.deserialize(formSerializedData);
             goToSpecificTab(markerObj.formID);
-            $(".radioCheckedTrue").each(function () {
+            $(".radio_checked_true").each(function () {
             	if ($(this).is(':checked')) {
             		var elem = $("ol.formset", $(this).parent());
             		elem.slideDown('fast');
@@ -160,7 +138,7 @@ function ComponentMarkerClass(location, markerProp) {
 
 function createQuestMarker(location) {
     var questImage = 'static/icons/questIcon.png';
-    var markerStrings = ["latitude", "longitude", "id", "questForm"];
+    var markerStrings = ["latitude", "longitude", "id", "quest_form"];
     var questMarkerObj = ComponentMarkerClass(location, markerStrings);
     questMarkerObj.icon = questImage;
     questMarkerObj.formID = 0;
@@ -170,7 +148,7 @@ function createQuestMarker(location) {
 
 function createInfoMarker(location) {
     var infoImage = 'static/icons/infoIcon.png';
-    var markerStrings = ["info_latitude", "info_longitude", "info_id", "infoForm"];
+    var markerStrings = ["info_latitude", "info_longitude", "info_id", "info_form"];
     var infoMarkerObj = ComponentMarkerClass(location, markerStrings);
     infoMarkerObj.icon = infoImage;
     infoMarkerObj.formID = 1;
