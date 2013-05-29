@@ -6,6 +6,7 @@ var componentCounter = -1;
 var taskCircleArray = [];
 var componentArray = [];
 var queryStringsArr = [];
+var taskArray = [];
 /**
  * Google map initialization, setting map and its properties like center, zoom etc.
  * @returns
@@ -48,7 +49,7 @@ function AbstractMarkerClass(location, markerProp) {
         labelClass: "labels",
         labelAnchor: new google.maps.Point(14, -5),
         latString: markerProp[0],
-        lngString: markerProp[1],
+        lngString: markerProp[1]
     });
     /**
      * 
@@ -96,12 +97,12 @@ function ComponentMarkerClass(location, markerProp) {
         concreteMarkerObj.formString = markerProp[3];
         concreteMarkerObj.formId = 0;
         return concreteMarkerObj;
-    }
+    };
 
     var markerObj = createMarkerObj();
 
     google.maps.event.addListener(markerObj, 'rightclick', function () {
-        var componentIndexToRemove = parseInt(markerObj.labelContent)
+        var componentIndexToRemove = parseInt(markerObj.labelContent, 10);
         queryStringsArr.splice(componentIndexToRemove, 1);
         componentCounter--;
         goToChooseComponentTab();
@@ -111,21 +112,21 @@ function ComponentMarkerClass(location, markerProp) {
 
     google.maps.event.addListener(markerObj, 'click', function (event) {
         if (markerObj.queryString !== 0) {
-            var $form = $("#".concat(markerObj.formString))
+            var $form = $("#".concat(markerObj.formString));
             var formSerializedData = markerObj.queryString;
             cleanForms();
             $form.deserialize(formSerializedData);
-            goToSpecificFormTab(markerObj.formID);
+            goToConcreteForm(markerObj.formID);
             $(".radio_checked_true").each(function () {
-            	if ($(this).is(':checked')) {
-            		var elem = $("ol.formset", $(this).parent());
-            		elem.slideDown('fast');
-            	}
+                if ($(this).is(':checked')) {
+                    var elem = $("ol.formset", $(this).parent());
+                    elem.slideDown('fast');
+                }
             });
             
         } else {
             putComponentIdToForm();
-            goToSpecificFormTab(markerObj.formID);
+            goToConcreteForm(markerObj.formID);
         }
     });
 
@@ -166,7 +167,7 @@ function CircleClass(taskPosition) {
         strokeWeight: 2,
         fillColor: "#0000FF",
         fillOpacity: 0.4,
-        map: map,
+        map: map
     });
     return circleObj;
 }
@@ -199,11 +200,13 @@ function markerWithCircle(location, idString, radiusString) {
 
     google.maps.event.addDomListener(
     document.getElementById(radiusString), 'change', function () {
-        var currentTaskId = parseInt(document.getElementById(idString).value);
+        var currentTaskId = parseInt(document.getElementById(idString).value, 10);
+        alert(currentTaskId);
         for (var i = 0; i < taskCircleArray.length; i++) {
             if (currentTaskId === (taskCircleArray[i]["circleId"])) {
+            	alert(taskCircleArray[i]["circleId"])
                 taskCircleArray[i].bindTo('center', taskMarker, 'position');
-                taskCircleArray[i].setRadius(parseInt(document.getElementById(radiusString).value))
+                taskCircleArray[i].setRadius(parseInt(document.getElementById(radiusString).value));
             }
         }
     });

@@ -14,13 +14,13 @@ $(document).ready(function () {
     });
 
     function handleQuestDropped(latlng) {
-    	cleanForms();
+        cleanForms();
         createQuestMarker(latlng);
         goToQuestFormTab();
     }
 
     function handleInfoDropped(latlng) {
-    	cleanForms();
+        cleanForms();
         createInfoMarker(latlng);
         goToInfoFormTab();
     }
@@ -31,8 +31,8 @@ $(document).ready(function () {
 
     var droppedElementHandlers = {
         "quest_icon_id": handleQuestDropped,
-        "info_icon_id": handleInfoDropped,
-        "task_icon_id": handleTaskDropped,
+            "info_icon_id": handleInfoDropped,
+            "task_icon_id": handleTaskDropped,
     }
 
 
