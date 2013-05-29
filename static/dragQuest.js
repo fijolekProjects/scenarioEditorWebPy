@@ -14,11 +14,13 @@ $(document).ready(function () {
     });
 
     function handleQuestDropped(latlng) {
+    	cleanForms();
         createQuestMarker(latlng);
         goToQuestFormTab();
     }
 
     function handleInfoDropped(latlng) {
+    	cleanForms();
         createInfoMarker(latlng);
         goToInfoFormTab();
     }

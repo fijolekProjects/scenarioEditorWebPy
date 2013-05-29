@@ -138,24 +138,16 @@ function ComponentMarkerClass(location, markerProp) {
             cleanForms();
             $form.deserialize(formSerializedData);
             goToSpecificTab(markerObj.formID);
-<<<<<<< HEAD
-        }
-           else {
-//            cleanForms();
-//            putLatLngToForm();
-            putComponentIdToForm();
-             goToSpecificTab(markerObj.formID);
-=======
             $(".radioCheckedTrue").each(function () {
             	if ($(this).is(':checked')) {
             		var elem = $("ol.formset", $(this).parent());
             		elem.slideDown('fast');
             	}
             });
+            
         } else {
             putComponentIdToForm();
             goToSpecificTab(markerObj.formID);
->>>>>>> objectsTest
         }
     });
 

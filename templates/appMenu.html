@@ -1,39 +1,36 @@
 $def with ()
 <head>
-    <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
-    <script type="text/javascript" src="static/questFormControl.js"></script>
-    <script type="text/javascript" src="static/menuControl.js"></script>
-    <script type="text/javascript" src="static/dragQuest.js"></script>
-    <script type="text/javascript" src="static/formFunctions.js"></script>
-    <script type="text/javascript" src="static/ajaxFormHandle.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://raw.github.com/kflorence/jquery-deserialize/master/src/jquery.deserialize.js"></script>
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/start/jquery-ui.css" />
+<script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
+<script type="text/javascript" src="static/questFormControl.js"></script>
+<script type="text/javascript" src="static/menuControl.js"></script>
+<script type="text/javascript" src="static/dragQuest.js"></script>
+<script type="text/javascript" src="static/formFunctions.js"></script>
+<script type="text/javascript" src="static/ajaxFormHandle.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://raw.github.com/kflorence/jquery-deserialize/master/src/jquery.deserialize.js"></script>
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/start/jquery-ui.css"/>
 </head>
+
 <body>
     <div id="tabs">
         <ul>
-            <li><a href="#tabs-1">Choose Component</a>
-            </li>
-            <li><a href="#tabs-2">Form</a>
-            </li>
-            <li><a href="#tabs-3">Scenario Generation</a>
-            </li>
+            <li><a href="#tabs-1">Choose Component</a></li>
+            <li><a href="#tabs-2">Form</a></li>
+            <li><a href="#tabs-3">Scenario Generation</a></li>
         </ul>
         <div id="tabs-1">
             <img src="static/icons/questIcon.png" id="questIconId">
             <img src="static/icons/infoIcon.png" id="infoIconId">
         </div>
         <div id="tabs-2">
-            <div id="accordion">
-                 <h3>Quest Form</h3>
-
+            <div id ="accordion">
+                <h3>Quest Form  </h3>
                 <div>
                     <form method="post" id="questForm">
                         <fieldset>
                             <ol class="formset">
                                 <li>
-                                    <input type="hidden" name="FORM_TYPE" value="quest" />
+                                		<input type="hidden" name="FORM_TYPE" value="quest" />
                                     <label for="id">id</label>
                                     <input type="number" id="id" name="id" readonly/>
                                 </li>
@@ -55,21 +52,20 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="image">image</label>
-                                    <input type="file" id="imageFile" name="imageFile" class="questFileInput" />
-                                    <input type="hidden" id="image" name="image" />
+                                    <input type="file" id="imageFile" name="imageFile" class="questFileInput"/>
+                                    <input type="hidden" id="image" name="image"/>
                                 </li>
                                 <li>
                                     <label for="icon">icon</label>
-                                    <input type="file" id="iconFile" name="icon" class="questFileInput" />
-                                    <input type="hidden" id="icon" name="icon" />
+                                    <input type="file" id="iconFile" name="icon" class="questFileInput"/>
+                                    <input type="hidden" id="icon" name="icon"/>
                                 </li>
                                 <li>
                                     <label for="tasks_location">tasks location?</label>
                                     <input type="radio" name="tasks_location" value="Yes" class="radioCheckedTrue"/>Yes
-                                    <input type="radio" name="tasks_location" value="No" />No
+                                    <input type="radio" name="tasks_location" value="No"/>No
                                     <ol id="tasks_location_parent" class="formset">
-                                        <li><strong>Task location:</strong>
-                                        </li>
+                                        <li><strong>Task location:</strong></li>
                                         <li>
                                             <img src="static/icons/taskIcon.png" id="taskIconId">
                                         </li>
@@ -90,10 +86,9 @@ $def with ()
                                 <li>
                                     <label for="tasks_text">tasks text?</label>
                                     <input type="radio" name="tasks_text" value="Yes" class="radioCheckedTrue"/>Yes
-                                    <input type="radio" name="tasks_text" value="No"/>No
+                                    <input type="radio" name="tasks_text" value="No" />No
                                     <ol id="tasks_text_parent" class="formset">
                                         <li><strong>Task text:</strong>
-
                                         </li>
                                         <li>
                                             <label for="text_question">question</label>
@@ -108,10 +103,9 @@ $def with ()
                                 <li>
                                     <label for="tasks_choice">tasks choice?</label>
                                     <input type="radio" name="tasks_choice" value="Yes" class="radioCheckedTrue"/>Yes
-                                    <input type="radio" name="tasks_choice" value="No" />No
+                                    <input type="radio" name="tasks_choice" value="No"/>No
                                     <ol id="tasks_choice_parent" class="formset">
                                         <li><strong>Task choice:</strong>
-
                                         </li>
                                         <li>
                                             <label for="add_answer">Add question</label>
@@ -126,20 +120,13 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="hints">tasks hints?</label>
-<<<<<<< HEAD
-                                    <input type="radio" name="hints_description" value="Yes" class="is_hints" />Yes
-                                    <input type="radio" name="hints_description" value="No" class="is_hints" />No
-=======
-                                    <input type="radio" name="hints" value="Yes" class="radioCheckedTrue"/>Yes
-                                    <input type="radio" name="hints" value="No" />No
->>>>>>> objectsTest
+                                    <input type="radio" name="hints_description" value="Yes" class="radioCheckedTrue"/>Yes
+                                    <input type="radio" name="hints_description" value="No"/>No
                                     <ol id="hints_parent" class="formset">
                                         <li><strong>Task hints:</strong>
-
                                         </li>
                                         <li>
                                             <label for="hints_text">hints text / cost</label>
-<<<<<<< HEAD
                                             <input type="text" id="hints_text" name="hints_text_param" />
                                             <input type="number" id="hints_text_cost" name="cost"/>
                                         </li>
@@ -154,42 +141,21 @@ $def with ()
                                             <input type="file" id="hints_soundFile" name="hints_soundFile" class="questFileInput"/>
                                             <input type="hidden" id="hints_sound" name="hints_sound_param" />
                                             <input type="number" id="hints_sound_cost" name="cost"/>
-=======
-                                            <input type="text" id="hints_text" name="hints_text" />
-                                            <input type="number" id="hints_text_cost" name="hints_text_cost" />
-                                        </li>
-                                        <li>
-                                            <label for="hints_image">hints image / cost</label>
-                                            <input type="file" id="hints_imageFile" name="hints_imageFile" class="questFileInput" />
-                                            <input type="hidden" id="hints_image" name="hints_image" />
-                                            <input type="number" id="hints_image_cost" name="hints_image_cost" />
-                                        </li>
-                                        <li>
-                                            <label for="hints_sound">hints sound / cost</label>
-                                            <input type="file" id="hints_soundFile" name="hints_soundFile" class="questFileInput" />
-                                            <input type="hidden" id="hints_sound" name="hints_sound" />
-                                            <input type="number" id="hints_sound_cost" name="hints_sound_cost" />
->>>>>>> objectsTest
                                         </li>
                                     </ol>
                                 </li>
                             </ol>
-                            <input id="questButton" class="formButton" type="submit" value="Add component" />
+                            <input id="questButton" class="formButton" type="submit" value="Add component"/>
                         </fieldset>
                     </form>
                 </div>
-                 <h3>Information Form</h3>
-
+                <h3>Information Form</h3>
                 <div>
-                    <form method="post" id="infoForm">
+                <form method="post" id="infoForm">
                         <fieldset>
                             <ol class="formset">
                                 <li>
-<<<<<<< HEAD
-                                    <input type="hidden" name="FORM_TYPE" value="info" />
-=======
                                 		<input type="hidden" name="FORM_TYPE" value="information" />
->>>>>>> 9b208a3d8d5b3c8dcf2714c9e495dec2ad57bae4
                                     <label for="id">id</label>
                                     <input type="number" id="info_id" name="id" readonly/>
                                 </li>
@@ -211,25 +177,25 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="image">image</label>
-                                    <input type="file" id="imageFile" name="imageFile" class="infoFileInput" />
-                                    <input type="hidden" id="info_image" name="image" />
+                                    <input type="file" id="imageFile" name="imageFile" class="infoFileInput"/>
+                                    <input type="hidden" id="info_image" name="image"/>
                                 </li>
                                 <li>
                                     <label for="icon">icon</label>
-                                    <input type="file" id="iconFile" name="icon" class="infoFileInput" />
-                                    <input type="hidden" id="info_icon" name="icon" />
+                                    <input type="file" id="iconFile" name="icon" class="infoFileInput"/>
+                                    <input type="hidden" id="info_icon" name="icon"/>
                                 </li>
                             </ol>
-                            <input id="infoButton" class="formButton" type="submit" value="Add component" />
+                            <input id="infoButton" class="formButton" type="submit" value="Add component"/>
                         </fieldset>
                     </form>
                 </div>
             </div>
         </div>
         <div id="tabs-3">
-            <form method="post">
-                <input class="scenarioButton" type="submit" value="Generate XML!">
-            </form>
+        	<form method="post">
+    				<input class="scenarioButton" type="submit" value="Generate XML!">
+				</form>
         </div>
     </div>
 </body>
