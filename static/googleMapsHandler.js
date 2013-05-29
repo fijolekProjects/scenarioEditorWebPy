@@ -1,6 +1,4 @@
-var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
 
-<!-- initialize -->
 var map;
 var overlay;
 
@@ -8,8 +6,12 @@ var componentCounter = -1;
 var taskCircleArray = [];
 var componentArray = [];
 var queryStringsArr = [];
-
+/**
+ * Google map initialization, setting map and its properties like center, zoom etc.
+ * @returns
+ */
 function initialize() {
+	var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
     var mapProp = {
         center: myCenter,
         zoom: 16,
@@ -36,18 +38,29 @@ function initialize() {
         fillOpacity: 0.4,
         map: map,
     });
-
+    
     google.maps.event.addListener(marker, 'click', function () {
         var infoWindow = new google.maps.InfoWindow();
         infoWindow.setContent("<p>WEITI<br />" + "Lat = " + myCenter.lat() + "<br />" + "Lng = " + myCenter.lng() + "<br />" + "Radius = " + weiti.radius + "<br/>" + "Kliknij na mape by dodac nowy taskMarker " + "<br />" + "Nastepnie kliknij na taskMarker PP myszy" + "<br />" + "Usuwanie markera double click" + "</p>");
         infoWindow.open(map, marker);
     });
-
-
 }
-<!-- initialize -->
 
-function abstractMarkerClass(location, markerProp) {
+/**
+ * The most abstract class for MarkerObject <br> It implements events: <br>
+ * - 'rightclick' deletes the marker <br>
+ * - 'drag' changes latitude/longitude at Marker specific fields in form
+ * @namespace MarkerClass
+ * @param location usually event coordinates in google map, Marker is created at that specific place1
+ * @param markerProp marker properties <br>
+ * markerProp[0] = latitude name in form <br>
+ * markerProp[1] = longitude name in form <br>
+ * @returns {MarkerWithLabel}
+ */
+function AbstractMarkerClass(location, markerProp) {
+	/**
+	 * Base marker Object
+	 */
     var abstractMarkerObj = new MarkerWithLabel({
         position: location,
         map: map,
@@ -59,16 +72,22 @@ function abstractMarkerClass(location, markerProp) {
         latString: markerProp[0],
         lngString: markerProp[1],
     });
-
+    /**
+     * 
+     */
     google.maps.event.addListener(abstractMarkerObj, 'rightclick', function () {
         abstractMarkerObj.setMap(null);
     });
-
+    /**
+     * Dragging marker updates form coordinates
+     */
     google.maps.event.addListener(abstractMarkerObj, 'drag', function (event) {
         document.getElementById(abstractMarkerObj.latString).value = event.latLng.lat();
         document.getElementById(abstractMarkerObj.lngString).value = event.latLng.lng();
     });
-
+    /**
+     * Puts latitude/longitude to form
+     */
     function putLatLngToForm() {
         document.getElementById(abstractMarkerObj.latString).value = abstractMarkerObj.position.lat();
         document.getElementById(abstractMarkerObj.lngString).value = abstractMarkerObj.position.lng();
@@ -79,8 +98,13 @@ function abstractMarkerClass(location, markerProp) {
     return abstractMarkerObj;
 }
 
-
-function componentMarkerClass(location, markerProp) {
+/**
+ * @namespace MarkerClass
+ * @param location
+ * @param markerProp
+ * @returns
+ */
+function ComponentMarkerClass(location, markerProp) {
     componentCounter++;
 
     function putComponentIdToForm() {
@@ -88,7 +112,7 @@ function componentMarkerClass(location, markerProp) {
     }
 
     var createMarkerObj = function () {
-        var concreteMarkerObj = abstractMarkerClass(location, markerProp);
+        var concreteMarkerObj = AbstractMarkerClass(location, markerProp);
         concreteMarkerObj.queryString = 0;
         concreteMarkerObj.idString = markerProp[2];
         concreteMarkerObj.formString = markerProp[3];
@@ -114,12 +138,24 @@ function componentMarkerClass(location, markerProp) {
             cleanForms();
             $form.deserialize(formSerializedData);
             goToSpecificTab(markerObj.formID);
+<<<<<<< HEAD
         }
            else {
 //            cleanForms();
 //            putLatLngToForm();
             putComponentIdToForm();
              goToSpecificTab(markerObj.formID);
+=======
+            $(".radioCheckedTrue").each(function () {
+            	if ($(this).is(':checked')) {
+            		var elem = $("ol.formset", $(this).parent());
+            		elem.slideDown('fast');
+            	}
+            });
+        } else {
+            putComponentIdToForm();
+            goToSpecificTab(markerObj.formID);
+>>>>>>> objectsTest
         }
     });
 
@@ -133,7 +169,7 @@ function componentMarkerClass(location, markerProp) {
 function createQuestMarker(location) {
     var questImage = 'static/icons/questIcon.png';
     var markerStrings = ["latitude", "longitude", "id", "questForm"];
-    var questMarkerObj = componentMarkerClass(location, markerStrings);
+    var questMarkerObj = ComponentMarkerClass(location, markerStrings);
     questMarkerObj.icon = questImage;
     questMarkerObj.formID = 0;
     return questMarkerObj;
@@ -143,14 +179,14 @@ function createQuestMarker(location) {
 function createInfoMarker(location) {
     var infoImage = 'static/icons/infoIcon.png';
     var markerStrings = ["info_latitude", "info_longitude", "info_id", "infoForm"];
-    var infoMarkerObj = componentMarkerClass(location, markerStrings);
+    var infoMarkerObj = ComponentMarkerClass(location, markerStrings);
     infoMarkerObj.icon = infoImage;
     infoMarkerObj.formID = 1;
     return infoMarkerObj;
 }
 
 
-function circleClass(taskPosition) {
+function CircleClass(taskPosition) {
     var circleObj = new google.maps.Circle({
         center: taskPosition,
         radius: 0,
@@ -165,10 +201,10 @@ function circleClass(taskPosition) {
     return circleObj;
 }
 
-function taskMarkerClass(location) {
+function TaskMarkerClass(location) {
     var taskImage = 'static/icons/taskIcon.png';
     var taskMarkerStrings = ["location_latitude", "location_longitude"];
-    var taskMarkerObj = abstractMarkerClass(location, taskMarkerStrings);
+    var taskMarkerObj = AbstractMarkerClass(location, taskMarkerStrings);
     taskMarkerObj.icon = taskImage;
 
     google.maps.event.addListener(taskMarkerObj, 'rightclick', function () {
@@ -180,16 +216,16 @@ function taskMarkerClass(location) {
 }
 
 
-function taskCircleClass(taskPosition) {
-    var taskCircle = circleClass(taskPosition);
+function TaskCircleClass(taskPosition) {
+    var taskCircle = CircleClass(taskPosition);
     taskCircleArray.push(taskCircle);
     return taskCircle;
 }
 
 function markerWithCircle(location, idString, radiusString) {
-    var taskMarker = taskMarkerClass(location);
+    var taskMarker = TaskMarkerClass(location);
     var taskPosition = taskMarker.position;
-    var taskCircle = taskCircleClass(taskPosition);
+    var taskCircle = TaskCircleClass(taskPosition);
 
     google.maps.event.addDomListener(
     document.getElementById(radiusString), 'change', function () {
