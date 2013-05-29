@@ -7,7 +7,7 @@ $(document).ready(function () {
         else
             elem.slideUp('fast');
     });
-    var choiceQuestion = '<ul><li><label for="choice_answer">answer/success code</label><input type="text" id="choice_answer" name="choice_answer" /><input type="number" id="choice_success_code" name="choice_success_code"/></li></ul>';
+    var choiceQuestion = '<ul><li><label for="choice_answer">answer/success code</label><input type="text" id="choice_answer" name="choice_answer_param" /><input type="number" id="choice_success_code" name="successCode"/></li></ul>';
 	    
     $("#add_answer_button").click(function(){
     	$("#tasks_choice_parent").append(choiceQuestion);

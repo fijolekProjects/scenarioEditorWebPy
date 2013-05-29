@@ -120,27 +120,27 @@ $def with ()
                                 </li>
                                 <li>
                                     <label for="hints">tasks hints?</label>
-                                    <input type="radio" name="hints" value="Yes" class="is_hints" />Yes
-                                    <input type="radio" name="hints" value="No" class="is_hints" />No
+                                    <input type="radio" name="hints_description" value="Yes" class="is_hints" />Yes
+                                    <input type="radio" name="hints_description" value="No" class="is_hints" />No
                                     <ol id="hints_parent" class="formset">
                                         <li><strong>Task hints:</strong>
                                         </li>
                                         <li>
                                             <label for="hints_text">hints text / cost</label>
-                                            <input type="text" id="hints_text" name="hints_text" />
-                                            <input type="number" id="hints_text_cost" name="hints_text_cost"/>
+                                            <input type="text" id="hints_text" name="hints_text_param" />
+                                            <input type="number" id="hints_text_cost" name="cost"/>
                                         </li>
                                         <li>
-                                            <label for="hints_image">hints image / cost</label>
+                                            <label for="hints_image_param">hints image / cost</label>
                                             <input type="file" id="hints_imageFile" name="hints_imageFile" class="questFileInput"/>
-                                            <input type="hidden" id="hints_image" name="hints_image" />
-                                            <input type="number" id="hints_image_cost" name="hints_image_cost"/>
+                                            <input type="hidden" id="hints_image" name="hints_image_param" />
+                                            <input type="number" id="hints_image_cost" name="cost"/>
                                         </li>
                                         <li>
                                             <label for="hints_sound">hints sound / cost</label>
                                             <input type="file" id="hints_soundFile" name="hints_soundFile" class="questFileInput"/>
-                                            <input type="hidden" id="hints_sound" name="hints_sound" />
-                                            <input type="number" id="hints_sound_cost" name="hints_sound_cost"/>
+                                            <input type="hidden" id="hints_sound" name="hints_sound_param" />
+                                            <input type="number" id="hints_sound_cost" name="cost"/>
                                         </li>
                                     </ol>
                                 </li>

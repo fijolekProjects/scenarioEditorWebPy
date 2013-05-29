@@ -2,8 +2,7 @@
 import re
 from lxml import etree
 
-root = etree.Element('Scenario')
-taskList = ['location_.*','text_,*','choice_.*']
+
 
 def singleton(cls):
     instances = {}
@@ -16,16 +15,25 @@ def singleton(cls):
 
 @singleton
 class ScenarioGenerator(object):
-   
+    
+    
+    taskList = ['location.*','text,*','choice.*']
+    hintsList = []
+    
+    indentationList = [('tasks.*',taskList),('hints.*',hintsList)]
+    
+    valueSuffix = '.*_param'
+    
+    root = etree.Element('Scenario')
     filledFormCounter = 0
     filename = "scenario.xml"
     FILE = open(filename, "w")
     
     
-    def cutFormList(self, inputList):
+    def cutFormList(self,inputList):
        
         questList = []    
-        tempQuestMark = 0
+        tempQuestMark = 0;
                 
         for index,item in enumerate(inputList):
             if item[0] == 'EOS':
@@ -42,32 +50,33 @@ class ScenarioGenerator(object):
     
   
     def fillXml(self, xmlData):
-       
+        
         eventType = xmlData[0][1]
-               
-        quest = etree.Element(eventType, id = xmlData[1][1])  
+        quest = etree.Element(eventType, id = xmlData[1][1])
+        
        
         
-        i = iter(xmlData)   
-        i.next() 
-        i.next() 
+        i = iter(xmlData)    
+        item = i.next()  
+        item = i.next()
+        
         for item in i:         
   
             attribute= etree.Element(item[0])           
             attribute.text = item[1] 
-             
-            attribute = self.addMultiChild('tasks.*', attribute, i, item, taskList)              
-            
+                     
+            attribute = self.addIndentation(attribute, i, item)
+    
             quest.append(attribute)
-        root.append(quest)
-
+        self.root.append(quest)
+        
         return 0
   
 
         
     def xmlFinish(self):
         
-        tempXml = etree.tostring(root, pretty_print=True)
+        tempXml = etree.tostring(self.root, pretty_print=True)
         self.FILE.writelines(tempXml)
         
         return 0
@@ -75,26 +84,25 @@ class ScenarioGenerator(object):
    
    
    
-    def addChild(self, prefix, attr, iter, item ,section):
-        if re.match(section,item[0]):
-            item = iter.next()
+    def addMultiChild(self, prefix, attr, i,item,section):
         
-        localRoot = etree.Element(prefix[0:len(prefix)-3])
+        if re.match(section,item[0]):
+            item = i.next()
+        
+        localRoot = etree.Element(prefix[0:len(prefix)-2])
         topicTest = 0
         
-        while re.match(prefix, item[0]):
+        while re.match(prefix,item[0]):
                             
                     topicTest = 1
                     
-                    temp = item[0]
-                    temp = temp[len(prefix)-2:]
+                    task = self.createSingleTask(prefix, attr, i, item) 
                     
-                    task = etree.Element(temp)
-                    task.text = item[1]
+                    
                     localRoot.append(task)    
                           
                     try:                          
-                        item = iter.next()
+                        item = i.next()
                     except StopIteration:
                         break
         
@@ -103,24 +111,78 @@ class ScenarioGenerator(object):
             
         return item
     
-   
-   
+
     
-    
-    def addMultiChild(self, prefix, attribute, i, item, childList):
-        if re.match(prefix, item[0]):
+    def addComplexChild(self ,prefix, attribute, i, item, childList):
+        if re.match(prefix,item[0]):
                 
                 attribute = etree.Element(prefix[0:len(prefix)-2])
                 attribute.text = ''    
                
-                item = i.next()
-                
-                for k in range (0,len(childList)):
-                    item = (self.addChild(childList[k], attribute, i, item, prefix))
+                if not childList:
+              
+                    item = self.addChild(prefix, attribute, i, item)
       
-               
+                        
+                else:
+                      item = i.next()
+                      for k in range (0,len(childList)):
+                       
+                          item = (self.addMultiChild(childList[k],attribute,i,item,prefix))
+                        
+            
         return attribute
     
-      
-      
+    
+    
+    def addIndentation(self, attribute, i, item):
+        tempAttribute = attribute
+        
+        for k in range(0,len(self.indentationList)):
+        
+            if re.match(self.indentationList[k][0],item[0]):    
+                          
+                 tempAttribute = None
+                 tempAttribute = self.addComplexChild(self.indentationList[k][0], attribute, i, item,self.indentationList[k][1])  
+                 break
+ 
+        return tempAttribute
 
+ 
+    def addChild(self, prefix, attribute, i, item):
+         
+         
+         while re.match(prefix,item[0]):
+                           
+            task = self.createSingleTask(prefix, attribute, i, item)  
+                
+            attribute.append(task)    
+                         
+            try:                          
+                item = i.next()
+            except StopIteration:
+                break
+        
+        
+         return item    
+     
+       
+    def createSingleTask(self, prefix, attribute, i, item): 
+        
+        temp = item[0]                  
+        temp = temp[len(prefix)-1:]
+        
+        if re.match(self.valueSuffix,temp):
+                            
+            temp = temp[:len(temp)-len(self.valueSuffix)+2]
+            task = etree.Element(temp)
+            task.text = item[1]
+            item = i.next()              
+            task.set(item[0],item[1])
+            
+        else:
+            
+            task = etree.Element(temp)
+            task.text = item[1]
+        
+        return task
