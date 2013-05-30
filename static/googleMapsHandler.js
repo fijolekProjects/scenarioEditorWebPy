@@ -141,8 +141,8 @@ function ComponentMarkerClass(location, markerProp) {
             var componentIndexToRemove = parseInt(markerObj.labelContent);
             queryStringsArr.splice(componentIndexToRemove, 1);
             componentCounter--;
-            goToChooseComponentTab();
-            cleanForms();
+            MenuManager.goToChooseComponentTab();
+            MenuManager.cleanForms();
         });
     }();
     /**
@@ -153,9 +153,9 @@ function ComponentMarkerClass(location, markerProp) {
             if (markerObj.queryString !== 0) {
                 var $form = $("#".concat(markerObj.formString));
                 var formSerializedData = markerObj.queryString;
-                cleanForms();
+                MenuManager.cleanForms();
                 $form.deserialize(formSerializedData);
-                goToConcreteForm(markerObj.formID);
+                MenuManager.goToConcreteForm(markerObj.formID);
                 $(".radio_checked_true").each(function () {
                     if ($(this).is(':checked')) {
                         var elem = $("ol.formset", $(this).parent());
@@ -164,7 +164,7 @@ function ComponentMarkerClass(location, markerProp) {
                 });
             } else {
                 putComponentIdToForm();
-                goToConcreteForm(markerObj.formID);
+                MenuManager.goToConcreteForm(markerObj.formID);
             }
         });
     }();

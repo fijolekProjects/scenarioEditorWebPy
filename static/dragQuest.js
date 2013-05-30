@@ -14,15 +14,15 @@ $(document).ready(function () {
     });
 
     function handleQuestDropped(latlng) {
-    	cleanForms();
+    	MenuManager.cleanForms();
         MarkerFactory.createQuestMarker(latlng);
-        goToQuestFormTab();
+        MenuManager.goToQuestFormTab();
     }
 
     function handleInfoDropped(latlng) {
-    	cleanForms();
+    	MenuManager.cleanForms();
         MarkerFactory.createInfoMarker(latlng);
-        goToInfoFormTab();
+        MenuManager.goToInfoFormTab();
     }
 
     function handleTaskDropped(latlng) {

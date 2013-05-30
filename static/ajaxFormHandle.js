@@ -16,8 +16,8 @@ $(document).ready(function () {
             var currentId = $(component.concat("_id")).val();
             componentArray[currentId]["queryString"] = serializedForm;
             queryStringsArr.splice(currentId, 1, serializedForm);
-            cleanForms();
-            FormManager.goToChooseComponentTab();
+            MenuManager.cleanForms();
+            MenuManager.goToChooseComponentTab();
             $("#remove_answer_button").click();
             $.ajax({
                 async: false,
