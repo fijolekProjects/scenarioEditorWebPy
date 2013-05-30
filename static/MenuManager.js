@@ -75,7 +75,7 @@ var MenuManager = {
         });
     }),
     
-    handleChangeFileInputEvent: function () {
+    handleChangeFileInputEvent: $(document).ready(function () {
         $(".file_input").each(function () {
             $(this).bind('change', function () {
                 if ($(this).val() !== "") {
@@ -84,5 +84,5 @@ var MenuManager = {
                 }
             });
         });
-    }(),
+    }),
 }

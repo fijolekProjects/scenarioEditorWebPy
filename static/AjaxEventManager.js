@@ -1,7 +1,7 @@
 $(document).ready(function () {
-	var AjaxEventsManager = {
+	var AjaxEventManager = {
         handleClickAllComponentsButtons: function () {
-            var componentArray = ["#quest", "#info"];
+            var componentNameArray = ["#quest", "#info"];
             var handleClickOneComponentButton = function (component) {
                 $(component.concat("_button")).click(function () {
                     var serializedForm = $(component.concat("_form")).serialize();
@@ -18,7 +18,7 @@ $(document).ready(function () {
                 });
             }
 
-            $.each(componentArray, function (index, value) {
+            $.each(componentNameArray, function (index, value) {
                 handleClickOneComponentButton(value);
             });
         }(),

@@ -7,6 +7,8 @@ var componentArray = [];
 var queryStringsArr = [];
 var taskArray = [];
 var allComponentIdsArray = ["quest_id", "info_id"];
+
+
 /**
  * Google map initialization, setting map and its properties like center, zoom etc.
  * @namespace Initialize Function
@@ -148,7 +150,7 @@ function ComponentMarkerClass(location, markerProp) {
     /**
      * Handles Component Marker click event
      */
-    var clickMarker = function () {
+   
         google.maps.event.addListener(markerObj, 'click', function (event) {
             if (markerObj.queryString !== 0) {
                 var $form = $("#".concat(markerObj.formString));
@@ -167,7 +169,7 @@ function ComponentMarkerClass(location, markerProp) {
                 MenuManager.goToConcreteForm(markerObj.formID);
             }
         });
-    }();
+   
 
     /**
      * Puts Component Id to concrete form (quest_id or info_id)
