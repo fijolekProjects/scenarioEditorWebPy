@@ -14,19 +14,19 @@ $(document).ready(function () {
     });
 
     function handleQuestDropped(latlng) {
-        cleanForms();
-        createQuestMarker(latlng);
+    	cleanForms();
+        MarkerFactory.createQuestMarker(latlng);
         goToQuestFormTab();
     }
 
     function handleInfoDropped(latlng) {
-        cleanForms();
-        createInfoMarker(latlng);
+    	cleanForms();
+        MarkerFactory.createInfoMarker(latlng);
         goToInfoFormTab();
     }
 
     function handleTaskDropped(latlng) {
-        createTaskMarkerWithCircle(latlng);
+    	MarkerFactory.createTaskMarkerWithCircle(latlng);
     }
 
     var droppedElementHandlers = {

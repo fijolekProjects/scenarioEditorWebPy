@@ -9,10 +9,16 @@ var taskArray = [];
 var allComponentIdsArray = ["quest_id", "info_id"];
 /**
  * Google map initialization, setting map and its properties like center, zoom etc.
- * @returns
+ * @namespace Initialize Function
  */
 function initialize() {
+    /**
+     * Center of google map
+     */
     var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
+    /**
+     * Properties of map
+     */
     var mapProp = {
         center: myCenter,
         zoom: 16,
@@ -25,6 +31,10 @@ function initialize() {
 
 }
 
+var initializeMap = function () {
+    google.maps.event.addDomListener(window, 'load', initialize);
+}();
+
 /**
  * The most abstract class for MarkerObject <br> It implements events: <br>
  * - 'rightclick' deletes the marker <br>
@@ -34,8 +44,9 @@ function initialize() {
  * @param markerProp marker properties <br>
  * markerProp[0] = latitude name in form <br>
  * markerProp[1] = longitude name in form <br>
- * @returns {MarkerWithLabel}
+ * @returns MarkerWithLabel
  */
+
 function AbstractMarkerClass(location, markerProp) {
     /**
      * Base marker Object
@@ -95,92 +106,85 @@ function AbstractMarkerClass(location, markerProp) {
             }
         }
     }
-
-
     return abstractMarkerObj;
 }
 
 /**
+ * Abstract Class that represents Component Marker
+ * It adds properties like: <br>
+ * markerProp[2] = id of id in form (quest_id or info_id)<br>
+ * markerProp[3] = id of form <br>
  * @namespace MarkerClass
  * @param location
  * @param markerProp
- * @returns
+ * @extends AbstractMarkerClass
+ * @returns Component Marker
  */
 function ComponentMarkerClass(location, markerProp) {
     componentCounter++;
-
-
-
-    var createMarkerObj = function () {
+    /**
+     * Creates AbstractMarker and adds new properties to it
+     */
+    var markerObj = function () {
         var concreteMarkerObj = AbstractMarkerClass(location, markerProp);
         concreteMarkerObj.queryString = 0;
         concreteMarkerObj.idString = markerProp[2];
         concreteMarkerObj.formString = markerProp[3];
         concreteMarkerObj.formId = 0;
         return concreteMarkerObj;
-    };
-
-    var markerObj = createMarkerObj();
-
-    google.maps.event.addListener(markerObj, 'rightclick', function () {
-        var componentIndexToRemove = parseInt(markerObj.labelContent);
-        queryStringsArr.splice(componentIndexToRemove, 1);
-        componentCounter--;
-        goToChooseComponentTab();
-        cleanForms();
-
-    });
-
-    google.maps.event.addListener(markerObj, 'click', function (event) {
-        if (markerObj.queryString !== 0) {
-            var $form = $("#".concat(markerObj.formString));
-            var formSerializedData = markerObj.queryString;
+    }();
+    /**
+     * Removes Component Marker after 'right click' event
+     */
+    var removeMarker = function () {
+        google.maps.event.addListener(markerObj, 'rightclick', function () {
+            var componentIndexToRemove = parseInt(markerObj.labelContent);
+            queryStringsArr.splice(componentIndexToRemove, 1);
+            componentCounter--;
+            goToChooseComponentTab();
             cleanForms();
-            $form.deserialize(formSerializedData);
-            goToConcreteForm(markerObj.formID);
-            $(".radio_checked_true").each(function () {
-                if ($(this).is(':checked')) {
-                    var elem = $("ol.formset", $(this).parent());
-                    elem.slideDown('fast');
-                }
-            });
+        });
+    }();
+    /**
+     * Handles Component Marker click event
+     */
+    var clickMarker = function () {
+        google.maps.event.addListener(markerObj, 'click', function (event) {
+            if (markerObj.queryString !== 0) {
+                var $form = $("#".concat(markerObj.formString));
+                var formSerializedData = markerObj.queryString;
+                cleanForms();
+                $form.deserialize(formSerializedData);
+                goToConcreteForm(markerObj.formID);
+                $(".radio_checked_true").each(function () {
+                    if ($(this).is(':checked')) {
+                        var elem = $("ol.formset", $(this).parent());
+                        elem.slideDown('fast');
+                    }
+                });
+            } else {
+                putComponentIdToForm();
+                goToConcreteForm(markerObj.formID);
+            }
+        });
+    }();
 
-        } else {
-            putComponentIdToForm();
-            goToConcreteForm(markerObj.formID);
-        }
-    });
-
+    /**
+     * Puts Component Id to concrete form (quest_id or info_id)
+     */
     var putComponentIdToForm = function () {
         document.getElementById(markerObj.idString).value = componentCounter;
     }();
 
     componentArray.push(markerObj);
-
     return markerObj;
 }
 
 
-function createQuestMarker(location) {
-    var questImage = 'static/icons/questIcon.png';
-    var markerStrings = ["quest_latitude", "quest_longitude", "quest_id", "quest_form"];
-    var questMarkerObj = ComponentMarkerClass(location, markerStrings);
-    questMarkerObj.icon = questImage;
-    questMarkerObj.formID = 0;
-    return questMarkerObj;
-}
-
-
-function createInfoMarker(location) {
-    var infoImage = 'static/icons/infoIcon.png';
-    var markerStrings = ["info_latitude", "info_longitude", "info_id", "info_form"];
-    var infoMarkerObj = ComponentMarkerClass(location, markerStrings);
-    infoMarkerObj.icon = infoImage;
-    infoMarkerObj.formID = 1;
-    return infoMarkerObj;
-}
-
-
+/**
+ * Class that represents Circle that will be bind to TaskMarker
+ * @namespace Circle class
+ */
 function CircleClass(taskPosition) {
     var circleObj = new google.maps.Circle({
         center: taskPosition,
@@ -195,51 +199,112 @@ function CircleClass(taskPosition) {
     });
     return circleObj;
 }
-
+/**
+ * Class that represents Task Marker at given position <br>
+ * adds icon property to Abstract Marker
+ * @namespace TaskMarkerClass
+ * @param location of Task Marker
+ * @returns Task Marker
+ */
 function TaskMarkerClass(location) {
     var taskImage = 'static/icons/taskIcon.png';
     var taskMarkerStrings = ["quest_task_location_latitude", "quest_task_location_longitude"];
     var taskMarkerObj = AbstractMarkerClass(location, taskMarkerStrings);
     taskMarkerObj.icon = taskImage;
+    /**
+     * Removes Task Marker after 'right click' event
+     */
+    var removeMarker = function () {
+        google.maps.event.addListener(taskMarkerObj, 'rightclick', function () {
+            document.getElementById(taskMarkerObj.latString).value = null;
+            document.getElementById(taskMarkerObj.lngString).value = null;
+        });
+    }();
 
-    google.maps.event.addListener(taskMarkerObj, 'rightclick', function () {
-        document.getElementById(taskMarkerObj.latString).value = null;
-        document.getElementById(taskMarkerObj.lngString).value = null;
-    });
     taskArray.push(taskMarkerObj);
     return taskMarkerObj;
 }
 
-
+/**
+ * Class that represents Circle at given position
+ * @namespace TaskCircleClass
+ * @param taskPosition position of task to bind with
+ * @returns Task Circle
+ */
 function TaskCircleClass(taskPosition) {
     var taskCircle = CircleClass(taskPosition);
     taskCircleArray.push(taskCircle);
     return taskCircle;
 }
-
-function markerWithCircle(location, idString, radiusString) {
+/**
+ * Class that represents Marker with Circle binded to id
+ * @namespace MarkerWithCircleClass
+ * @param location location of Marker/Circle
+ * @param idString id of id in form
+ * @param radiusString id of radius in form
+ */
+function MarkerWithCircleClass(location, idString, radiusString) {
     var taskMarker = TaskMarkerClass(location);
     var taskPosition = taskMarker.position;
     var taskCircle = TaskCircleClass(taskPosition);
 
-    google.maps.event.addDomListener(
-    $("#".concat(radiusString)).bind('input', function () {
-        var currentTaskId = parseInt(document.getElementById(idString).value);
-        for (var i = 0; i < taskCircleArray.length; i++) {
-            if (currentTaskId === (taskCircleArray[i]["circleId"])) {
-                taskCircleArray[i].bindTo('center', taskArray[currentTaskId], 'position');
-                taskCircleArray[i].setRadius(parseInt(document.getElementById(radiusString).value));
+    /**
+     * Handles changing radius in form <br>
+     * User sees changes immediately on the map
+     */
+    var changeRadiusHandler = function () {
+        google.maps.event.addDomListener(
+        $("#".concat(radiusString)).bind('input', function () {
+            var currentTaskId = parseInt(document.getElementById(idString).value);
+            for (var i = 0; i < taskCircleArray.length; i++) {
+                if (currentTaskId === (taskCircleArray[i]["circleId"])) {
+                    taskCircleArray[i].bindTo('center', taskArray[currentTaskId], 'position');
+                    taskCircleArray[i].setRadius(parseInt(document.getElementById(radiusString).value));
+                }
             }
-        }
-    }));
-    google.maps.event.addListener(taskMarker, 'rightclick', function () {
-        taskCircle.setMap(null);
-        document.getElementById(radiusString).value = null;
-    });
+        }));
+    }();
+    /**
+     * Removes marker with circle after 'right click' event
+     */
+    var removeMarkerWithCircle = function () {
+        google.maps.event.addListener(taskMarker, 'rightclick', function () {
+            taskCircle.setMap(null);
+            document.getElementById(radiusString).value = null;
+        });
+    }();
 }
 
-function createTaskMarkerWithCircle(location) {
-    markerWithCircle(location, "quest_id", "quest_task_location_radius");
-}
+/**
+ * Factory that produces marker at given location
+ * It produces: <br>
+ * QuestMarker <br>
+ * InfoMarker <br>
+ * TaskMarkerWithCircle <br>
+ * @namespace Marker Factory
+ * @param location of marker
+ * @example Usage: MarkerFactory.createQuestMarker(latlng);
+ */
+var MarkerFactory = {
+    createQuestMarker: function (location) {
+        var questImage = 'static/icons/questIcon.png';
+        var markerStrings = ["quest_latitude", "quest_longitude", "quest_id", "quest_form"];
+        var questMarkerObj = ComponentMarkerClass(location, markerStrings);
+        questMarkerObj.icon = questImage;
+        questMarkerObj.formID = 0;
+        return questMarkerObj;
+    },
 
-google.maps.event.addDomListener(window, 'load', initialize);
+    createInfoMarker: function (location) {
+        var infoImage = 'static/icons/infoIcon.png';
+        var markerStrings = ["info_latitude", "info_longitude", "info_id", "info_form"];
+        var infoMarkerObj = ComponentMarkerClass(location, markerStrings);
+        infoMarkerObj.icon = infoImage;
+        infoMarkerObj.formID = 1;
+        return infoMarkerObj;
+    },
+
+    createTaskMarkerWithCircle: function (location) {
+        MarkerWithCircleClass(location, "quest_id", "quest_task_location_radius");
+    },
+}

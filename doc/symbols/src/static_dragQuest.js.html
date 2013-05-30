@@ -22,18 +22,18 @@
 <span class='line'> 15</span> 
 <span class='line'> 16</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">handleQuestDropped</span><span class="PUNC">(</span><span class="NAME">latlng</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 17</span> </span><span class="WHIT">        </span><span class="NAME">cleanForms</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 18</span> </span><span class="WHIT">        </span><span class="NAME">createQuestMarker</span><span class="PUNC">(</span><span class="NAME">latlng</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 18</span> </span><span class="WHIT">        </span><span class="NAME">MarkerFactory.createQuestMarker</span><span class="PUNC">(</span><span class="NAME">latlng</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 19</span> </span><span class="WHIT">        </span><span class="NAME">goToQuestFormTab</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 20</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
 <span class='line'> 21</span> 
 <span class='line'> 22</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">handleInfoDropped</span><span class="PUNC">(</span><span class="NAME">latlng</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 23</span> </span><span class="WHIT">        </span><span class="NAME">cleanForms</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 24</span> </span><span class="WHIT">        </span><span class="NAME">createInfoMarker</span><span class="PUNC">(</span><span class="NAME">latlng</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 24</span> </span><span class="WHIT">        </span><span class="NAME">MarkerFactory.createInfoMarker</span><span class="PUNC">(</span><span class="NAME">latlng</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 25</span> </span><span class="WHIT">        </span><span class="NAME">goToInfoFormTab</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 26</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
 <span class='line'> 27</span> 
 <span class='line'> 28</span> </span><span class="WHIT">    </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">handleTaskDropped</span><span class="PUNC">(</span><span class="NAME">latlng</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 29</span> </span><span class="WHIT">        </span><span class="NAME">createTaskMarkerWithCircle</span><span class="PUNC">(</span><span class="NAME">latlng</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">    	</span><span class="NAME">MarkerFactory.createTaskMarkerWithCircle</span><span class="PUNC">(</span><span class="NAME">latlng</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 30</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
 <span class='line'> 31</span> 
 <span class='line'> 32</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">droppedElementHandlers</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">

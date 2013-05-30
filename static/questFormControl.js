@@ -17,5 +17,4 @@ $(document).ready(function () {
     $("#remove_answer_button").click(function(){
     	$("#quest_task_choice_parent").children("ul").remove();
     	});
-    
 });

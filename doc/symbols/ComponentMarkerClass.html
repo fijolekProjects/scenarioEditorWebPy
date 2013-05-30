@@ -193,7 +193,21 @@ ul.inheritsList
 	
 	<li><a href="../symbols/AbstractMarkerClass.html">AbstractMarkerClass</a></li>
 	
+	<li><a href="../symbols/CircleClass.html">CircleClass</a></li>
+	
+	<li><a href="../symbols/cleanForms.html">cleanForms</a></li>
+	
 	<li><a href="../symbols/ComponentMarkerClass.html">ComponentMarkerClass</a></li>
+	
+	<li><a href="../symbols/initialize.html">initialize</a></li>
+	
+	<li><a href="../symbols/MarkerFactory.html">MarkerFactory</a></li>
+	
+	<li><a href="../symbols/MarkerWithCircleClass.html">MarkerWithCircleClass</a></li>
+	
+	<li><a href="../symbols/TaskCircleClass.html">TaskCircleClass</a></li>
+	
+	<li><a href="../symbols/TaskMarkerClass.html">TaskMarkerClass</a></li>
 	
 </ul>
 <hr />
@@ -210,6 +224,8 @@ ul.inheritsList
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
 				
+				<br />Extends
+					<a href="../symbols/AbstractMarkerClass.html">AbstractMarkerClass</a>.<br />
 				
 			
 				MarkerClass
@@ -236,7 +252,10 @@ ul.inheritsList
 							<div class="fixedFont">
 								<b><a href="../symbols/ComponentMarkerClass.html#constructor">ComponentMarkerClass</a></b>(location, markerProp)
 							</div>
-							<div class="description"></div>
+							<div class="description">Abstract Class that represents Component Marker
+It adds properties like: <br>
+markerProp[2] = id of id in form (quest_id or info_id)<br>
+markerProp[3] = id of form <br></div>
 						</td>
 					</tr>
 				</tbody>
@@ -244,6 +263,68 @@ ul.inheritsList
 			
 
 <!-- ============================== properties summary ===================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class ComponentMarkerClass.">
+					<caption>Field Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;inner&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/ComponentMarkerClass.html#-clickMarker">clickMarker</a></b>
+								</div>
+								<div class="description">Handles Component Marker click event</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;inner&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/ComponentMarkerClass.html#-markerObj">markerObj</a></b>
+								</div>
+								<div class="description">Creates AbstractMarker and adds new properties to it</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;inner&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/ComponentMarkerClass.html#-putComponentIdToForm">putComponentIdToForm</a></b>
+								</div>
+								<div class="description">Puts Component Id to concrete form (quest_id or info_id)</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;inner&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/ComponentMarkerClass.html#-removeMarker">removeMarker</a></b>
+								</div>
+								<div class="description">Removes Component Marker after 'right click' event</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+				<dl class="inheritsList">
+				
+				</dl>
+				
 			
 
 <!-- ============================== methods summary ======================== -->
@@ -263,7 +344,10 @@ ul.inheritsList
 				</div>
 				
 				<div class="description">
-					
+					Abstract Class that represents Component Marker
+It adds properties like: <br>
+markerProp[2] = id of id in form (quest_id or info_id)<br>
+markerProp[3] = id of form <br>
 					
 				</div>
 				
@@ -295,7 +379,7 @@ ul.inheritsList
 						<dl class="detailList">
 						<dt class="heading">Returns:</dt>
 						
-								<dd></dd>
+								<dd>Component Marker</dd>
 						
 						</dl>
 					
@@ -306,6 +390,99 @@ ul.inheritsList
 			
 
 <!-- ============================== field details ========================== -->		
+			
+				<div class="sectionTitle">
+					Field Detail
+				</div>
+				
+					<a name="-clickMarker"> </a>
+					<div class="fixedFont">&lt;inner&gt; 
+					
+					
+					<b>clickMarker</b>
+					
+					</div>
+					<div class="description">
+						Handles Component Marker click event
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="-markerObj"> </a>
+					<div class="fixedFont">&lt;inner&gt; 
+					
+					
+					<b>markerObj</b>
+					
+					</div>
+					<div class="description">
+						Creates AbstractMarker and adds new properties to it
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="-putComponentIdToForm"> </a>
+					<div class="fixedFont">&lt;inner&gt; 
+					
+					
+					<b>putComponentIdToForm</b>
+					
+					</div>
+					<div class="description">
+						Puts Component Id to concrete form (quest_id or info_id)
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="-removeMarker"> </a>
+					<div class="fixedFont">&lt;inner&gt; 
+					
+					
+					<b>removeMarker</b>
+					
+					</div>
+					<div class="description">
+						Removes Component Marker after 'right click' event
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					
+				
 			
 
 <!-- ============================== method details ========================= -->		
@@ -321,7 +498,7 @@ ul.inheritsList
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu May 30 2013 11:32:16 GMT+0200 (CEST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu May 30 2013 18:17:16 GMT+0200 (CEST)
 		</div>
 	</body>
 </html>
