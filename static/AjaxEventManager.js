@@ -6,8 +6,8 @@ $(document).ready(function () {
                 $(component.concat("_button")).click(function () {
                     var serializedForm = $(component.concat("_form")).serialize();
                     var currentId = $(component.concat("_id")).val();
-                    componentArray[currentId]["queryString"] = serializedForm;
-                    queryStringsArr.splice(currentId, 1, serializedForm);
+                    containerObj.componentArray[currentId]["queryString"] = serializedForm;
+                    containerObj.queryStringsArr.splice(currentId, 1, serializedForm);
                     MenuManager.cleanForms();
                     MenuManager.goToChooseComponentTab();
                     $("#remove_answer_button").click();
@@ -26,8 +26,8 @@ $(document).ready(function () {
         handleClickGenerateScenarioButton: function () {
             $(".scenario_button").click(function () {
                 var wholeQueryString = "";
-                for (var i = 0; i < queryStringsArr.length; i++) {
-                    wholeQueryString += queryStringsArr[i] + "&EOS=" + i + "&";
+                for (var i = 0; i < containerObj.queryStringsArr.length; i++) {
+                    wholeQueryString += containerObj.queryStringsArr[i] + "&EOS=" + i + "&";
                 }
                 alert(wholeQueryString);
                 $.ajax({

@@ -1,14 +1,40 @@
-var map;
-var overlay;
+/**
+ * Singleton class that holds variables: map and overlay
+ * @returns singleton object
+ */
+function MapVariablesClass(){
+	var varbiables = {
+			map: null,
+			overlay: null,
+	}
+	return varbiables;
+}
+MapVariablesClass.getInstance = function(){
+	if (MapVariablesClass.instance == undefined) MapVariablesClass.instance = new MapVariablesClass();
+	return MapVariablesClass.instance;
+}
+/**
+ * Singleton class which represents data container
+ * @returns container object
+ */
+function ContainerClass() {
+	var container = {
+			allComponentIdsArray: ["quest_id", "info_id"],
+			componentCounter: -1,
+			taskCircleArray: [],
+			componentArray: [],
+			queryStringsArr: [],
+			taskArray: [],
+	};
+	return container;
+}
+ContainerClass.getInstance = function(){
+	if (ContainerClass.instance == undefined) ContainerClass.instance = new ContainerClass();
+	return ContainerClass.instance;
+}
 
-var componentCounter = -1;
-var taskCircleArray = [];
-var componentArray = [];
-var queryStringsArr = [];
-var taskArray = [];
-var allComponentIdsArray = ["quest_id", "info_id"];
-
-
+var mapVariables = MapVariablesClass.getInstance();
+var containerObj = ContainerClass.getInstance();
 /**
  * Google map initialization, setting map and its properties like center, zoom etc.
  * @namespace Initialize Function
@@ -26,10 +52,10 @@ function initialize() {
         zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    map = new google.maps.Map(document.getElementById("google_map"), mapProp);
-    overlay = new google.maps.OverlayView();
-    overlay.draw = function () {};
-    overlay.setMap(map);
+    mapVariables.map = new google.maps.Map(document.getElementById("google_map"), mapProp);
+    mapVariables.overlay = new google.maps.OverlayView();
+    mapVariables.overlay.draw = function () {};
+    mapVariables.overlay.setMap(mapVariables.map);
 
 }
 
@@ -55,10 +81,10 @@ function AbstractMarkerClass(location, markerProp) {
      */
     var abstractMarkerObj = new MarkerWithLabel({
         position: location,
-        map: map,
+        map: mapVariables.map,
         draggable: true,
         icon: '',
-        labelContent: componentCounter.toString(),
+        labelContent: containerObj.componentCounter.toString(),
         labelClass: "labels",
         labelAnchor: new google.maps.Point(14, -5),
         latString: markerProp[0],
@@ -78,7 +104,7 @@ function AbstractMarkerClass(location, markerProp) {
      */
     var dragMarker = function () {
         google.maps.event.addListener(abstractMarkerObj, 'drag', function (event) {
-            var currentId = returnCurrentId(allComponentIdsArray);
+            var currentId = returnCurrentId(containerObj.allComponentIdsArray);
             var currentMarkerId = parseInt(abstractMarkerObj.labelContent);
             if (currentId === currentMarkerId) {
                 document.getElementById(abstractMarkerObj.latString).value = event.latLng.lat();
@@ -123,7 +149,7 @@ function AbstractMarkerClass(location, markerProp) {
  * @returns Component Marker
  */
 function ComponentMarkerClass(location, markerProp) {
-    componentCounter++;
+    containerObj.componentCounter++;
     /**
      * Creates AbstractMarker and adds new properties to it
      */
@@ -141,8 +167,8 @@ function ComponentMarkerClass(location, markerProp) {
     var removeMarker = function () {
         google.maps.event.addListener(markerObj, 'rightclick', function () {
             var componentIndexToRemove = parseInt(markerObj.labelContent);
-            queryStringsArr.splice(componentIndexToRemove, 1);
-            componentCounter--;
+            containerObj.queryStringsArr.splice(componentIndexToRemove, 1);
+            containerObj.componentCounter--;
             MenuManager.goToChooseComponentTab();
             MenuManager.cleanForms();
         });
@@ -175,10 +201,10 @@ function ComponentMarkerClass(location, markerProp) {
      * Puts Component Id to concrete form (quest_id or info_id)
      */
     var putComponentIdToForm = function () {
-        document.getElementById(markerObj.idString).value = componentCounter;
+        document.getElementById(markerObj.idString).value = containerObj.componentCounter;
     }();
 
-    componentArray.push(markerObj);
+    containerObj.componentArray.push(markerObj);
     return markerObj;
 }
 
@@ -191,13 +217,13 @@ function CircleClass(taskPosition) {
     var circleObj = new google.maps.Circle({
         center: taskPosition,
         radius: 0,
-        circleId: componentCounter,
+        circleId: containerObj.componentCounter,
         strokeColor: "#0000FF",
         strokeOpacity: 0.8,
         strokeWeight: 2,
         fillColor: "#0000FF",
         fillOpacity: 0.4,
-        map: map
+        map: mapVariables.map
     });
     return circleObj;
 }
@@ -223,7 +249,7 @@ function TaskMarkerClass(location) {
         });
     }();
 
-    taskArray.push(taskMarkerObj);
+    containerObj.taskArray.push(taskMarkerObj);
     return taskMarkerObj;
 }
 
@@ -235,7 +261,7 @@ function TaskMarkerClass(location) {
  */
 function TaskCircleClass(taskPosition) {
     var taskCircle = CircleClass(taskPosition);
-    taskCircleArray.push(taskCircle);
+    containerObj.taskCircleArray.push(taskCircle);
     return taskCircle;
 }
 /**
@@ -258,10 +284,10 @@ function MarkerWithCircleClass(location, idString, radiusString) {
         google.maps.event.addDomListener(
         $("#".concat(radiusString)).bind('input', function () {
             var currentTaskId = parseInt(document.getElementById(idString).value);
-            for (var i = 0; i < taskCircleArray.length; i++) {
-                if (currentTaskId === (taskCircleArray[i]["circleId"])) {
-                    taskCircleArray[i].bindTo('center', taskArray[currentTaskId], 'position');
-                    taskCircleArray[i].setRadius(parseInt(document.getElementById(radiusString).value));
+            for (var i = 0; i < containerObj.taskCircleArray.length; i++) {
+                if (currentTaskId === (containerObj.taskCircleArray[i]["circleId"])) {
+                    containerObj.taskCircleArray[i].bindTo('center', containerObj.taskArray[currentTaskId], 'position');
+                    containerObj.taskCircleArray[i].setRadius(parseInt(document.getElementById(radiusString).value));
                 }
             }
         }));

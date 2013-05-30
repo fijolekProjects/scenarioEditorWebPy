@@ -46,7 +46,7 @@ $(document).ready(function () {
                     }
                     var draggableId = ui.draggable.attr("id");
                     var point = new google.maps.Point(event.pageX, event.pageY);
-                    var latlng = overlay.getProjection()
+                    var latlng = mapVariables.overlay.getProjection()
                         .fromContainerPixelToLatLng(point);
 
                     var currentElementHandler = droppedElementHandlers[draggableId];
