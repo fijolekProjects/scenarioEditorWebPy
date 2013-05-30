@@ -25,12 +25,13 @@ $(document).ready(function () {
         for (var i = 0; i < queryStringsArr.length; i++) {
             wholeQueryString += queryStringsArr[i] + "&EOS=" + i + "&";
         }
-        alert(wholeQueryString);
+        //alert(wholeQueryString);
         $.ajax({
             type: "POST",
             async: false,
             data: wholeQueryString,
             success: function (data) {
+            	window.open('data:text/xml,' + encodeURIComponent(data) );
                 $('#result').html(data).hide().fadeIn(1500);
             },
         });

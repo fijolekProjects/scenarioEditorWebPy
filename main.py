@@ -30,7 +30,10 @@ class Index:
         gen.xmlFinish()
         gen.FILE.close()
         
-        return formList
+        fileHandle = open ( 'scenario.xml', 'r' )
+        scenarioXML = fileHandle.read()
+        fileHandle.close()
+        return scenarioXML
 
 if __name__ == '__main__':
     app.run()
