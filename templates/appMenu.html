@@ -1,9 +1,9 @@
 $def with ()
 <head>
     <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
-    <script type="text/javascript" src="static/dragQuest.js"></script>
+    <script type="text/javascript" src="static/DragAndDropManager.js"></script>
     <script type="text/javascript" src="static/MenuManager.js"></script>
-    <script type="text/javascript" src="static/ajaxFormHandle.js"></script>
+    <script type="text/javascript" src="static/AjaxEventManager.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://raw.github.com/kflorence/jquery-deserialize/master/src/jquery.deserialize.js"></script>
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/start/jquery-ui.css" />
@@ -11,11 +11,14 @@ $def with ()
 <body>
     <div id="tabs">
         <ul>
-            <li><a href="#tabs-1">Choose Component</a>
+            <li>
+            	<a href="#tabs-1">Choose Component</a>
             </li>
-            <li><a href="#tabs-2">Form</a>
+            <li>
+            	<a href="#tabs-2">Form</a>
             </li>
-            <li><a href="#tabs-3">Scenario Generation</a>
+            <li>
+            	<a href="#tabs-3">Scenario Generation</a>
             </li>
         </ul>
         <div id="tabs-1">
@@ -24,8 +27,7 @@ $def with ()
         </div>
         <div id="tabs-2">
             <div id="accordion">
-                 <h3>Quest Form  </h3>
-
+                <h3>Quest Form</h3>
                 <div>
                     <form method="post" id="quest_form">
                         <fieldset>
@@ -59,7 +61,7 @@ $def with ()
                                 <li>
                                     <label for="icon">icon</label>
                                     <input type="file" id="quest_icon_file" name="icon_file" class="file_input" />
-                                    <input type="text" id="icon" name="icon" class="file_input_viewer"/>
+                                    <input type="text" id="icon" name="icon" class="file_input_viewer" />
                                 </li>
                                 <li>
                                     <label for="tasks_location">tasks location?</label>
@@ -91,7 +93,6 @@ $def with ()
                                     <input type="radio" name="tasks_text" value="No" />No
                                     <ol id="quest_task_text_parent" class="formset">
                                         <li><strong>Task text:</strong>
-
                                         </li>
                                         <li>
                                             <label for="text_question">question</label>
@@ -109,7 +110,6 @@ $def with ()
                                     <input type="radio" name="tasks_choice" value="No" />No
                                     <ol id="quest_task_choice_parent" class="formset">
                                         <li><strong>Task choice:</strong>
-
                                         </li>
                                         <li>
                                             <label for="add_answer">Add question</label>
@@ -128,7 +128,6 @@ $def with ()
                                     <input type="radio" name="hints_description" value="No" />No
                                     <ol id="quest_task_hints_parent" class="formset">
                                         <li><strong>Task hints:</strong>
-
                                         </li>
                                         <li>
                                             <label for="hints_text">hints text / cost</label>
@@ -138,13 +137,13 @@ $def with ()
                                         <li>
                                             <label for="hints_image_param">hints image / cost</label>
                                             <input type="file" id="quest_task_hints_image_file" name="hints_image_file" class="file_input" />
-                                            <input type="text" id="quest_task_hints_image" name="hints_image_param" class="file_input_viewer"/>
+                                            <input type="text" id="quest_task_hints_image" name="hints_image_param" class="file_input_viewer" />
                                             <input type="number" id="quest_task_hints_image_cost" name="cost" />
                                         </li>
                                         <li>
                                             <label for="hints_sound">hints sound / cost</label>
                                             <input type="file" id="quest_task_hints_sound_file" name="hints_sound_file" class="file_input" />
-                                            <input type="text" id="quest_task_hints_sound" name="hints_sound_param" class="file_input_viewer"/>
+                                            <input type="text" id="quest_task_hints_sound" name="hints_sound_param" class="file_input_viewer" />
                                             <input type="number" id="quest_task_hints_sound_cost" name="cost" />
                                         </li>
                                     </ol>
@@ -154,8 +153,7 @@ $def with ()
                         </fieldset>
                     </form>
                 </div>
-                 <h3>Information Form</h3>
-
+                <h3>Information Form</h3>
                 <div>
                     <form method="post" id="info_form">
                         <fieldset>
@@ -184,12 +182,12 @@ $def with ()
                                 <li>
                                     <label for="image">image</label>
                                     <input type="file" id="info_image_file" name="image_file" class="file_input" />
-                                    <input type="text" id="info_info_image" name="image" class="file_input_viewer"/>
+                                    <input type="text" id="info_info_image" name="image" class="file_input_viewer" />
                                 </li>
                                 <li>
                                     <label for="icon">icon</label>
                                     <input type="file" id="info_icon_file" name="icon_file" class="file_input" />
-                                    <input type="text" id="info_info_icon" name="icon" class="file_input_viewer"/>
+                                    <input type="text" id="info_info_icon" name="icon" class="file_input_viewer" />
                                 </li>
                             </ol>
                             <input id="info_button" class="form_button" type="submit" value="Add component" />
