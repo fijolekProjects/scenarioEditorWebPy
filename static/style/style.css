@@ -60,11 +60,16 @@ input[type="number"] {
     width: 50px;
 }
 input[type="file"] {
-    width: 200px;
+    width: 97px;
+
 }
 input[type="text"] {
     width: 200px;
 }
+input[class="file_input_viewer"] {
+	    width: 98.5px;
+}
+)
 fieldset {
     margin-bottom:40px;
 }

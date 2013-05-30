@@ -1,4 +1,3 @@
-
 var map;
 var overlay;
 
@@ -13,7 +12,7 @@ var allComponentIdsArray = ["quest_id", "info_id"];
  * @returns
  */
 function initialize() {
-	var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
+    var myCenter = new google.maps.LatLng(52.21927287, 21.01122236);
     var mapProp = {
         center: myCenter,
         zoom: 16,
@@ -38,9 +37,9 @@ function initialize() {
  * @returns {MarkerWithLabel}
  */
 function AbstractMarkerClass(location, markerProp) {
-	/**
-	 * Base marker Object
-	 */
+    /**
+     * Base marker Object
+     */
     var abstractMarkerObj = new MarkerWithLabel({
         position: location,
         map: map,
@@ -55,26 +54,26 @@ function AbstractMarkerClass(location, markerProp) {
     /**
      * Removes marker with 'right click'
      */
-    var removeMarker = function() {
-    	google.maps.event.addListener(abstractMarkerObj, 'rightclick', function () {
+    var removeMarker = function () {
+        google.maps.event.addListener(abstractMarkerObj, 'rightclick', function () {
             abstractMarkerObj.setMap(null);
         });
     }();
-    
+
     /**
      * Dragging marker updates form coordinates
      */
-    var dragMarker = function(){
-    	google.maps.event.addListener(abstractMarkerObj, 'drag', function (event) {
-        	var currentId = returnCurrentId(allComponentIdsArray);
-        	var currentMarkerId = parseInt(abstractMarkerObj.labelContent);
-        	if (currentId === currentMarkerId) {
-        		document.getElementById(abstractMarkerObj.latString).value = event.latLng.lat();
+    var dragMarker = function () {
+        google.maps.event.addListener(abstractMarkerObj, 'drag', function (event) {
+            var currentId = returnCurrentId(allComponentIdsArray);
+            var currentMarkerId = parseInt(abstractMarkerObj.labelContent);
+            if (currentId === currentMarkerId) {
+                document.getElementById(abstractMarkerObj.latString).value = event.latLng.lat();
                 document.getElementById(abstractMarkerObj.lngString).value = event.latLng.lng();
-        	}
+            }
         });
     }();
-    
+
     /**
      * Puts latitude/longitude to form
      */
@@ -89,15 +88,15 @@ function AbstractMarkerClass(location, markerProp) {
      * @returns id of current form
      */
     function returnCurrentId(allComponentIdsArray) {
-		for (var i = 0; i < allComponentIdsArray.length; i++) {
-			var potentialCurrentId = parseInt(document.getElementById(allComponentIdsArray[i]).value);
-			if (!isNaN(potentialCurrentId)) {
-				return potentialCurrentId;
-			}
-		}
-	}
+        for (var i = 0; i < allComponentIdsArray.length; i++) {
+            var potentialCurrentId = parseInt(document.getElementById(allComponentIdsArray[i]).value);
+            if (!isNaN(potentialCurrentId)) {
+                return potentialCurrentId;
+            }
+        }
+    }
 
-    
+
     return abstractMarkerObj;
 }
 
@@ -110,7 +109,7 @@ function AbstractMarkerClass(location, markerProp) {
 function ComponentMarkerClass(location, markerProp) {
     componentCounter++;
 
-    
+
 
     var createMarkerObj = function () {
         var concreteMarkerObj = AbstractMarkerClass(location, markerProp);
@@ -145,14 +144,14 @@ function ComponentMarkerClass(location, markerProp) {
                     elem.slideDown('fast');
                 }
             });
-            
+
         } else {
             putComponentIdToForm();
             goToConcreteForm(markerObj.formID);
         }
     });
-    
-    var putComponentIdToForm = function() {
+
+    var putComponentIdToForm = function () {
         document.getElementById(markerObj.idString).value = componentCounter;
     }();
 
@@ -224,22 +223,19 @@ function markerWithCircle(location, idString, radiusString) {
     var taskCircle = TaskCircleClass(taskPosition);
 
     google.maps.event.addDomListener(
-    document.getElementById(radiusString), 'change', function () {
+    $("#".concat(radiusString)).bind('input', function () {
         var currentTaskId = parseInt(document.getElementById(idString).value);
         for (var i = 0; i < taskCircleArray.length; i++) {
             if (currentTaskId === (taskCircleArray[i]["circleId"])) {
-            	alert(taskCircleArray[i]["circleId"])
                 taskCircleArray[i].bindTo('center', taskArray[currentTaskId], 'position');
                 taskCircleArray[i].setRadius(parseInt(document.getElementById(radiusString).value));
             }
         }
-    });
-
+    }));
     google.maps.event.addListener(taskMarker, 'rightclick', function () {
         taskCircle.setMap(null);
         document.getElementById(radiusString).value = null;
     });
-
 }
 
 function createTaskMarkerWithCircle(location) {
