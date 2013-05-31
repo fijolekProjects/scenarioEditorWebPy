@@ -1,3 +1,7 @@
+/**
+ * MenuManager handles all menu stuff like tabs, accordion menu, going to different tabs, cleaning forms etc.
+ * @namespace MenuManager
+ */
 var MenuManager = {
     goToFormTab: function () {
         var formTabId = 1;
@@ -34,11 +38,11 @@ var MenuManager = {
         $('#tabs').tabs('enable', chooseComponentTabId).tabs('select', chooseComponentTabId);
     },
 
-    accordioHandler: $(function () {
+    accordionHandler: $(function () {
         $("#accordion").accordion({
             icons: false,
             heightStyle: "content",
-            collapsible: true,
+            collapsible: true
         });
         $("#tabs").tabs();
     }),
@@ -74,7 +78,7 @@ var MenuManager = {
             $("#quest_task_choice_parent").children("ul").remove();
         });
     }),
-    
+
     handleChangeFileInputEvent: $(document).ready(function () {
         $(".file_input").each(function () {
             $(this).bind('change', function () {
@@ -84,5 +88,5 @@ var MenuManager = {
                 }
             });
         });
-    }),
-}
+    })
+};

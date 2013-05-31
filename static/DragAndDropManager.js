@@ -1,3 +1,6 @@
+/**
+ * Handles drag and drop events like dragging icons into the map
+ */
 $(document).ready(function () {
     var DragAndDropManager = {
         makeQuestIconDraggable: function () {
@@ -16,7 +19,7 @@ $(document).ready(function () {
             $('#task_icon_id').draggable({
                 revert: true,
                 appendTo: 'body',
-                helper: "clone",
+                helper: "clone"
             });
         }(),
 
@@ -35,15 +38,15 @@ $(document).ready(function () {
         handleTaskDropped: function (latlng) {
             MarkerFactory.createTaskMarkerWithCircle(latlng);
         },
-        
+
         handleDropOnGoogleMap: function () {
             $('#google_map').droppable({
                 drop: function (event, ui) {
                     var droppedElementHandlers = {
                         "quest_icon_id": DragAndDropManager.handleQuestDropped,
                             "info_icon_id": DragAndDropManager.handleInfoDropped,
-                            "task_icon_id": DragAndDropManager.handleTaskDropped,
-                    }
+                            "task_icon_id": DragAndDropManager.handleTaskDropped
+                    };
                     var draggableId = ui.draggable.attr("id");
                     var point = new google.maps.Point(event.pageX, event.pageY);
                     var latlng = mapVariables.overlay.getProjection()
@@ -55,6 +58,6 @@ $(document).ready(function () {
                     }
                 }
             });
-        }(),
-    }
+        }()
+    };
 });

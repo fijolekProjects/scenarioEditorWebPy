@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	var AjaxEventManager = {
+    var AjaxEventManager = {
         handleClickAllComponentsButtons: function () {
             var componentNameArray = ["#quest", "#info"];
             var handleClickOneComponentButton = function (component) {
@@ -12,11 +12,11 @@ $(document).ready(function () {
                     MenuManager.goToChooseComponentTab();
                     $("#remove_answer_button").click();
                     $.ajax({
-                        async: false,
+                        async: false
                     });
                     return false;
                 });
-            }
+            };
 
             $.each(componentNameArray, function (index, value) {
                 handleClickOneComponentButton(value);
@@ -37,10 +37,10 @@ $(document).ready(function () {
                     success: function (data) {
                         window.open('data:text/xml,' + data);
                         $('#result').html("SUCCESS!").hide().fadeIn(1500);
-                    },
+                    }
                 });
                 return false;
             });
-        }(),
-    }
+        }()
+    };
 });

@@ -9,14 +9,9 @@ from urlparse import parse_qsl
 from generate import ScenarioGenerator
 
 urls = (
-    '/', 'Index', '/generateScenario', 'generateScenario')
+    '/', 'Index', '/qunit', 'QUnitPage')
 
 render = web.template.render('templates/', base='base')
-
-
-
-app = web.application(urls, globals())
-
                    
 class Index:
     def GET(self):
@@ -35,5 +30,11 @@ class Index:
         fileHandle.close()
         return scenarioXML
 
+class QUnitPage:
+    def GET(self):
+        renderTest = web.template.render('templates/qunit')
+        return renderTest.testSuitePage()
+    
 if __name__ == '__main__':
+    app = web.application(urls, globals())
     app.run()
