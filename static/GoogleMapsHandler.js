@@ -2,36 +2,40 @@
  * Singleton class that holds variables: map and overlay
  * @returns singleton object
  */
-function MapVariablesClass(){
-	var varbiables = {
-			map: null,
-			overlay: null,
-	}
-	return varbiables;
+function MapVariablesClass() {
+    var varbiables = {
+        map: null,
+        overlay: null
+    };
+    return varbiables;
 }
-MapVariablesClass.getInstance = function(){
-	if (MapVariablesClass.instance == undefined) MapVariablesClass.instance = new MapVariablesClass();
-	return MapVariablesClass.instance;
-}
+MapVariablesClass.getInstance = function () {
+    if (MapVariablesClass.instance === undefined) {
+        MapVariablesClass.instance = new MapVariablesClass();
+    }
+    return MapVariablesClass.instance;
+};
 /**
  * Singleton class which represents data container
  * @returns container object
  */
 function ContainerClass() {
-	var container = {
-			allComponentIdsArray: ["quest_id", "info_id"],
-			componentCounter: -1,
-			taskCircleArray: [],
-			componentArray: [],
-			queryStringsArr: [],
-			taskArray: [],
-	};
-	return container;
+    var container = {
+        allComponentIdsArray: ["quest_id", "info_id"],
+        componentCounter: -1,
+        taskCircleArray: [],
+        componentArray: [],
+        queryStringsArr: [],
+        taskArray: []
+    };
+    return container;
 }
-ContainerClass.getInstance = function(){
-	if (ContainerClass.instance == undefined) ContainerClass.instance = new ContainerClass();
-	return ContainerClass.instance;
-}
+ContainerClass.getInstance = function () {
+    if (ContainerClass.instance === undefined) {
+        ContainerClass.instance = new ContainerClass();
+    }
+    return ContainerClass.instance;
+};
 
 var mapVariables = MapVariablesClass.getInstance();
 var containerObj = ContainerClass.getInstance();
@@ -134,6 +138,7 @@ function AbstractMarkerClass(location, markerProp) {
             }
         }
     }
+    alert(markerProp.join('\n'))
     return abstractMarkerObj;
 }
 
@@ -176,26 +181,26 @@ function ComponentMarkerClass(location, markerProp) {
     /**
      * Handles Component Marker click event
      */
-   
-        google.maps.event.addListener(markerObj, 'click', function (event) {
-            if (markerObj.queryString !== 0) {
-                var $form = $("#".concat(markerObj.formString));
-                var formSerializedData = markerObj.queryString;
-                MenuManager.cleanForms();
-                $form.deserialize(formSerializedData);
-                MenuManager.goToConcreteForm(markerObj.formID);
-                $(".radio_checked_true").each(function () {
-                    if ($(this).is(':checked')) {
-                        var elem = $("ol.formset", $(this).parent());
-                        elem.slideDown('fast');
-                    }
-                });
-            } else {
-                putComponentIdToForm();
-                MenuManager.goToConcreteForm(markerObj.formID);
-            }
-        });
-   
+
+    google.maps.event.addListener(markerObj, 'click', function (event) {
+        if (markerObj.queryString !== 0) {
+            var $form = $("#".concat(markerObj.formString));
+            var formSerializedData = markerObj.queryString;
+            MenuManager.cleanForms();
+            $form.deserialize(formSerializedData);
+            MenuManager.goToConcreteForm(markerObj.formID);
+            $(".radio_checked_true").each(function () {
+                if ($(this).is(':checked')) {
+                    var elem = $("ol.formset", $(this).parent());
+                    elem.slideDown('fast');
+                }
+            });
+        } else {
+            putComponentIdToForm();
+            MenuManager.goToConcreteForm(markerObj.formID);
+        }
+    });
+
 
     /**
      * Puts Component Id to concrete form (quest_id or info_id)
@@ -334,5 +339,5 @@ var MarkerFactory = {
 
     createTaskMarkerWithCircle: function (location) {
         MarkerWithCircleClass(location, "quest_id", "quest_task_location_radius");
-    },
-}
+    }
+};
