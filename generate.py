@@ -1,7 +1,8 @@
 
 import re
 from lxml import etree
-
+from iteratorWrapper import iteratorWrapper
+import constants
 
 
 def singleton(cls):
@@ -15,41 +16,31 @@ def singleton(cls):
 
 @singleton
 class ScenarioGenerator(object):
-    
-    
-    taskList = ['location.*','text,*','choice.*']
-    hintsList = []
-    
-    indentationList = [('tasks.*',taskList),('hints.*',hintsList)]
-    
-    valueSuffix = '.*_param'
-    
-    root = etree.Element('Scenario')
-    filledFormCounter = 0
+   
+    root = etree.Element(constants.rootName) 
     filename = "scenario.xml"
     FILE = open(filename, "w")
     
     
     def cutFormList(self,inputList):
-       
+        
         questList = []    
         tempQuestMark = 0;
                 
         for index,item in enumerate(inputList):
-            if item[0] == 'EOS':
+            if item[0] == constants.endOfStringMark:
                 
                 questList.append(inputList[tempQuestMark:index])
                 tempQuestMark = index+1
               
              
-        for item in questList:
-            self.fillXml(item)
+        return questList
             
 
         
     
   
-    def fillXml(self, xmlData):
+    def fillQuest(self, xmlData):
         
         eventType = xmlData[0][1]
         quest = etree.Element(eventType, id = xmlData[1][1])
@@ -57,15 +48,20 @@ class ScenarioGenerator(object):
        
         
         i = iter(xmlData)    
-        item = i.next()  
+        
+        item = i.next()
         item = i.next()
         
-        for item in i:         
+        questWrapper = iteratorWrapper(None,i,item)
+        
+      
+        
+        for questWrapper.item in questWrapper.iterator:         
   
-            attribute= etree.Element(item[0])           
-            attribute.text = item[1] 
+            questWrapper.attribute = etree.Element(questWrapper.item[0])           
+            questWrapper.attribute.text = questWrapper.item[1] 
                      
-            attribute = self.addIndentation(attribute, i, item)
+            attribute = self.addIndentation(questWrapper)
     
             quest.append(attribute)
         self.root.append(quest)
@@ -84,105 +80,115 @@ class ScenarioGenerator(object):
    
    
    
-    def addMultiChild(self, prefix, attr, i,item,section):
+    def addMultiChild(self, prefix, wrapper,section):
         
-        if re.match(section,item[0]):
-            item = i.next()
+        if re.match(section,wrapper.item[0]):
+            wrapper.item = wrapper.iterator.next()
         
         localRoot = etree.Element(prefix[0:len(prefix)-2])
         topicTest = 0
         
-        while re.match(prefix,item[0]):
+        while re.match(prefix, wrapper.item[0]):
                             
                     topicTest = 1
                     
-                    task = self.createSingleTask(prefix, attr, i, item) 
+                    task = self.createSingleTask(prefix, wrapper) 
                     
                     
                     localRoot.append(task)    
                           
                     try:                          
-                        item = i.next()
+                        wrapper.item = wrapper.iterator.next()
                     except StopIteration:
                         break
         
         if topicTest==1:
-            attr.append(localRoot)
+            wrapper.attribute.append(localRoot)
             
-        return item
+        return wrapper.item
     
 
     
-    def addComplexChild(self ,prefix, attribute, i, item, childList):
-        if re.match(prefix,item[0]):
+    def addComplexChild(self, indentList, wrapper):
+        if re.match(indentList[0], wrapper.item[0]):
                 
-                attribute = etree.Element(prefix[0:len(prefix)-2])
-                attribute.text = ''    
+                wrapper.attribute = etree.Element(indentList[0][0:len(indentList[0])-2])
+                wrapper.attribute.text = ''    
                
-                if not childList:
+                if not indentList[1]:
               
-                    item = self.addChild(prefix, attribute, i, item)
+                    wrapper.item = self.addChild(indentList[0], wrapper)
       
                         
                 else:
-                      item = i.next()
-                      for k in range (0,len(childList)):
+                      wrapper.item = wrapper.iterator.next()
+                      for k in range (0,len(indentList[1])):
                        
-                          item = (self.addMultiChild(childList[k],attribute,i,item,prefix))
-                        
+                          wrapper.item = (self.addMultiChild(indentList[1][k], wrapper, indentList[0]))
+                          
             
-        return attribute
+        return wrapper.attribute
     
     
     
-    def addIndentation(self, attribute, i, item):
-        tempAttribute = attribute
+    def addIndentation(self, wrapper):
+        tempAttribute = wrapper.attribute
         
-        for k in range(0,len(self.indentationList)):
+        for k in range(0,len(constants.indentationList)):
         
-            if re.match(self.indentationList[k][0],item[0]):    
+            if re.match(constants.indentationList[k][0], wrapper.item[0]):    
                           
                  tempAttribute = None
-                 tempAttribute = self.addComplexChild(self.indentationList[k][0], attribute, i, item,self.indentationList[k][1])  
+                 
+                 tempAttribute = self.addComplexChild(constants.indentationList[k], wrapper)  
                  break
  
         return tempAttribute
 
  
-    def addChild(self, prefix, attribute, i, item):
+    def addChild(self, prefix, wrapper):
          
          
-         while re.match(prefix,item[0]):
+         while re.match(prefix,wrapper.item[0]):
                            
-            task = self.createSingleTask(prefix, attribute, i, item)  
+            task = self.createSingleTask(prefix, wrapper)  
                 
-            attribute.append(task)    
+            wrapper.attribute.append(task)    
                          
             try:                          
-                item = i.next()
+                wrapper.item = wrapper.iterator.next()
             except StopIteration:
                 break
         
-        
-         return item    
+                 
+         return wrapper.item    
      
        
-    def createSingleTask(self, prefix, attribute, i, item): 
+    def createSingleTask(self, prefix, wrapper): 
         
-        temp = item[0]                  
+        temp = wrapper.item[0]                  
         temp = temp[len(prefix)-1:]
         
-        if re.match(self.valueSuffix,temp):
+        if re.match(constants.valueSuffix,temp):
                             
-            temp = temp[:len(temp)-len(self.valueSuffix)+2]
+            temp = temp[:len(temp)-len(constants.valueSuffix)+2]
             task = etree.Element(temp)
-            task.text = item[1]
-            item = i.next()              
-            task.set(item[0],item[1])
+            task.text = wrapper.item[1]
+            wrapper.item = wrapper.iterator.next()              
+            task.set(wrapper.item[0],wrapper.item[1])
             
         else:
             
             task = etree.Element(temp)
-            task.text = item[1]
+            task.text = wrapper.item[1]
         
         return task
+    
+    
+    def fillXml(self,questList):
+        
+        for item in questList:
+            self.fillQuest(item)
+            
+            
+            
