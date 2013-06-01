@@ -21,7 +21,7 @@ class Index:
         form = web.data()
         formList = parse_qsl(form)      
         gen = ScenarioGenerator()
-        gen.fillXml(gen.cutFormList(formList)))
+        gen.fillXml(gen.cutFormList(formList))
         gen.xmlFinish()
         gen.FILE.close()
         
