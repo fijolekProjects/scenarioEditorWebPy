@@ -138,7 +138,6 @@ function AbstractMarkerClass(location, markerProp) {
             }
         }
     }
-    alert(markerProp.join('\n'))
     return abstractMarkerObj;
 }
 
@@ -181,27 +180,27 @@ function ComponentMarkerClass(location, markerProp) {
     /**
      * Handles Component Marker click event
      */
-
-    google.maps.event.addListener(markerObj, 'click', function (event) {
-        if (markerObj.queryString !== 0) {
-            var $form = $("#".concat(markerObj.formString));
-            var formSerializedData = markerObj.queryString;
-            MenuManager.cleanForms();
-            $form.deserialize(formSerializedData);
-            MenuManager.goToConcreteForm(markerObj.formID);
-            $(".radio_checked_true").each(function () {
-                if ($(this).is(':checked')) {
-                    var elem = $("ol.formset", $(this).parent());
-                    elem.slideDown('fast');
-                }
-            });
-        } else {
-            putComponentIdToForm();
-            MenuManager.goToConcreteForm(markerObj.formID);
-        }
-    });
-
-
+    var clickMarker = function() {
+    	google.maps.event.addListener(markerObj, 'click', function (event) {
+            if (markerObj.queryString !== 0) {
+                var $form = $("#".concat(markerObj.formString));
+                var formSerializedData = markerObj.queryString;
+                MenuManager.cleanForms();
+                $form.deserialize(formSerializedData);
+                MenuManager.goToConcreteForm(markerObj.formID);
+                $(".radio_checked_true").each(function () {
+                    if ($(this).is(':checked')) {
+                        var elem = $("ol.formset", $(this).parent());
+                        elem.slideDown('fast');
+                    }
+                });
+            } else {
+                putComponentIdToForm();
+                MenuManager.goToConcreteForm(markerObj.formID);
+            }
+        });
+    }();
+    
     /**
      * Puts Component Id to concrete form (quest_id or info_id)
      */
@@ -277,9 +276,10 @@ function TaskCircleClass(taskPosition) {
  * @param radiusString id of radius in form
  */
 function MarkerWithCircleClass(location, idString, radiusString) {
-    var taskMarker = TaskMarkerClass(location);
-    var taskPosition = taskMarker.position;
-    var taskCircle = TaskCircleClass(taskPosition);
+    var markerObj = TaskMarkerClass(location);
+    var taskPosition = markerObj.position;
+    var circleObj = TaskCircleClass(taskPosition);
+    
 
     /**
      * Handles changing radius in form <br>
@@ -291,7 +291,7 @@ function MarkerWithCircleClass(location, idString, radiusString) {
             var currentTaskId = parseInt(document.getElementById(idString).value);
             for (var i = 0; i < containerObj.taskCircleArray.length; i++) {
                 if (currentTaskId === (containerObj.taskCircleArray[i]["circleId"])) {
-                    containerObj.taskCircleArray[i].bindTo('center', containerObj.taskArray[currentTaskId], 'position');
+                    containerObj.taskCircleArray[i].bindTo('center', containerObj.taskArray[i], 'position');
                     containerObj.taskCircleArray[i].setRadius(parseInt(document.getElementById(radiusString).value));
                 }
             }
@@ -301,8 +301,8 @@ function MarkerWithCircleClass(location, idString, radiusString) {
      * Removes marker with circle after 'right click' event
      */
     var removeMarkerWithCircle = function () {
-        google.maps.event.addListener(taskMarker, 'rightclick', function () {
-            taskCircle.setMap(null);
+        google.maps.event.addListener(markerObj, 'rightclick', function () {
+            circleObj.setMap(null);
             document.getElementById(radiusString).value = null;
         });
     }();
