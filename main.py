@@ -6,7 +6,7 @@ Created on Apr 9, 2013
 import web
 
 from urlparse import parse_qsl
-from generate import ScenarioGenerator
+from sources.generate import ScenarioGenerator
 
 urls = (
     '/', 'Index', '/qunit', 'QUnitPage')
