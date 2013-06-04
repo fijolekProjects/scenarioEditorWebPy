@@ -1,12 +1,11 @@
 '''
-Created on Apr 9, 2013
-
-@author: mihas
+Scenario generator
 '''
+#-*- coding: utf-8 -*
 import web
 
 from urlparse import parse_qsl
-from sources.generate import ScenarioGenerator
+from src.generate import ScenarioGenerator
 
 urls = (
     '/', 'Index', '/qunit', 'QUnitPage')
