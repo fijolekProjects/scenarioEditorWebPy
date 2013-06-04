@@ -1,0 +1,91 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module scenarioEditorWebPy.src.generate</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="scenarioEditorWebPy.html"><font color="#ffffff">scenarioEditorWebPy</font></a>.<a href="scenarioEditorWebPy.src.html"><font color="#ffffff">src</font></a>.generate</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:../../src/generate.py">scenarioEditorWebPy/src/generate.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="scenarioEditorWebPy.src.constants.html">scenarioEditorWebPy.src.constants</a><br>
+</td><td width="25%" valign=top><a href="lxml.etree.html">lxml.etree</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="scenarioEditorWebPy.src.generate.html#ScenarioGenerator">ScenarioGenerator</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ScenarioGenerator">class <strong>ScenarioGenerator</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Xml-generating&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="ScenarioGenerator-addChild"><strong>addChild</strong></a>(self, prefix, wrapper)</dt><dd><tt>Adds&nbsp;children&nbsp;to&nbsp;a&nbsp;tree&nbsp;defined&nbsp;by&nbsp;a&nbsp;prefix</tt></dd></dl>
+
+<dl><dt><a name="ScenarioGenerator-addComplexChild"><strong>addComplexChild</strong></a>(self, indentList, wrapper)</dt><dd><tt>Adds&nbsp;a&nbsp;child&nbsp;which&nbsp;can&nbsp;have&nbsp;other&nbsp;children</tt></dd></dl>
+
+<dl><dt><a name="ScenarioGenerator-addIndentation"><strong>addIndentation</strong></a>(self, wrapper)</dt><dd><tt>Adds&nbsp;indentation&nbsp;to&nbsp;main&nbsp;tree&nbsp;in&nbsp;quest</tt></dd></dl>
+
+<dl><dt><a name="ScenarioGenerator-addMultiChild"><strong>addMultiChild</strong></a>(self, prefix, wrapper, section)</dt><dd><tt>Adds&nbsp;children&nbsp;in&nbsp;a&nbsp;certain&nbsp;section</tt></dd></dl>
+
+<dl><dt><a name="ScenarioGenerator-createSingleTask"><strong>createSingleTask</strong></a>(self, prefix, wrapper)</dt><dd><tt>Returns&nbsp;one&nbsp;task&nbsp;which&nbsp;can&nbsp;be&nbsp;appended&nbsp;to&nbsp;tree&nbsp;in&nbsp;other&nbsp;method</tt></dd></dl>
+
+<dl><dt><a name="ScenarioGenerator-cutFormList"><strong>cutFormList</strong></a>(self, inputList)</dt><dd><tt>Cuts&nbsp;whole&nbsp;scenario&nbsp;into&nbsp;single&nbsp;quests</tt></dd></dl>
+
+<dl><dt><a name="ScenarioGenerator-fillQuest"><strong>fillQuest</strong></a>(self, xmlData)</dt><dd><tt>Fills&nbsp;&nbsp;single&nbsp;quest&nbsp;data</tt></dd></dl>
+
+<dl><dt><a name="ScenarioGenerator-fillXml"><strong>fillXml</strong></a>(self, questList)</dt><dd><tt>Fill&nbsp;xml&nbsp;with&nbsp;quest</tt></dd></dl>
+
+<dl><dt><a name="ScenarioGenerator-xmlFinish"><strong>xmlFinish</strong></a>(self)</dt><dd><tt>Writes&nbsp;parsed&nbsp;data&nbsp;into&nbsp;a&nbsp;.xml&nbsp;file</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>FILE</strong> = &lt;open file 'scenario.xml', mode 'w'&gt;</dl>
+
+<dl><dt><strong>filename</strong> = 'scenario.xml'</dl>
+
+<dl><dt><strong>root</strong> = &lt;Element Scenario at b6edd054&gt;</dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-singleton"><strong>singleton</strong></a>(cls)</dt></dl>
+</td></tr></table>
+</body></html>
