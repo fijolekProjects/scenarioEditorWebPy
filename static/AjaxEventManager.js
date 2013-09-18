@@ -35,6 +35,12 @@ $(document).ready(function () {
                     async: false,
                     data: wholeQueryString,
                     success: function (data) {
+                    	containerObj.componentCounter = -1
+                        containerObj.queryStringsArr = []
+                        containerObj.taskCircleArray = []
+                        containerObj.componentArray = []
+                        containerObj.taskArray = []
+                    	initialize()
                         window.open('data:text/xml,' + data);
                         $('#result').html("SUCCESS!").hide().fadeIn(1500);
                     }

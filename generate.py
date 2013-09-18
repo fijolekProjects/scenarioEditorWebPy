@@ -16,11 +16,8 @@ def singleton(cls):
 
 @singleton
 class ScenarioGenerator(object):
-   
-    root = etree.Element(constants.rootName) 
-    filename = "scenario.xml"
-    FILE = open(filename, "w")
     
+    root = etree.Element(constants.rootName) 
     
     def cutFormList(self,inputList):
         
@@ -73,11 +70,11 @@ class ScenarioGenerator(object):
     def xmlFinish(self):
         
         tempXml = etree.tostring(self.root, pretty_print=True)
-        self.FILE.writelines(tempXml)
-        
+        filename = "scenario.xml"
+        FILE = open(filename, "w+")
+        FILE.writelines(tempXml)
+        FILE.close()
         return 0
-
-   
    
    
     def addMultiChild(self, prefix, wrapper,section):
@@ -186,6 +183,7 @@ class ScenarioGenerator(object):
     
     
     def fillXml(self,questList):
+        self.root = etree.Element(constants.rootName) 
         
         for item in questList:
             self.fillQuest(item)

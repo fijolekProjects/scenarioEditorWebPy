@@ -1,13 +1,12 @@
 $def with (page)
 <html>
-    
     <head>
         <title>Scenario Editor</title>
         <script src='http://code.jquery.com/jquery-1.9.1.min.js'></script>
         <link rel="stylesheet" href="static/style/style.css" />
         <script src="https://maps.googleapis.com/maps/api/js?3.12&sensor=false"></script>
         <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.5/src/markerwithlabel_packed.js"></script>
-        <script type="text/javascript" src="https://raw.github.com/kflorence/jquery-deserialize/master/src/jquery.deserialize.js"></script>
+        <script type="text/javascript" src="static/libs/jquery.deserialize.js"></script>
         <script type="text/javascript" src="static/GoogleMapsHandler.js"></script>
     </head>
     
@@ -15,8 +14,6 @@ $def with (page)
         <div id="page_wrap">
             <div id="google_map"></div>
             <div id="right_panel">$:page</div> <span id="result">OUT</span>
-
         </div>
     </body>
-
 </html>

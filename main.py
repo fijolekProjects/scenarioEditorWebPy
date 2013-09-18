@@ -23,7 +23,6 @@ class Index:
         gen = ScenarioGenerator()
         gen.fillXml(gen.cutFormList(formList))
         gen.xmlFinish()
-        gen.FILE.close()
         
         fileHandle = open ( 'scenario.xml', 'r' )
         scenarioXML = fileHandle.read()
